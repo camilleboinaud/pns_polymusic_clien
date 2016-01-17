@@ -13,7 +13,7 @@ angular.module('song')
     var audioContext = Song.initAudioContext();
     $scope.playingMusic = Song.newPlayingMusic(audioContext);
 
-    $scope.playingMusic.url = 'http://localhost:3000/public/uploads/songs/Emeli Sandé - Read All About It, Pt. III.mp3';
+    $scope.playingMusic.url = 'http://localhost:3000/api/songs/569bd241b42136fd0d7ffeda';
 
     $scope.play = function () {
       // for changing the button icon from play to pause
