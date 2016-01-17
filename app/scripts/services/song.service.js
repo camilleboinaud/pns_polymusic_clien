@@ -68,6 +68,10 @@ angular.module('song').factory('Song', ['$window',
             return ctx;
         };
 
+      Music.getNbPlayingMusic = function getNbPlayingMusic() {
+        return playingMusicStack;
+      };
+
 
 
         /**

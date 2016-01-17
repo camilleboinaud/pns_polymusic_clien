@@ -14,76 +14,19 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>song1
+
+            <tr ng-repeat="song in playlist">
+              <td>{{song.name}}
                 <div class="pull-right">
                   <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                    <button type="button" class="btn btn-warning">A</button>
-                    <button type="button" class="btn btn-info">B</button>
+                    <button type="button" class="btn btn-warning" ng-click="playMusic($index,0)">A</button>
+                    <button type="button" class="btn btn-info" ng-click="playMusic($index,1)">B</button>
                   </div>
                 </div>
               </td>
             </tr>
-            <tr>
-              <td>song1
-                <div class="pull-right">
-                  <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                    <button type="button" class="btn btn-warning">A</button>
-                    <button type="button" class="btn btn-info">B</button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>song1
-                <div class="pull-right">
-                  <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                    <button type="button" class="btn btn-warning">A</button>
-                    <button type="button" class="btn btn-info">B</button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>song1
-                <div class="pull-right">
-                  <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                    <button type="button" class="btn btn-warning">A</button>
-                    <button type="button" class="btn btn-info">B</button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>song1
-                <div class="pull-right">
-                  <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                    <button type="button" class="btn btn-warning">A</button>
-                    <button type="button" class="btn btn-info">B</button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>song1
-                <div class="pull-right">
-                  <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                    <button type="button" class="btn btn-warning">A</button>
-                    <button type="button" class="btn btn-info">B</button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>song1
-                <div class="pull-right">
-                  <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                    <button type="button" class="btn btn-warning">A</button>
-                    <button type="button" class="btn btn-info">B</button>
-                  </div>
-                </div>
-              </td>
-            </tr>
+
+
           </tbody>
         </table>
       </div>
@@ -324,21 +267,27 @@
 <footer class="footer well">
   <div class="container">
     <div class="row">
-      <div class="col col-lg-6" >
+      <div class="col col-lg-6" ng-controller="PlayerController as player1" >
         <div class="btn-group btn-group-sm"  role="group" aria-label="...">
           <button type="button" class="btn btn-default"><i class="fa fa-fast-backward"></i></button>
-          <button type="button" class="btn btn-warning" ng-click="play()"><i class="fa fa-play"></i></button>
+
+          <button type="button" class="btn btn-warning" ng-click="pause()" ng-if="!isPaused"><i class="fa fa-pause"></i></button>
+          <button type="button" class="btn btn-warning" ng-click="play()" ng-if="isPaused"><i class="fa fa-play"></i></button>
+
           <button type="button" class="btn btn-default"><i class="fa fa-fast-forward"></i></button>
         </div>
-        <span>SongA Name</span>
+        <span>{{playingMusic.name}}</span>
       </div>
-      <div class="col col-lg-6" style="color:#31b0d5">
+      <div class="col col-lg-6" style="color:#31b0d5"  ng-controller="PlayerController as player2">
         <div class="btn-group btn-group-sm" role="group" aria-label="...">
           <button type="button" class="btn btn-default"><i class="fa fa-fast-backward"></i></button>
-          <button type="button" class="btn btn-info"><i class="fa fa-play"></i></button>
+
+          <button type="button" class="btn btn-warning" ng-click="pause()" ng-if="!isPaused"><i class="fa fa-pause"></i></button>
+          <button type="button" class="btn btn-warning" ng-click="play()" ng-if="isPaused"><i class="fa fa-play"></i></button>
+
           <button type="button" class="btn btn-default"><i class="fa fa-fast-forward"></i></button>
         </div>
-        <span>SongB Name</span>
+        <span>{{playingMusic.name}}</span>
       </div>
 
     </div>

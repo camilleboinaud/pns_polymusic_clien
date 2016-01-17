@@ -5,53 +5,54 @@
 /**
  *
  */
-angular.module('song').controller('PlayerController', ['$scope', '$state', '$window', 'Song',
-    function ($scope, $state, $window, Song) {
+angular.module('song').controller('PlayerController', ['$scope', '$window', 'Song', 'REST',
+    function ($scope, $window, Song, REST) {
 
-        var audioContext = Song.initAudioContext();
-            $scope.playingMusic = Song.newPlayingMusic(audioContext);
-        console.info($scope.playingMusic);
-        $scope.isLoaded = false;
-        $scope.isPaused = true;
+      var audioContext = Song.initAudioContext();
 
-        //$scope.playingMusic.url = 'modules/music/music/upload/1452586098334-The Royal Concept - On Our Way.mp3';
-
-        $scope.safeApply = function(fn) {
-            var phase = this.$root.$$phase;
-            if(phase === '$apply' || phase === '$digest') {
-                if(fn && (typeof(fn) === 'function')) {
-                    fn();
-                }
-            }else {
-                this.$apply(fn);
-            }
-        };
+      $scope.playingMusic = Song.newPlayingMusic(audioContext);
+      $scope.isLoaded = false;
+      $scope.isPaused = true;
 
 
+      //$scope.playingMusic.url = REST.getSongUrlById('569bd241b42136fd0d7ffeda');
 
-        $scope.play = function () {
-            // for changing the button icon from play to pause
-            $scope.playingMusic.play(function(){
-                $scope.safeApply(function(){
-                    $scope.isLoaded = $scope.playingMusic.isLoaded;
-                    $scope.isPaused = $scope.playingMusic.isPaused;
-                });
-            });
+      $scope.safeApply = function(fn) {
+        var phase = this.$root.$$phase;
+        if(phase === '$apply' || phase === '$digest') {
+          if(fn && (typeof(fn) === 'function')) {
+            fn();
+          }
+        }else {
+          this.$apply(fn);
+        }
+      };
 
-        };
 
-        $scope.pause = function () {
-            $scope.playingMusic.pause(function() {
-                $scope.safeApply(function(){
-                    $scope.isLoaded = $scope.playingMusic.isLoaded;
-                    $scope.isPaused = $scope.playingMusic.isPaused;
-                });
-            });
-        };
 
-        $scope.stop = function () {
-            console.log('stop music');
-        };
+      $scope.play = function () {
+        // for changing the button icon from play to pause
+        $scope.playingMusic.play(function(){
+          $scope.safeApply(function(){
+            $scope.isLoaded = $scope.playingMusic.isLoaded;
+            $scope.isPaused = $scope.playingMusic.isPaused;
+          });
+        });
+
+      };
+
+      $scope.pause = function () {
+        $scope.playingMusic.pause(function() {
+          $scope.safeApply(function(){
+            $scope.isLoaded = $scope.playingMusic.isLoaded;
+            $scope.isPaused = $scope.playingMusic.isPaused;
+          });
+        });
+      };
+
+      $scope.stop = function () {
+        console.log('stop music');
+      };
 
     }
 ]);

@@ -7,18 +7,32 @@
  * # MainCtrl
  * Controller of the pnsPolymusicClientApp
  */
-angular.module('song')
-  .controller('MainCtrl', ['$scope', 'Song', function ($scope,Song) {
+angular.module('pnsPolymusicClientApp')
+  .controller('MainCtrl', ['$scope', 'Song', 'REST', function ($scope, Song, REST) {
 
-    var audioContext = Song.initAudioContext();
-    $scope.playingMusic = Song.newPlayingMusic(audioContext);
 
-    $scope.playingMusic.url = 'http://localhost:3000/api/songs/569bd241b42136fd0d7ffeda';
 
-    $scope.play = function () {
-      // for changing the button icon from play to pause
-      $scope.playingMusic.play();
+    REST.getAllPubSongs(function(data){
+      $scope.playlist = data;
+      $scope.playlist.forEach(function (song) {
+        song.isPlaying = false;
+        song.url = REST.getSongUrlById(song._id);
+      })
+    });
 
+    $scope.lastIndex = 0;
+    $scope.playMusic = function playMusic(index,barIndex){
+      console.log('click index = '+index+' barIndex = '+ barIndex);
+      if(!$scope.playlist[index].isPlaying) {
+        Song.updatePlayingMusicAt(barIndex, $scope.playlist[index], function () {
+          console.log($scope.playlist[$scope.lastIndex]);
+          $scope.playlist[$scope.lastIndex].isPlaying = false;
+          $scope.playlist[index].isPlaying = true;
+          $scope.lastIndex = index;
+          //Music.getPlayingMusicAt(0).load();
+        });
+        console.log('Music playing = '+Song.getPlayingMusicAt(0).name);
+      }
     };
 
 
