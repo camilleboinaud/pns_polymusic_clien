@@ -1,5 +1,8 @@
 'use strict';
 
+
+angular.module('song',[]);
+
 /**
  * @ngdoc overview
  * @name pnsPolymusicClientApp
@@ -17,7 +20,9 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ngFileUpload',
+    'song'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -25,6 +30,11 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
+      })
+      .when('/upload', {
+        templateUrl: 'views/upload.html',
+        controller: 'MusicUploadController',
+        controllerAs: 'uploaderCtrl'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -35,3 +45,5 @@ angular
         redirectTo: '/'
       });
   });
+
+
