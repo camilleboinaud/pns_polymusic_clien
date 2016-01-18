@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-2">
     <ul  id="song_mix_tab" class="nav nav-tabs" data-tabs="tabs">
-      <li class="active"><a href="#song_tab" data-toggle="tab">Hot Songs</a></li>
+      <li class="active"><a href="#song_tab" data-toggle="tab"> Songs</a></li>
       <li><a href="#mix_tab" data-toggle="tab">Mix Songs</a></li>
     </ul>
     <div id="content_song_mix_tab" class="tab-content">
@@ -322,7 +322,6 @@
 </div>
 
 <footer class="footer well">
-  <div class="container">
     <div class="row">
       <div class="col col-lg-6" >
         <div class="btn-group btn-group-sm"  role="group" aria-label="...">
@@ -340,10 +339,15 @@
         </div>
         <span>SongB Name</span>
       </div>
-
     </div>
-
-  </div>
 </footer>
+
+
+<script>
+  $('a[data-toggle="tab"]').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+  })
+</script>
 
 
