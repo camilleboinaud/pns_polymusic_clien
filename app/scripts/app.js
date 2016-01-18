@@ -31,6 +31,15 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
+      .when('/sign-in', {
+        templateUrl: 'views/sign_in.html',
+        controller: 'AuthentificationCtrl',
+        controllerAs: 'auth'
+      })
+      .when('/sign-up', {
+        templateUrl: 'views/sign_up.html',
+        controller: 'AuthentificationCtrl'
+      })
       .when('/upload', {
         templateUrl: 'views/upload.html',
         controller: 'MusicUploadController',

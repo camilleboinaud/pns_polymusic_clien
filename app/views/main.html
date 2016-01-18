@@ -4,7 +4,9 @@
       <li class="active"><a href="#song_tab" data-toggle="tab"> Songs</a></li>
       <li><a href="#mix_tab" data-toggle="tab">Mix Songs</a></li>
     </ul>
+    <!--List of songs and mix songs-->
     <div id="content_song_mix_tab" class="tab-content">
+      <!--tab of songs-->
       <div class="tab-pane active" id="song_tab">
         <!--Table of songs-->
         <table class="table table-hover">
@@ -14,7 +16,6 @@
             </tr>
           </thead>
           <tbody>
-
             <tr ng-repeat="song in playlist">
               <td>{{song.name}}
                 <div class="pull-right">
@@ -25,12 +26,11 @@
                 </div>
               </td>
             </tr>
-
-
           </tbody>
         </table>
       </div>
 
+      <!--tab of mix-->
       <div class="tab-pane" id="mix_tab">
         <!--Table of mix-->
         <table class="table table-hover">
@@ -150,13 +150,17 @@
       </div>
     </div>
   </div>
+
   <div class="col-lg-10">
-    <div class="btn btn-success">Save Mix Song</div>
+    <a class="btn btn-success">Save Mix Song</a>
+    <br/>
+    <br/>
     <div class="panel panel-default">
       <div class="panel-body">
        <img src="../images/track.jpg" class="pull-right" width="90%">
       </div>
     </div>
+    <!--list of track-->
     <div class="row">
       <div class="col-lg-6">
         <div class="panel panel-default">
@@ -261,8 +265,12 @@
         </div>
       </div>
     </div>
+    <!--END list of track-->
   </div>
 </div>
+<br/>
+<br/>
+<br/>
 
 <footer class="footer well">
     <div class="row">
@@ -282,7 +290,7 @@
           <button type="button" class="btn btn-default"><i class="fa fa-fast-backward"></i></button>
 
           <button type="button" class="btn btn-warning" ng-click="pause()" ng-if="!isPaused"><i class="fa fa-pause"></i></button>
-          <button type="button" class="btn btn-warning" ng-click="play()" ng-if="isPaused"><i class="fa fa-play"></i></button>
+          <button type="button" class="btn btn-info" ng-click="play()" ng-if="isPaused"><i class="fa fa-play"></i></button>
 
           <button type="button" class="btn btn-default"><i class="fa fa-fast-forward"></i></button>
         </div>

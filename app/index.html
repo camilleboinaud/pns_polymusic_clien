@@ -35,14 +35,14 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" style="color: orange;" href="#/">PolyMusic</a>
+            <a class="navbar-brand" style="color: orange;" href="/#/">PolyMusic</a>
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
             <ul class="nav navbar-nav navbar-right">
-              <li><a class="btn btn-warning btn-xs" href="#">Sign up</a></li>
-              <li><a class="btn btn-primary btn-xs" href="#">Sign in</a></li>
+              <li><a class="btn btn-primary btn-xs" href="/#/sign-up">Sign up</a></li>
+              <li><a class="btn btn-default btn-xs" href="/#/sign-in">Sign in</a></li>
             </ul>
           </div>
         </div>
@@ -50,7 +50,9 @@
     </div>
 
     <!--Views-->
-    <div ng-view=""></div>
+    <div class="container-fluid">
+      <div ng-view=""></div>
+    </div>
 
 
 
@@ -92,5 +94,6 @@
         <script src="scripts/services/song.service.js"></script>
         <script src="scripts/services/restapi.service.js"></script>
         <!-- endbuild -->
+
 </body>
 </html>
