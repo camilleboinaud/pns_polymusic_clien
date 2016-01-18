@@ -9,15 +9,12 @@
  */
 angular.module('pnsPolymusicClientApp')
   .controller('MainCtrl', ['$scope', 'Song', 'REST', function ($scope, Song, REST) {
-
-
-
     REST.getAllPubSongs(function(data){
       $scope.playlist = data;
       $scope.playlist.forEach(function (song) {
         song.isPlaying = false;
         song.url = REST.getSongUrlById(song._id);
-      })
+      });
     });
 
     $scope.lastIndex = 0;

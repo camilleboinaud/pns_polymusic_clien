@@ -9,150 +9,20 @@
       <!--tab of songs-->
       <div class="tab-pane active" id="song_tab">
         <!--Table of songs-->
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th class="hidden">Songs</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="song in playlist">
-              <td>{{song.name}}
-                <div class="pull-right">
-                  <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                    <button type="button" class="btn btn-warning" ng-click="playMusic($index,0)">A</button>
-                    <button type="button" class="btn btn-info" ng-click="playMusic($index,1)">B</button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div ng-include src="'views/tab_list_songs.html'"></div>
       </div>
 
       <!--tab of mix-->
       <div class="tab-pane" id="mix_tab">
         <!--Table of mix-->
-        <table class="table table-hover">
-          <thead>
-          <tr>
-            <th class="hidden">Mix Name</th>
-          </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Mix1
-                <div class="pull-right">
-                  <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-play"></i></button>
-                </div>
-            </td>
-            </tr>
-            <tr>
-              <td>Mix1
-                <div class="pull-right">
-                  <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-play"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Mix1
-                <div class="pull-right">
-                  <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-play"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Mix1
-                <div class="pull-right">
-                  <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-play"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Mix1
-                <div class="pull-right">
-                  <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-play"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Mix1
-                <div class="pull-right">
-                  <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-play"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Mix1
-                <div class="pull-right">
-                  <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-play"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Mix1
-                <div class="pull-right">
-                  <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-play"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Mix1
-                <div class="pull-right">
-                  <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-play"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Mix1
-                <div class="pull-right">
-                  <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-play"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Mix1
-                <div class="pull-right">
-                  <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-play"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Mix1
-                <div class="pull-right">
-                  <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-play"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Mix1
-                <div class="pull-right">
-                  <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-play"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Mix1
-                <div class="pull-right">
-                  <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-play"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Mix1
-                <div class="pull-right">
-                  <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-play"></i></button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div ng-include src="'views/tab_list_mix.html'"></div>
       </div>
     </div>
   </div>
 
   <div class="col-lg-10">
-    <a class="btn btn-success">Save Mix Song</a>
+    <a class="btn btn-success" data-toggle="modal" data-target="#modal_save_mix">Save Mix Song</a>
+    <div ng-include src="'views/modal_save_mix.html'"></div>
     <br/>
     <br/>
     <div class="panel panel-default">
@@ -160,144 +30,36 @@
        <img src="../images/track.jpg" class="pull-right" width="90%">
       </div>
     </div>
-    <!--list of track-->
+
     <div class="row">
-      <div class="col-lg-6">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-lg-2">
-                Piano:
-              </div>
-              <div class="col-lg-10">
-                <img src="../images/track.jpg" class="pull-right" width="100%">
-              </div>
-            </div>
-            <br/>
-            <div class="row">
-              <div class="col-lg-2">
-                Piano:
-              </div>
-              <div class="col-lg-10">
-                <img src="../images/track.jpg" class="pull-right" width="100%">
-              </div>
-            </div>
-            <br/>
-            <div class="row">
-              <div class="col-lg-2">
-                Piano:
-              </div>
-              <div class="col-lg-10">
-                <img src="../images/track.jpg" class="pull-right" width="100%">
-              </div>
-            </div>
-            <br/>
-            <div class="row">
-              <div class="col-lg-2">
-                Piano:
-              </div>
-              <div class="col-lg-10">
-                <img src="../images/track.jpg" class="pull-right" width="100%">
-              </div>
-            </div>
-            <br/>
-          </div>
-        </div>
+      <!--List of track left-->
+      <div class="col-lg-6 text-warning">
+        <div ng-include src="'views/track_list.html'"></div>
       </div>
+
+      <!--List of track right-->
       <div class="col-lg-6" style="color:#31b0d5">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-lg-2">
-                Piano:
-              </div>
-              <div class="col-lg-10">
-                <img src="../images/track.jpg" class="pull-right" width="100%">
-              </div>
-            </div>
-            <br/>
-            <div class="row">
-              <div class="col-lg-2">
-                Piano:
-              </div>
-              <div class="col-lg-10">
-                <img src="../images/track.jpg" class="pull-right" width="100%">
-              </div>
-            </div>
-            <br/>
-            <div class="row">
-              <div class="col-lg-2">
-                Piano:
-              </div>
-              <div class="col-lg-10">
-                <img src="../images/track.jpg" class="pull-right" width="100%">
-              </div>
-            </div>
-            <br/>
-            <div class="row">
-              <div class="col-lg-2">
-                Piano:
-              </div>
-              <div class="col-lg-10">
-                <img src="../images/track.jpg" class="pull-right" width="100%">
-              </div>
-            </div>
-            <br/>
-            <div class="row">
-              <div class="col-lg-2">
-                Piano:
-              </div>
-              <div class="col-lg-10">
-                <img src="../images/track.jpg" class="pull-right" width="100%">
-              </div>
-            </div>
-            <br/>
-            <div class="row">
-              <div class="col-lg-2">
-                Piano:
-              </div>
-              <div class="col-lg-10">
-                <img src="../images/track.jpg" class="pull-right" width="100%">
-              </div>
-            </div>
-            <br/>
-          </div>
-        </div>
+        <div ng-include src="'views/track_list.html'"></div>
       </div>
     </div>
-    <!--END list of track-->
   </div>
 </div>
 <br/>
 <br/>
 <br/>
 
+<!--player of music : footer-->
 <footer class="footer well">
-    <div class="row">
-      <div class="col col-lg-6" ng-controller="PlayerController as player1" >
-        <div class="btn-group btn-group-sm"  role="group" aria-label="...">
-          <button type="button" class="btn btn-default"><i class="fa fa-fast-backward"></i></button>
-
-          <button type="button" class="btn btn-warning" ng-click="pause()" ng-if="!isPaused"><i class="fa fa-pause"></i></button>
-          <button type="button" class="btn btn-warning" ng-click="play()" ng-if="isPaused"><i class="fa fa-play"></i></button>
-
-          <button type="button" class="btn btn-default"><i class="fa fa-fast-forward"></i></button>
-        </div>
-        <span>{{playingMusic.name}}</span>
-      </div>
-      <div class="col col-lg-6" style="color:#31b0d5"  ng-controller="PlayerController as player2">
-        <div class="btn-group btn-group-sm" role="group" aria-label="...">
-          <button type="button" class="btn btn-default"><i class="fa fa-fast-backward"></i></button>
-
-          <button type="button" class="btn btn-warning" ng-click="pause()" ng-if="!isPaused"><i class="fa fa-pause"></i></button>
-          <button type="button" class="btn btn-info" ng-click="play()" ng-if="isPaused"><i class="fa fa-play"></i></button>
-
-          <button type="button" class="btn btn-default"><i class="fa fa-fast-forward"></i></button>
-        </div>
-        <span>{{playingMusic.name}}</span>
-      </div>
+  <div class="row">
+    <div class="col col-lg-6 text-warning" ng-controller="PlayerController as player1" >
+      <div ng-include src="'views/player.html'"></div>
     </div>
+    <div class="col col-lg-6" style="color:#31b0d5"  ng-controller="PlayerController as player2">
+      <div ng-include src="'views/player.html'"></div>
+    </div>
+  </div>
 </footer>
+<!--END player of music : footer-->
 
 
 <script>

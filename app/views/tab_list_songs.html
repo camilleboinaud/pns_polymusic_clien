@@ -1,0 +1,19 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th class="hidden">Songs</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="song in playlist">
+    <td>{{song.name}}
+      <div class="pull-right">
+        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+          <button type="button" class="btn btn-warning" ng-click="playMusic($index,0)">A</button>
+          <button type="button" class="btn btn-info" ng-click="playMusic($index,1)">B</button>
+        </div>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
