@@ -8,7 +8,7 @@
  * Controller of the pnsPolymusicClientApp
  */
 angular.module('pnsPolymusicClientApp')
-  .controller('MainCtrl', ['$scope', 'Song', 'REST', function ($scope, Song, REST) {
+  .controller('MainCtrl', ['$scope', 'SongService', 'REST', function ($scope, SongService, REST) {
     REST.getAllPubSongs(function(data){
       $scope.playlist = data;
       $scope.playlist.forEach(function (song) {
@@ -21,14 +21,14 @@ angular.module('pnsPolymusicClientApp')
     $scope.playMusic = function playMusic(index,barIndex){
       console.log('click index = '+index+' barIndex = '+ barIndex);
       if(!$scope.playlist[index].isPlaying) {
-        Song.updatePlayingMusicAt(barIndex, $scope.playlist[index], function () {
+        SongService.updatePlayingSongAt(barIndex, $scope.playlist[index], function () {
           console.log($scope.playlist[$scope.lastIndex]);
           $scope.playlist[$scope.lastIndex].isPlaying = false;
           $scope.playlist[index].isPlaying = true;
           $scope.lastIndex = index;
           //Music.getPlayingMusicAt(0).load();
         });
-        console.log('Music playing = '+Song.getPlayingMusicAt(0).name);
+        console.log('Music playing = '+SongService.getPlayingSongAt(0).name);
       }
     };
 

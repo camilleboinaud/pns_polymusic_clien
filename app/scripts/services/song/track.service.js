@@ -4,52 +4,52 @@
 'use strict';
 
 // For controlling playing music between PlayerCtr and PlaylistCtr
-angular.module('song').factory('Song', ['$window',
+angular.module('song').factory('TrackService', ['$window',
     function ($window) {
 
-        var Music = {},
-            nbPlayingMusic = 0,
-            playingMusicStack = [];
+        var Track = {},
+          nbTrack = 0;
+          //playingTrackList = [];
 
         /**
-         * This is constructor of PlayingMusic
+         * This is constructor of PlayingTrack
          * @param audioContext
          * @param initValue
          * @constructor
          */
-        function PlayingMusic(audioContext, initValue){
-            this.index = nbPlayingMusic;
-            nbPlayingMusic++;
-            this.name = (initValue && initValue.name) || 'unknown';
-            this.cover = (initValue && initValue.cover) || 'default.jpg';
-            this.url = (initValue && initValue.url) || '';
-            this.time = (initValue && initValue.time) || {
-                min:'00',
-                sec:'00'
+        function PlayingTrack(audioContext, initValue){
+          this.index = nbTrack;
+          nbTrack++;
+          this.name = (initValue && initValue.name) || 'unknown';
+          this.cover = (initValue && initValue.cover) || 'default.jpg';
+          this.url = (initValue && initValue.url) || '';
+          this.time = (initValue && initValue.time) || {
+              min:'00',
+              sec:'00'
             };
-            this.isPaused = true;
-            this.isLoaded = false;
-            this.isStarted = false;
-            this.audioBufferFromUrl = null;
-            this.audioBufferSourceNode = null;
-            this.trackVolumeNode = null;
-            this.startTime = 0;
-            this.lastTime = 0;
-            this.pauseTime = 0;// pause duration
-            this.offsetTime = 0;// play duration
-            this.audioContext = audioContext; // get audio context
+          this.isPaused = true;
+          this.isLoaded = false;
+          this.isStarted = false;
+          this.audioBufferFromUrl = null;
+          this.audioBufferSourceNode = null;
+          this.trackVolumeNode = null;
+          this.startTime = 0;
+          this.lastTime = 0;
+          this.pauseTime = 0;// pause duration
+          this.offsetTime = 0;// play duration
+          this.audioContext = audioContext; // get audio context
 
-            playingMusicStack.push(this);
+          //playingTrackList.push(this);
         }
 
         /**
-         * Create a new PlayingMusic
+         * Create a new PlayingTrack
          * @param audioContext
          * @param initValue
-         * @returns {PlayingMusic}
+         * @returns {PlayingTrack}
          */
-        Music.newPlayingMusic = function(audioContext, initValue){
-            return new PlayingMusic(audioContext, initValue);
+        Track.newPlayingTrack = function(audioContext, initValue){
+            return new PlayingTrack(audioContext, initValue);
         };
 
 
@@ -57,7 +57,7 @@ angular.module('song').factory('Song', ['$window',
          * Initialise the Audio Context
          * @returns the Audio Context
          */
-        Music.initAudioContext = function initAudioContext() {
+        Track.initAudioContext = function initAudioContext() {
             // There can be only one!
             var AudioContext = $window.AudioContext || $window.webkitAudioContext,
                 ctx = new AudioContext();
@@ -67,20 +67,20 @@ angular.module('song').factory('Song', ['$window',
             }
             return ctx;
         };
-
-      Music.getNbPlayingMusic = function getNbPlayingMusic() {
-        return playingMusicStack;
-      };
+      //
+      //Track.getNbPlayingTrack = function getNbPlayingTrack() {
+      //  return playingTrackList;
+      //};
 
 
 
         /**
-         * This function is defined as a prototype of PlayingMusic: Load sound from url
+         * This function is defined as a prototype of PlayingTrack: Load sound from url
          * @param url
          * @param successCallback
          * @param errorCallback
          */
-        PlayingMusic.prototype.loadSound = function loadSound(url, successCallback, errorCallback) {
+        PlayingTrack.prototype.loadSound = function loadSound(url, successCallback, errorCallback) {
             var request = new XMLHttpRequest(),
                 me = this;
             request.open('GET', url, true);
@@ -95,7 +95,7 @@ angular.module('song').factory('Song', ['$window',
                         return;
                       }
                       console.log('Load music success');
-                      // save the audioBuffer into playingMusic which we will use for resuming
+                      // save the audioBuffer into PlayingTrack which we will use for resuming
                       me.audioBufferFromUrl = audioBuffer;
                       me.isLoaded = true;
                       if(successCallback) {successCallback();}
@@ -113,11 +113,11 @@ angular.module('song').factory('Song', ['$window',
         };
 
         /**
-         * This function is defined as a prototype of PlayingMusic: play music
+         * This function is defined as a prototype of PlayingTrack: play music
          * @param successCallback: success callback
          * @param errorCallback: error callback
          */
-        PlayingMusic.prototype.play = function play(successCallback, errorCallback) {
+        PlayingTrack.prototype.play = function play(successCallback, errorCallback) {
             console.log('play music');
             var me = this,
                 playSoundSuccess = function(trackVolumeNode,audioBufferSourceNode){
@@ -163,7 +163,7 @@ angular.module('song').factory('Song', ['$window',
          * @param successCallback: success callback
          * @param errorCallback: error callback
          */
-        PlayingMusic.prototype.pause = function pause(successCallback,errorCallback){
+        PlayingTrack.prototype.pause = function pause(successCallback,errorCallback){
             console.log('pause music');
             var me = this;
             if(me.audioBufferSourceNode !== null){
@@ -221,44 +221,44 @@ angular.module('song').factory('Song', ['$window',
 
 
 
-        Music.getAllPlayingMusic = function() {
-            return playingMusicStack;
-        };
+      //Track.getAllPlayingTrack = function() {
+      //  return playingTrackList;
+      //};
 
-        Music.getPlayingMusicAt = function(index) {
-            if(index >= playingMusicStack.length ){
-                return;
-            }
-            return playingMusicStack[index];
-        };
+      //Track.getPlayingTrackAt = function(index) {
+      //  if(index >= playingTrackList.length ){
+      //    return;
+      //  }
+      //  return playingTrackList[index];
+      //};
 
-        Music.updatePlayingMusicAt = function(index, newValue, callback) {
-            if(index >= playingMusicStack.length ){
-                return;
-            }
-            var music = playingMusicStack[index];
-            if(newValue){
-                if(newValue.name) {music.name = newValue.name;}
-                if(newValue.cover) {music.cover = newValue.cover;}
-                if(newValue.url) {music.url = newValue.url;}
-                if(newValue.time) {music.time = newValue.time;}
-                if(newValue.isPaused) {music.isPaused = newValue.isPaused;}
-                if(newValue.isLoaded) {music.isLoaded = newValue.isLoaded;}
-                if(newValue.isStarted) {music.isStarted = newValue.isStarted;}
-                if(newValue.audioBufferFromUrl) {music.audioBufferFromUrl = newValue.audioBufferFromUrl;}
-                if(newValue.audioBufferSourceNode) {music.audioBufferSourceNode = newValue.audioBufferSourceNode;}
-                if(newValue.trackVolumeNode) {music.trackVolumeNode = newValue.trackVolumeNode;}
-                if(newValue.startTime) {music.startTime = newValue.startTime;}
-                if(newValue.lastTime) {music.lastTime = newValue.lastTime;}
-                if(newValue.pauseTime) {music.pauseTime = newValue.pauseTime;}
-                if(newValue.offsetTime) {music.offsetTime = newValue.offsetTime;}
-                if(newValue.audioContext) {music.audioContext = newValue.audioContext;}
-            }
-            playingMusicStack[index] = music;
-            if(callback) {callback();}
-        };
+      //Track.updatePlayingTrackAt = function(index, newValue, callback) {
+      //  if(index >= playingTrackList.length ){
+      //    return;
+      //  }
+      //  var track = playingTrackList[index];
+      //  if(newValue){
+      //    if(newValue.name) {track.name = newValue.name;}
+      //    if(newValue.cover) {track.cover = newValue.cover;}
+      //    if(newValue.url) {track.url = newValue.url;}
+      //    if(newValue.time) {track.time = newValue.time;}
+      //    if(newValue.isPaused) {track.isPaused = newValue.isPaused;}
+      //    if(newValue.isLoaded) {track.isLoaded = newValue.isLoaded;}
+      //    if(newValue.isStarted) {track.isStarted = newValue.isStarted;}
+      //    if(newValue.audioBufferFromUrl) {track.audioBufferFromUrl = newValue.audioBufferFromUrl;}
+      //    if(newValue.audioBufferSourceNode) {track.audioBufferSourceNode = newValue.audioBufferSourceNode;}
+      //    if(newValue.trackVolumeNode) {track.trackVolumeNode = newValue.trackVolumeNode;}
+      //    if(newValue.startTime) {track.startTime = newValue.startTime;}
+      //    if(newValue.lastTime) {track.lastTime = newValue.lastTime;}
+      //    if(newValue.pauseTime) {track.pauseTime = newValue.pauseTime;}
+      //    if(newValue.offsetTime) {track.offsetTime = newValue.offsetTime;}
+      //    if(newValue.audioContext) {track.audioContext = newValue.audioContext;}
+      //  }
+      //  playingTrackList[index] = track;
+      //  if(callback) {callback();}
+      //};
 
 
-        return Music;
+      return Track;
     }
 ]);

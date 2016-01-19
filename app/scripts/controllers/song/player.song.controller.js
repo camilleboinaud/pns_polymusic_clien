@@ -5,17 +5,17 @@
 /**
  *
  */
-angular.module('song').controller('PlayerController', ['$scope', '$window', 'Song', 'REST',
-    function ($scope, $window, Song, REST) {
+angular.module('song').controller('PlayerController', ['$scope', '$window', 'SongService',
+    function ($scope, $window, SongService) {
 
-      var audioContext = Song.initAudioContext();
+      var audioContext = SongService.initAudioContext();
 
-      $scope.playingMusic = Song.newPlayingMusic(audioContext);
+      $scope.playingMusic = SongService.newPlayingSong(audioContext);
       $scope.isLoaded = false;
       $scope.isPaused = true;
 
 
-      //$scope.playingMusic.url = REST.getSongUrlById('569bd241b42136fd0d7ffeda');
+      $scope.playingMusic.url = '/Users/sth/develope/polytech/pns_web/pns_polymusic_server/public/uploads/Adele - Hello.mp3';
 
       $scope.safeApply = function(fn) {
         var phase = this.$root.$$phase;
