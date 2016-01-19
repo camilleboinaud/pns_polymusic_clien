@@ -8,14 +8,12 @@
 angular.module('song').controller('PlayerController', ['$scope', '$window', 'SongService',
     function ($scope, $window, SongService) {
 
+      // init audio context
       var audioContext = SongService.initAudioContext();
 
-      $scope.playingMusic = SongService.newPlayingSong(audioContext);
+      $scope.playingSong = SongService.getNewSong(audioContext);
       $scope.isLoaded = false;
       $scope.isPaused = true;
-
-
-      $scope.playingMusic.url = '/Users/sth/develope/polytech/pns_web/pns_polymusic_server/public/uploads/Adele - Hello.mp3';
 
       $scope.safeApply = function(fn) {
         var phase = this.$root.$$phase;
@@ -31,21 +29,21 @@ angular.module('song').controller('PlayerController', ['$scope', '$window', 'Son
 
 
       $scope.play = function () {
-        // for changing the button icon from play to pause
-        $scope.playingMusic.play(function(){
+        // the callback is out of Angular Context, so we should manually update view
+        $scope.playingSong.play(function(){
           $scope.safeApply(function(){
-            $scope.isLoaded = $scope.playingMusic.isLoaded;
-            $scope.isPaused = $scope.playingMusic.isPaused;
+            $scope.isLoaded = $scope.playingSong.isLoaded;
+            $scope.isPaused = $scope.playingSong.isPaused;
           });
         });
 
       };
 
       $scope.pause = function () {
-        $scope.playingMusic.pause(function() {
+        $scope.playingSong.pause(function() {
           $scope.safeApply(function(){
-            $scope.isLoaded = $scope.playingMusic.isLoaded;
-            $scope.isPaused = $scope.playingMusic.isPaused;
+            $scope.isLoaded = $scope.playingSong.isLoaded;
+            $scope.isPaused = $scope.playingSong.isPaused;
           });
         });
       };

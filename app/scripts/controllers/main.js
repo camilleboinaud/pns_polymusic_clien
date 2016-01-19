@@ -21,14 +21,14 @@ angular.module('pnsPolymusicClientApp')
     $scope.playMusic = function playMusic(index,barIndex){
       console.log('click index = '+index+' barIndex = '+ barIndex);
       if(!$scope.playlist[index].isPlaying) {
-        SongService.updatePlayingSongAt(barIndex, $scope.playlist[index], function () {
+        SongService.updateSongAtPlayer(barIndex, $scope.playlist[index], function () {
           console.log($scope.playlist[$scope.lastIndex]);
           $scope.playlist[$scope.lastIndex].isPlaying = false;
           $scope.playlist[index].isPlaying = true;
           $scope.lastIndex = index;
           //Music.getPlayingMusicAt(0).load();
         });
-        console.log('Music playing = '+SongService.getPlayingSongAt(0).name);
+        console.log('Music playing = '+SongService.getSongAtPlayer(0).name);
       }
     };
 
