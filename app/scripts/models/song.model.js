@@ -56,38 +56,40 @@ angular.module('song').factory('SongModel',['TrackModel',function(TrackModel){
    */
   SongModel.prototype.play = function (callback) {
     var me = this,
+      // function for playing one track
+      playOneTrack = function (track) {
+        track.play(function(){
+          // check if it is last one
+          if (track.index === me.ngTrack-1) {
+            me.isStarted = true;
+            me.isPaused = false;
+            if (callback) {callback();}
+          }
+        });
+      },
+      // function for playing all tracks
       playAllTrack = function () {
         // play all track
         me.trackList.forEach(function(track){
-          console.log('each play');
-          track.play(function(){
-            // check if it is last one
-            if (track.index === me.ngTrack-1) {
-              me.isStarted = true;
-              me.isPaused = false;
-              if (callback) {callback();}
-            }
-          });
+          playOneTrack(track);
         });
       };
 
-    me.trackList.forEach(function (track) {
-
-      if (!me.isLoaded){
+    if (!me.isLoaded){
+      me.trackList.forEach(function (track) {
         // preload for each track
         track.loadSound(track.url, function () {
           // check if it is last one
           if (track.index === me.ngTrack-1) {
             me.isLoaded = true;
+            // all track loaded than play
             playAllTrack();
           }
         });
-      } else {
-        playAllTrack();
-      }
-
-
-    });
+      });
+    } else {
+      playAllTrack();
+    }
   };
 
 
