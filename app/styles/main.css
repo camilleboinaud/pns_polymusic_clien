@@ -142,7 +142,7 @@ footer {
   font-size: 14px;
 }
 .track input[type="range"] {
-  position: absolute;
+  /*position: absolute;*/
   right: 0;
   top: 5px;
   height: 4px;
