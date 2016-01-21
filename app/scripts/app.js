@@ -3,6 +3,7 @@
 
 angular.module('song',[]);
 
+
 /**
  * @ngdoc overview
  * @name pnsPolymusicClientApp
@@ -24,6 +25,12 @@ angular
     'ngFileUpload',
     'song'
   ])
+
+  .config(function() {
+    window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame;
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+  })
+
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
