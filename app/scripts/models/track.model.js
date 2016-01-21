@@ -27,9 +27,7 @@ angular.module('song').factory('TrackModel', [function () {
     me.audioBufferSourceNode = null;
     me.trackVolumeNode = null;
     me.startTime = 0;
-    me.lastTime = 0;
     me.pauseTime = 0;// pause duration
-    me.offsetTime = 0;// play duration
   }
 
 
@@ -98,12 +96,12 @@ angular.module('song').factory('TrackModel', [function () {
       var me = this,
         playSoundSuccess = function(result){
           // mark start
-          if(!me.isStarted){
-            me.startTime = me.audioContext.currentTime;
-            me.lastTime = me.startTime;
-            me.isStarted = true;
+
+          me.startTime = me.audioContext.currentTime;
+          if (me.pauseTime) {
+            me.startTime -= me.pauseTime;
           }
-          me.isPaused = false;
+
           me.audioBufferSourceNode = result.audioBufferSourceNode;
           me.trackVolumeNode = result.trackVolumeNode;
           if(successCallback) {successCallback();}
@@ -153,8 +151,9 @@ angular.module('song').factory('TrackModel', [function () {
         // reset audioBufferSourceNode. Because audioBufferSourceNode.start() can only use once
         // we need recreate it from audioBuffer for the next time
         me.audioBufferSourceNode = null;
-        me.lastTime = me.audioContext.currentTime;
-        me.offsetTime = me.lastTime - me.startTime - me.pauseTime;
+
+        me.pauseTime = me.audioContext.currentTime - me.startTime;
+
         if(successCallback) {successCallback();}
       } else {
         console.log('Something wrong when we loaded the sound');
@@ -173,7 +172,7 @@ angular.module('song').factory('TrackModel', [function () {
         trackVolumeNode,
         audioContext = params.audioContext,
         audioBuffer = params.audioBufferFromUrl,
-        offsetTime = params.offsetTime,
+        offsetTime = params.pauseTime || 0,
 
       // Create a single gain node for master volume
         masterVolumeNode =  audioContext.createGain();

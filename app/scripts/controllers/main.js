@@ -69,26 +69,26 @@ angular.module('pnsPolymusicClientApp')
       }
     });
 
-<<<<<<< HEAD
+
     $scope.trackLoad = function(key, track) {
       if (++thisLoadCount >= $scope.currentSong.tracks.length) {
         $scope.ready = true;
         $scope.$$phase || $scope.$apply();
         tick();
-=======
-    $scope.lastIndex = 0;
-    $scope.playMusic = function playMusic(index,barIndex){
-      console.log('click index = '+index+' barIndex = '+ barIndex);
-      if(!$scope.playlist[index].isPlaying) {
-        SongService.updateSongAtPlayer(barIndex, $scope.playlist[index], function () {
-          console.log($scope.playlist[$scope.lastIndex]);
-          $scope.playlist[$scope.lastIndex].isPlaying = false;
-          $scope.playlist[index].isPlaying = true;
-          $scope.lastIndex = index;
-          //Music.getPlayingMusicAt(0).load();
-        });
-        console.log('Music playing = '+SongService.getSongAtPlayer(0).name);
->>>>>>> de05ba4c4fa27fb6011b780eb42baa8f2a7686e8
+    //
+    //$scope.lastIndex = 0;
+    //$scope.playMusic = function playMusic(index,barIndex){
+    //  console.log('click index = '+index+' barIndex = '+ barIndex);
+    //  if(!$scope.playlist[index].isPlaying) {
+    //    SongService.updateSongAtPlayer(barIndex, $scope.playlist[index], function () {
+    //      console.log($scope.playlist[$scope.lastIndex]);
+    //      $scope.playlist[$scope.lastIndex].isPlaying = false;
+    //      $scope.playlist[index].isPlaying = true;
+    //      $scope.lastIndex = index;
+    //      //Music.getPlayingMusicAt(0).load();
+    //    });
+    //    console.log('Music playing = '+SongService.getSongAtPlayer(0).name);
+
       }
     };
 
