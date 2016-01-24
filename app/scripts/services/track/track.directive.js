@@ -19,7 +19,7 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
     var track = $scope.track;
     var canvas = $element[0].querySelector('canvas');
     var canvasWidth = $scope.$parent.trackWidth;
-    var canvasHeight = 200;
+    var canvasHeight = 100;
     var freqShowPercent = 0.75;
     var fftSize = 256;
     var freqCount = fftSize / 2;

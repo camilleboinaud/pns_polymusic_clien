@@ -107,7 +107,7 @@ angular.module('pnsPolymusicClientApp')
 
 
     function setTrackWidth() {
-      $scope.trackWidth = 260;
+      $scope.trackWidth = 450;
     }
 
   }]);

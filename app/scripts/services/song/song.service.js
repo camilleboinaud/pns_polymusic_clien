@@ -44,6 +44,73 @@ angular.module('pnsPolymusicClientApp').factory('songFactory', function () {
           url: '././music/amy_rehab/voix.mp3'
         }
       ]
+    },
+    {
+      name: 'bob love',
+      band: 'Queen',
+      tracks: [
+        {
+          name: 'basse',
+          url: '././music/bob_love/basse.mp3'
+        },
+        {
+          name: 'choeurs1',
+          url: '././music/bob_love/choeurs1.mp3'
+        },
+        {
+          name: 'choeurs2',
+          url: '././music/bob_love/choeurs2.mp3'
+        },
+        {
+          name: 'extra',
+          url: '././music/bob_love/extra.mp3'
+        },
+        {
+          name: 'guitare1',
+          url: '././music/bob_love/guitare1.mp3'
+        },
+        {
+          name: 'guitare2',
+          url: '././music/bob_love/guitare2.mp3'
+        },
+        {
+          name: 'guitare3',
+          url: '././music/bob_love/guitare3.mp3'
+        },
+        {
+          name: 'guitare3',
+          url: '././music/bob_love/guitare3.mp3'
+        },
+        {
+          name: 'oooh',
+          url: '././music/bob_love/oooh.mp3'
+        },
+        {
+          name: 'orgue',
+          url: '././music/bob_love/orgue.mp3'
+        },
+        {
+          name: 'piano',
+          url: '././music/bob_love/piano.mp3'
+        },
+        {
+          name: 'rythme',
+          url: '././music/bob_love/rythme.mp3'
+        },
+        {
+          name: 'saxo',
+          url: '././music/bob_love/saxo.mp3'
+        },
+        {
+          name: 'trombone',
+          url: '././music/bob_love/trombone.mp3'
+        },
+        {
+          name: 'voix',
+          url: '././music/bob_love/voix.mp3'
+        }
+
+      ]
     }
   ];
 });

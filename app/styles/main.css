@@ -109,28 +109,28 @@ footer {
 
 
 
-.controls {
-  padding: 0px 15px 10px;
-  line-height: 2.5em;
-}
-.controls h2 {
-  margin: 0 1.5em 0 0;
-  color: #EEE;
-  display: inline-block;
-}
-.controls > div {
-  text-align: center;
-}
-.controls button {
-  margin:0 1.5em 0 0;
-}
+/*.controls {*/
+  /*padding: 0px 15px 10px;*/
+  /*line-height: 2.5em;*/
+/*}*/
+/*.controls h2 {*/
+  /*margin: 0 1.5em 0 0;*/
+  /*color: #EEE;*/
+  /*display: inline-block;*/
+/*}*/
+/*.controls > div {*/
+  /*text-align: center;*/
+/*}*/
+/*.controls button {*/
+  /*margin:0 1.5em 0 0;*/
+/*}*/
 
 
 
-.track-container {
-  margin: 2em 5px;
-  min-height: 400px;
-}
+/*.track-container {*/
+  /*margin: 2em 5px;*/
+  /*min-height: 250px;*/
+/*}*/
 
 .track {
   display: inline-block;
@@ -147,7 +147,7 @@ footer {
   top: 5px;
   height: 4px;
   margin: 0;
-  width: 130px;
+  width: 100%;
 }
 .track input[type='range'] {
   -webkit-appearance: none !important;
@@ -156,7 +156,7 @@ footer {
 }
 .track input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none !important;
-  background: #888;
+  background: orange;
   height: 15px;
   width: 15px;
   border-radius: 50%;
