@@ -6,8 +6,8 @@
 </div>
 
 <div class="controls" ng-show="currentSong" ng-cloak>
-  <button ng-disabled="!ready" ng-show="!playing" ng-click="playTracks()">Play</button>
-  <button ng-disabled="!ready" ng-show="playing" ng-click="stopTracks()">Stop</button>
+  <button ng-disabled="!ready" ng-show="!playing" ng-click="playTracks()" class="btn-sm">Play</button>
+  <button ng-disabled="!ready" ng-show="playing" ng-click="stopTracks()" class="btn-sm">Stop</button>
 </div>
 
 <div class="error" ng-show="error" ng-cloak>Sorry, it looks like this won't work in your browser.</div>
@@ -18,68 +18,68 @@
 
 
 
-<div class="row">
-  <div class="col-lg-2">
-    <ul  id="song_mix_tab" class="nav nav-tabs" data-tabs="tabs">
-      <li class="active"><a href="#song_tab" data-toggle="tab"> Songs</a></li>
-      <li><a href="#mix_tab" data-toggle="tab">Mix Songs</a></li>
-    </ul>
-    <!--List of songs and mix songs-->
-    <div id="content_song_mix_tab" class="tab-content">
-      <!--tab of songs-->
-      <div class="tab-pane active" id="song_tab">
-        <!--Table of songs-->
-        <!--<div ng-include src="'views/tab_list_songs.html'"></div>-->
-      </div>
+<!--<div class="row">-->
+  <!--<div class="col-lg-2">-->
+    <!--<ul  id="song_mix_tab" class="nav nav-tabs" data-tabs="tabs">-->
+      <!--<li class="active"><a href="#song_tab" data-toggle="tab"> Songs</a></li>-->
+      <!--<li><a href="#mix_tab" data-toggle="tab">Mix Songs</a></li>-->
+    <!--</ul>-->
+    <!--&lt;!&ndash;List of songs and mix songs&ndash;&gt;-->
+    <!--<div id="content_song_mix_tab" class="tab-content">-->
+      <!--&lt;!&ndash;tab of songs&ndash;&gt;-->
+      <!--<div class="tab-pane active" id="song_tab">-->
+        <!--&lt;!&ndash;Table of songs&ndash;&gt;-->
+        <!--&lt;!&ndash;<div ng-include src="'views/tab_list_songs.html'"></div>&ndash;&gt;-->
+      <!--</div>-->
 
-      <!--tab of mix-->
-      <div class="tab-pane" id="mix_tab">
-        <!--Table of mix-->
-        <div ng-include src="'views/tab_list_mix.html'"></div>
-      </div>
-    </div>
-  </div>
+      <!--&lt;!&ndash;tab of mix&ndash;&gt;-->
+      <!--<div class="tab-pane" id="mix_tab">-->
+        <!--&lt;!&ndash;Table of mix&ndash;&gt;-->
+        <!--<div ng-include src="'views/tab_list_mix.html'"></div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
 
-  <div class="col-lg-10">
-    <a class="btn btn-success" data-toggle="modal" data-target="#modal_save_mix">Save Mix Song</a>
-    <div ng-include src="'views/modal_save_mix.html'"></div>
-    <br/>
-    <br/>
-    <div class="panel panel-default">
-      <div class="panel-body">
-       <img src="../images/track.jpg" class="pull-right" width="90%">
-      </div>
-    </div>
+  <!--<div class="col-lg-10">-->
+    <!--<a class="btn btn-success" data-toggle="modal" data-target="#modal_save_mix">Save Mix Song</a>-->
+    <!--<div ng-include src="'views/modal_save_mix.html'"></div>-->
+    <!--<br/>-->
+    <!--<br/>-->
+    <!--<div class="panel panel-default">-->
+      <!--<div class="panel-body">-->
+       <!--<img src="../images/track.jpg" class="pull-right" width="90%">-->
+      <!--</div>-->
+    <!--</div>-->
 
-    <div class="row">
-      <!--List of track left-->
-      <div class="col-lg-6 text-warning">
-        <div ng-include src="'views/track_list.html'"></div>
-      </div>
+    <!--<div class="row">-->
+      <!--&lt;!&ndash;List of track left&ndash;&gt;-->
+      <!--<div class="col-lg-6 text-warning">-->
+        <!--<div ng-include src="'views/track_list.html'"></div>-->
+      <!--</div>-->
 
-      <!--List of track right-->
-      <div class="col-lg-6" style="color:#31b0d5">
-        <div ng-include src="'views/track_list.html'"></div>
-      </div>
-    </div>
-  </div>
-</div>
-<br/>
-<br/>
-<br/>
+      <!--&lt;!&ndash;List of track right&ndash;&gt;-->
+      <!--<div class="col-lg-6" style="color:#31b0d5">-->
+        <!--<div ng-include src="'views/track_list.html'"></div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+<!--<br/>-->
+<!--<br/>-->
+<!--<br/>-->
 
-<!--player of music : footer-->
-<footer class="footer well">
-  <div class="row">
-    <div class="col col-lg-6 text-warning" ng-controller="PlayerController as player1" >
-      <div ng-include src="'views/player.html'"></div>
-    </div>
-    <div class="col col-lg-6" style="color:#31b0d5"  ng-controller="PlayerController as player2">
-      <div ng-include src="'views/player.html'"></div>
-    </div>
-  </div>
-</footer>
-<!--END player of music : footer-->
+<!--&lt;!&ndash;player of music : footer&ndash;&gt;-->
+<!--<footer class="footer well">-->
+  <!--<div class="row">-->
+    <!--<div class="col col-lg-6 text-warning" >-->
+      <!--<div ng-include src="'views/player.html'"></div>-->
+    <!--</div>-->
+    <!--<div class="col col-lg-6" style="color:#31b0d5">-->
+      <!--<div ng-include src="'views/player.html'"></div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</footer>-->
+<!--&lt;!&ndash;END player of music : footer&ndash;&gt;-->
 
 
 <script>

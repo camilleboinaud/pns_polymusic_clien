@@ -1,5 +1,13 @@
 'use strict';
 
+/**
+ * @ngdoc function
+ * @name pnsPolymusicClientApp.services: audioTrackFactory
+ * @description
+ * # audioTrackFactory: une instance of audio track
+ * Controller of the pnsPolymusicClientApp
+ */
+
 
 angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', function ($http) {
 
@@ -38,7 +46,6 @@ angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', function ($
       audio.crossOrigin = 'anonymous';
       audio.addEventListener('canplaythrough', function(e) {
         self.node = self.ctx.createMediaElementSource(audio);
-
         self.gainNode = self.addGainNode(self.node);
         self.analyser = self.createAnalyser(self.gainNode);
 

@@ -1,5 +1,14 @@
 'use strict';
 
+/**
+ * @ngdoc function
+ * @name pnsPolymusicClientApp.services: track
+ * @description
+ * # track: make the track template of every track in the list with volume
+ * service of the pnsPolymusicClientApp
+ */
+
+
 angular.module('pnsPolymusicClientApp').directive('track', function() {
 
   function trackController($scope, $element, $timeout, audioTrackFactory) {
@@ -9,7 +18,6 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
 
     var track = $scope.track;
     var canvas = $element[0].querySelector('canvas');
-    console.info(canvas);
     var canvasWidth = $scope.$parent.trackWidth;
     var canvasHeight = 200;
     var freqShowPercent = 0.75;
@@ -55,6 +63,7 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
     }
 
 
+    //init the canvas with height, width and forme, color..
     function initCanvas(canvas) {
       track.canvas = canvas;
       track.canvas.width = canvasWidth;
@@ -73,12 +82,12 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
 
 
     // augment track object
-
     track.play = function() {
       audioTrack.play();
       analyser = audioTrack.analyser;
     };
 
+    //stop the song
     track.stop = function() {
       audioTrack.stop();
     };
@@ -87,6 +96,8 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
       audioTrack.clear();
     };
 
+
+    //draw the canvas
     track.draw = function() {
       var ctx = track.cCtx;
 
@@ -112,11 +123,9 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
       }
       ctx.stroke();
     };
+  }
 
-  };
-
-
-
+  //return the template of track
   return {
     restrict: 'EA',
     replace: true,
@@ -124,10 +133,7 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
       track: '=',
       trackName: '@'
     },
-    link: function(scope, elem, attrs) {
-
-    },
     templateUrl: 'scripts/services/track/track.html',
     controller: trackController
-  }
+  };
 });

@@ -16,14 +16,12 @@ angular.module('pnsPolymusicClientApp')
 
     $scope.currentSong;
     $scope.songs = songFactory;
-    $scope.ready = false
+    $scope.ready = false;
     $scope.playing = false;
     $scope.trackWidth;
     $scope.aCtx;
     $scope.master = {};
     $scope.useAudioTag = true;
-
-
 
     (function init() {
       if (!window.AudioContext) {
@@ -64,7 +62,7 @@ angular.module('pnsPolymusicClientApp')
       }
       if (oldSong) {
         clearAudios(oldSong.tracks);
-        $scope.ready = false
+        $scope.ready = false;
         thisLoadCount = 0;
       }
     });
@@ -75,20 +73,6 @@ angular.module('pnsPolymusicClientApp')
         $scope.ready = true;
         $scope.$$phase || $scope.$apply();
         tick();
-    //
-    //$scope.lastIndex = 0;
-    //$scope.playMusic = function playMusic(index,barIndex){
-    //  console.log('click index = '+index+' barIndex = '+ barIndex);
-    //  if(!$scope.playlist[index].isPlaying) {
-    //    SongService.updateSongAtPlayer(barIndex, $scope.playlist[index], function () {
-    //      console.log($scope.playlist[$scope.lastIndex]);
-    //      $scope.playlist[$scope.lastIndex].isPlaying = false;
-    //      $scope.playlist[index].isPlaying = true;
-    //      $scope.lastIndex = index;
-    //      //Music.getPlayingMusicAt(0).load();
-    //    });
-    //    console.log('Music playing = '+SongService.getSongAtPlayer(0).name);
-
       }
     };
 
@@ -110,7 +94,6 @@ angular.module('pnsPolymusicClientApp')
       });
     }
 
-
     function initAudio() {
       $scope.aCtx = new window.AudioContext();
       $scope.aCtx.createGain = $scope.aCtx.createGain || $scope.aCtx.createGainNode;
@@ -124,14 +107,7 @@ angular.module('pnsPolymusicClientApp')
 
 
     function setTrackWidth() {
-      $scope.trackWidth = angular.element(document).find('.track-container').offsetWidth;
-
-      if ($scope.trackWidth > 1200) {
-        $scope.trackWidth /= 3;
-      } else if ($scope.trackWidth > 800) {
-        $scope.trackWidth /= 2;
-      }
-      $scope.trackWidth -= 22;
+      $scope.trackWidth = 260;
     }
 
   }]);
