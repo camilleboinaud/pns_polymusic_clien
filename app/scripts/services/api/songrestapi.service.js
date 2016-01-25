@@ -24,11 +24,17 @@ angular.module('pnsPolymusicClientApp').factory('REST', ['$http', 'Upload',
       return serverAddress+'/api/songs/'+ID;
     };
 
-    REST.uploadSong = function (file, successCallback, errorCallback, progressCallback) {
+    REST.uploadSong = function (song, successCallback, errorCallback, progressCallback) {
       Upload.upload({
         url: serverAddress + '/api/songs',
-        data: {file: file}
+        data: { songName:song.name,file: song.tracks}
       }).then(successCallback, errorCallback, progressCallback);
+      //$http({
+      //  method  : 'POST',
+      //  url     : serverAddress + '/api/songs',
+      //  data    : files, //forms user object
+      //  headers : {'Content-Type': 'application/form-Data'}
+      //}).then(successCallback, errorCallback, progressCallback);
     };
 
     return REST;
