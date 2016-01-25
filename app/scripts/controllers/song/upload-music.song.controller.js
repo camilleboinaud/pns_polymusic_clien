@@ -5,6 +5,7 @@
 
  angular.module('song').controller('MusicUploadController', ['$scope', '$timeout', '$window', 'REST',
      function ($scope, $timeout, $window, REST) {
+       $scope.progressPercentage =0;
 
        $scope.submit = function() {
          console.log('submit');
@@ -32,8 +33,8 @@
            }, function (resp) {
              console.log('Error status: ' + resp.status);
            }, function (evt) {
-             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-             console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+              $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+             console.log('progress: ' + $scope.progressPercentage + '% ' + evt.config.data.file.name);
            }
          );
 
