@@ -38,6 +38,11 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
+      .when('/songs/:songId',{
+        templateUrl: 'views/song_detail.html',
+        controller: 'SongDetailCtrl',
+        controllerAs: 'songDetail'
+      })
       .when('/sign-in', {
         templateUrl: 'views/sign_in.html',
         controller: 'AuthentificationCtrl',

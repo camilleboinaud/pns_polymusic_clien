@@ -12,6 +12,7 @@
 angular.module('pnsPolymusicClientApp').factory('songFactory', function () {
   return [
     {
+      id: 0,
       name: 'amy rehab',
       band: 'Queen',
       song: '././music/amy_rehab/song.mp3',
@@ -47,6 +48,7 @@ angular.module('pnsPolymusicClientApp').factory('songFactory', function () {
       ]
     },
     {
+      id: 1,
       name: 'bob love',
       band: 'Queen',
       tracks: [
