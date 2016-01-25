@@ -13,9 +13,15 @@
             </div>
           </div>
           <div class="form-group">
+            <label class="col-lg-3 control-label">Author</label>
+            <div class="col-lg-9">
+              <input type="text" ng-model="author" class="form-control" placeholder="Author">
+            </div>
+          </div>
+          <div class="form-group">
             <label class="col-lg-3 control-label">Choose File</label>
             <div class="col-lg-9">
-              <input type="file" class="btn btn-default" id="uploadSong" webkitdirectory directory accept="audio/*" ng-model="song"/>
+              <input type="file" class="btn btn-default" id="uploadSong" webkitdirectory directory accept="audio/*"/>
             </div>
           </div>
           <div class="progress progress-striped active">

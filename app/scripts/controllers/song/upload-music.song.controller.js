@@ -12,6 +12,7 @@
          if ($scope.tracks && $scope.songName) {
            var song = {
              name:$scope.songName,
+             author:$scope.author,
              tracks: $scope.tracks
            };
            console.log(song);
@@ -33,7 +34,7 @@
            }, function (resp) {
              console.log('Error status: ' + resp.status);
            }, function (evt) {
-              $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+             $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
              console.log('progress: ' + $scope.progressPercentage + '% ' + evt.config.data.file.name);
              var interval = setInterval(function() {
                $document.find("#progress-bar")

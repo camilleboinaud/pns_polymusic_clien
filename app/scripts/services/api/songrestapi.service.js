@@ -27,7 +27,7 @@ angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload',
     SongREST.uploadSong = function (song, successCallback, errorCallback, progressCallback) {
       Upload.upload({
         url: serverAddress + '/api/songs',
-        data: { songName:song.name,file: song.tracks}
+        data: { songName:song.name, author:song.author, file: song.tracks}
       }).then(successCallback, errorCallback, progressCallback);
     };
 
