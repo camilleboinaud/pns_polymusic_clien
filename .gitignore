@@ -6,3 +6,5 @@
 *.iml
 .idea/
 /app/music
+.DS_Store
+app/.DS_Store
