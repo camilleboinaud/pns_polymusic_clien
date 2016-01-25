@@ -13,7 +13,7 @@
         <div class="songs" ng-cloak>
           <span ng-repeat="song in songs">
             <input id="{{'radio-'+song.name}}" type="radio" ng-model="$parent.currentSong" ng-value="song" hidden/>
-            <a class="text-capitalize">{{song.name}}</a>
+            <a href="/#/songs/{{song.id}}" class="text-capitalize">{{song.name}}</a>
             <div class="btn-group btn-group-sm">
               <label class="btn-warning btn-sm" for="{{'radio-'+song.name}}">A</label>
               <label class="btn-info btn-sm">B</label>
