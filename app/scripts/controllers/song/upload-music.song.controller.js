@@ -3,9 +3,9 @@
  */
  'use strict';
 
- angular.module('song').controller('MusicUploadController', ['$scope','SongREST',
-     function ($scope, SongREST) {
-       
+ angular.module('song').controller('MusicUploadController', ['$scope','SongREST','$document',
+     function ($scope, SongREST, $document) {
+
        $scope.progressPercentage =0;
 
        $scope.submit = function() {
@@ -35,6 +35,14 @@
            }, function (evt) {
               $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
              console.log('progress: ' + $scope.progressPercentage + '% ' + evt.config.data.file.name);
+             var interval = setInterval(function() {
+               $document.find("#progress-bar")
+                 .css("width", $scope.progressPercentage + "%")
+                 .attr("aria-valuenow", value)
+                 .text($scope.progressPercentage + "%");
+               if (value >= 100)
+                 clearInterval(interval);
+             }, 0);
            }
          );
 
