@@ -3,11 +3,10 @@
  */
  'use strict';
 
- angular.module('song').controller('MusicUploadController', ['$scope', '$timeout', '$window', 'REST',
-     function ($scope, $timeout, $window, REST) {
+ angular.module('song').controller('MusicUploadController', ['$scope','SongREST',
+     function ($scope, SongREST) {
 
        $scope.submit = function() {
-         console.log('submit');
          if ($scope.tracks && $scope.songName) {
            var song = {
              name:$scope.songName,
@@ -27,8 +26,8 @@
        // upload on file select or drop
        $scope.upload = function (song) {
 
-         REST.uploadSong(song, function (resp) {
-             console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+         SongREST.uploadSong(song, function (resp) {
+             console.log('Success uploaded. Response: ' + resp.data.message);
            }, function (resp) {
              console.log('Error status: ' + resp.status);
            }, function (evt) {
