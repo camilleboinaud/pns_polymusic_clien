@@ -27,8 +27,8 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
     var freqDrawWidth = canvasWidth / (freqCount * freqShowPercent);
     var timeDrawWidth = canvasWidth / freqCount;
     var trackMuteVolume=0;
-    var trackIsMute=false;
-    $scope.muteVar="mute";
+
+    $scope.trackIsMute=false;
 
     var audioTrack;
     var analyser;
@@ -50,26 +50,23 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
         value = value / 100;
         audioTrack.setVolume(value);
         if(value !== 0) {
-          trackIsMute=false;
-          $scope.muteVar="mute";
+          $scope.trackIsMute=false;
         }
       });
     })();
 
     $scope.mute = function() {
-      if(trackIsMute === false) {
+      if($scope.trackIsMute === false) {
         var temp = $scope.trackVolume;
         audioTrack.setVolume(0);
         $scope.trackVolume = 0;
         trackMuteVolume = temp;
-        trackIsMute = true;
-        $scope.muteVar="demute";
+        $scope.trackIsMute = true;
       } else {
         audioTrack.setVolume(trackMuteVolume);
         $scope.trackVolume = trackMuteVolume;
         trackMuteVolume = 0;
-        trackIsMute = false;
-        $scope.muteVar="mute";
+        $scope.trackIsMute = false;
       }
     };
 
