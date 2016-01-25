@@ -6,4 +6,13 @@
   <br/>
   <canvas></canvas>
   <div class="spinner" ng-show="loading"></div>
+  <button class="button-mute" ng-click="mute()">{{muteVar}}</button>
+  <button class="button-solo">Solo</button>
+  <div>
+    <span>L</span>
+    <input type="range" ng-model="trackStereo" min='-1' max='1'/>
+    <span>R</span>
+  </div>
+
+
 </div>
