@@ -38,9 +38,9 @@
              var interval = setInterval(function() {
                $document.find("#progress-bar")
                  .css("width", $scope.progressPercentage + "%")
-                 .attr("aria-valuenow", value)
+                 .attr("aria-valuenow", $scope.progressPercentage)
                  .text($scope.progressPercentage + "%");
-               if (value >= 100)
+               if ($scope.progressPercentage >= 100)
                  clearInterval(interval);
              }, 0);
            }
