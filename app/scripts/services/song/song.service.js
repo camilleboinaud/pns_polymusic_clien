@@ -14,6 +14,7 @@ angular.module('pnsPolymusicClientApp').factory('songFactory', function () {
     {
       name: 'amy rehab',
       band: 'Queen',
+      song: '././music/amy_rehab/song.mp3',
       tracks: [
         {
           name: 'piano',

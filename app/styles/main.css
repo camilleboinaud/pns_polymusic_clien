@@ -147,7 +147,8 @@ footer {
   top: 5px;
   height: 4px;
   margin: 0;
-  width: 100%;
+  width: 90%;
+  display: inline;
 }
 .track input[type='range'] {
   -webkit-appearance: none !important;
