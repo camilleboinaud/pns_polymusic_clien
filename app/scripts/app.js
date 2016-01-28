@@ -23,6 +23,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'ngFileUpload',
+    'ngStorage',
     'song'
   ])
 
@@ -46,7 +47,6 @@ angular
       .when('/sign-in', {
         templateUrl: 'views/sign_in.html',
         controller: 'AuthentificationCtrl',
-        controllerAs: 'auth'
       })
       .when('/sign-up', {
         templateUrl: 'views/sign_up.html',
@@ -65,6 +65,8 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+
+  .constant('SERVER_ADDR', 'http://localhost:3000/');
 
 
