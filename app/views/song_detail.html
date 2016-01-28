@@ -5,8 +5,8 @@
         <div class="row">
           <div class="col-md-2">
             <img  class="img-thumbnail" src="././images/logo.png">
-            <div><i class="fa fa-music"></i> Song Name</div>
-            <div><i class="fa fa-user"></i> Author</div>
+            <div><i class="fa fa-music"></i> {{song.name}}</div>
+            <div><i class="fa fa-user"></i> {{song.author}}</div>
           </div>
 
           <div class="col-md-10">
@@ -22,21 +22,22 @@
             <br/>
             <br/>
             <br/>
-            <div style="font-size: 20px"><i class="fa fa-comments"></i> <span class="badge">89</span></div>
+            <div style="font-size: 20px"><i class="fa fa-comments"></i> <span class="badge">{{nbComment}}</span></div>
             <hr style="margin-top: 2px"/>
             <div class="form-group">
               <form class="form">
-                <textarea class="form-control" rows="3" placeholder="Comments"></textarea>
+                <textarea class="form-control" rows="3" placeholder="Comments" ng-model="content"></textarea>
                 <div class="pull-right">
-                  <button type="submit" class="btn btn-primary">Comment</button>
+                  <button type="submit" class="btn btn-primary" ng-click=newComment()>Comment</button>
                 </div>
               </form>
             </div>
             <br/>
 
+
             <div class="list-comments">
               <ul class="media-list">
-                <li class="media">
+                <li class="media" ng-repeat="comment in comments">
                   <div class="media-left">
                     <a href="#">
                       <img class="media-object" src="../images/user.png">
@@ -44,33 +45,52 @@
                   </div>
                   <div class="media-body">
                     <h5 class="media-heading">Name of user <small>09/11/2015</small></h5>
-                    <p>Amazing music, i love it!!Amazing music, i love it!!Amazing music, i love it!!</p>
+                    <p>{{comment.content}}</p>
                   </div>
                 </li>
-                <li class="media">
-                  <div class="media-left">
-                    <a href="#">
-                      <img class="media-object" src="../images/user.png">
-                    </a>
-                  </div>
-                  <div class="media-body">
-                    <h5 class="media-heading">Name of user <small>09/11/2015</small></h5>
-                    <p>Amazing music, i love it!!Amazing music, i love it!!Amazing music, i love it!!</p>
-                  </div>
-                </li>
-                <li class="media">
-                  <div class="media-left">
-                    <a href="#">
-                      <img class="media-object" src="../images/user.png">
-                    </a>
-                  </div>
-                  <div class="media-body">
-                    <h5 class="media-heading">Name of user <small>09/11/2015</small></h5>
-                    <p>Amazing music, i love it!!Amazing music, i love it!!Amazing music, i love it!!</p>
-                  </div>
-                </li>
+
               </ul>
             </div>
+
+            <!--<div class="list-comments">-->
+              <!--<ul class="media-list">-->
+                <!--<li class="media">-->
+                  <!--<div class="media-left">-->
+                    <!--<a href="#">-->
+                      <!--<img class="media-object" src="../images/user.png">-->
+                    <!--</a>-->
+                  <!--</div>-->
+                  <!--<div class="media-body">-->
+                    <!--<h5 class="media-heading">Name of user <small>09/11/2015</small></h5>-->
+                    <!--<p>Amazing music, i love it!!Amazing music, i love it!!Amazing music, i love it!!</p>-->
+                  <!--</div>-->
+                <!--</li>-->
+                <!--<li class="media">-->
+                  <!--<div class="media-left">-->
+                    <!--<a href="#">-->
+                      <!--<img class="media-object" src="../images/user.png">-->
+                    <!--</a>-->
+                  <!--</div>-->
+                  <!--<div class="media-body">-->
+                    <!--<h5 class="media-heading">Name of user <small>09/11/2015</small></h5>-->
+                    <!--<p>Amazing music, i love it!!Amazing music, i love it!!Amazing music, i love it!!</p>-->
+                  <!--</div>-->
+                <!--</li>-->
+                <!--<li class="media">-->
+                  <!--<div class="media-left">-->
+                    <!--<a href="#">-->
+                      <!--<img class="media-object" src="../images/user.png">-->
+                    <!--</a>-->
+                  <!--</div>-->
+                  <!--<div class="media-body">-->
+                    <!--<h5 class="media-heading">Name of user <small>09/11/2015</small></h5>-->
+                    <!--<p>Amazing music, i love it!!Amazing music, i love it!!Amazing music, i love it!!</p>-->
+                  <!--</div>-->
+                <!--</li>-->
+              <!--</ul>-->
+            <!--</div>-->
+
+
           </div>
         </div>
       </div>
