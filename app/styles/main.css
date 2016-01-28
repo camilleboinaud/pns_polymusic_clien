@@ -77,60 +77,15 @@ footer {
 
 
 
-/*.songs {*/
-  /*padding: 8px 5px;*/
-/*}*/
-/*.songs span {*/
-  /*display: inline-block;*/
-/*}*/
-/*.songs label {*/
-  /*display: inline-block;*/
-  /*!*margin: 5px 10px;*!*/
-  /*border: 1px solid #888;*/
-  /*border-radius: 4px;*/
-  /*!*padding: 3px 6px;*!*/
-  /*cursor: pointer;*/
-/*}*/
-/*.songs span:last-child label {*/
-  /*margin-right: 0;*/
-/*}*/
-/*.songs input:focus + label {*/
-  /*box-shadow: 0 0 0 1px #ddd;*/
-/*}*/
-/*.songs input:checked + label {*/
-  /*background-color: #EEE;*/
-  /*border-color: #EEE;*/
-  /*color: #050505;*/
-/*}*/
-/*.songs input {*/
-  /*position: absolute;*/
-  /*top: -20px;*/
-/*}*/
+.songs label {
+  display: inline-block;
+  /*margin: 5px 10px;*/
+  border: 1px solid #888;
+  border-radius: 4px;
+  /*padding: 3px 6px;*/
+  cursor: pointer;
+}
 
-
-
-/*.controls {*/
-  /*padding: 0px 15px 10px;*/
-  /*line-height: 2.5em;*/
-/*}*/
-/*.controls h2 {*/
-  /*margin: 0 1.5em 0 0;*/
-  /*color: #EEE;*/
-  /*display: inline-block;*/
-/*}*/
-/*.controls > div {*/
-  /*text-align: center;*/
-/*}*/
-/*.controls button {*/
-  /*margin:0 1.5em 0 0;*/
-/*}*/
-
-
-
-/*.track-container {*/
-  /*margin: 2em 5px;*/
-  /*min-height: 250px;*/
-/*}*/
 
 .track {
   display: inline-block;
