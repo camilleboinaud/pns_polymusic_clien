@@ -15,7 +15,7 @@ angular.module('pnsPolymusicClientApp')
     var thisLoadCount = 0;
 
     $scope.currentSong;
-    $scope.songs = songFactory;
+
     $scope.ready = false;
     $scope.playing = false;
     $scope.trackWidth;
@@ -32,6 +32,9 @@ angular.module('pnsPolymusicClientApp')
 
       setTrackWidth();
       initAudio();
+      songFactory.getAllPubSongs(function (songs) {
+        $scope.songs = songs;
+      });
     })();
 
 

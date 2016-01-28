@@ -12,7 +12,7 @@ angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload',
     SongREST.getAllPubSongs = function (callback) {
       $http({
         method: 'GET',
-        url: serverAddress + '/api/songs?is_pub=true'
+        url: serverAddress + '/api/songs'//?is_pub=true
       }).then(function successCallback(response){
         callback(response.data);
       }, function errorCallback(error) {
