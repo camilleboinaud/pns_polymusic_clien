@@ -3,27 +3,47 @@
  */
  'use strict';
 
- angular.module('song').controller('MusicUploadController', ['$scope', '$timeout', '$window', 'REST',
-     function ($scope, $timeout, $window, REST) {
+ angular.module('song').controller('MusicUploadController', ['$scope','SongREST','$document',
+     function ($scope, SongREST, $document) {
 
-       $scope.musicName = '';
+       $scope.progressPercentage =0;
 
        $scope.submit = function() {
-         if ($scope.file) {
-           $scope.upload($scope.file);
+         if ($scope.tracks && $scope.songName) {
+           var song = {
+             name:$scope.songName,
+             author:$scope.author,
+             tracks: $scope.tracks
+           };
+           console.log(song);
+           $scope.upload(song);
          }
        };
 
-       // upload on file select or drop
-       $scope.upload = function (file) {
+       var inputElement = document.getElementById('uploadSong');
+       inputElement.onchange = function() {
+         $scope.tracks = inputElement.files;
+         //TODO do something with fileList.
+       };
 
-         REST.uploadSong(file, function (resp) {
-             console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+       // upload on file select or drop
+       $scope.upload = function (song) {
+
+         SongREST.uploadSong(song, function (resp) {
+             console.log('Success uploaded. Response: ' + resp.data.message);
            }, function (resp) {
              console.log('Error status: ' + resp.status);
            }, function (evt) {
-             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-             console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+             $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+             console.log('progress: ' + $scope.progressPercentage + '% ' + evt.config.data.file.name);
+             var interval = setInterval(function() {
+               $document.find("#progress-bar")
+                 .css("width", $scope.progressPercentage + "%")
+                 .attr("aria-valuenow", $scope.progressPercentage)
+                 .text($scope.progressPercentage + "%");
+               if ($scope.progressPercentage >= 100)
+                 clearInterval(interval);
+             }, 0);
            }
          );
 

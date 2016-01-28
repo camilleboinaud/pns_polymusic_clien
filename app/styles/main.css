@@ -147,7 +147,8 @@ footer {
   top: 5px;
   height: 4px;
   margin: 0;
-  width: 100%;
+  width: 90%;
+  display: inline;
 }
 .track input[type='range'] {
   -webkit-appearance: none !important;
@@ -189,4 +190,24 @@ footer {
 @keyframes spinner-frames {
   from { transform: rotate(0deg); }
   to { transform: rotate(359deg); }
+}
+
+
+
+/*stars css*/
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  font-size: 30px;
+}
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+  content: "\2605";
+  color: orange;
+  position: absolute;
 }

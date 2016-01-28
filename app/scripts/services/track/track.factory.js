@@ -28,7 +28,6 @@ angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', function ($
   };
 
   AudioTrack.prototype.createAnalyser = function(node) {
-    console.log('analyse');
     var analyser = this.ctx.createAnalyser();
     analyser.smoothingTimeConstant = 0.6;
     analyser.fftSize = this.fftSize;

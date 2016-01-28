@@ -3,13 +3,13 @@
  */
 'use strict';
 
-angular.module('pnsPolymusicClientApp').factory('REST', ['$http', 'Upload',
+angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload',
   function ($http, Upload) {
-    var REST= {},
+    var SongREST= {},
       serverAddress = 'http://localhost:3000';
 
-    REST.serverAddress = serverAddress;
-    REST.getAllPubSongs = function (callback) {
+    SongREST.serverAddress = serverAddress;
+    SongREST.getAllPubSongs = function (callback) {
       $http({
         method: 'GET',
         url: serverAddress + '/api/songs?is_pub=true'
@@ -20,17 +20,17 @@ angular.module('pnsPolymusicClientApp').factory('REST', ['$http', 'Upload',
       });
     };
 
-    REST.getSongUrlById = function (ID) {
+    SongREST.getSongUrlById = function (ID) {
       return serverAddress+'/api/songs/'+ID;
     };
 
-    REST.uploadSong = function (file, successCallback, errorCallback, progressCallback) {
+    SongREST.uploadSong = function (song, successCallback, errorCallback, progressCallback) {
       Upload.upload({
         url: serverAddress + '/api/songs',
-        data: {file: file}
+        data: { songName:song.name, author:song.author, file: song.tracks}
       }).then(successCallback, errorCallback, progressCallback);
     };
 
-    return REST;
+    return SongREST;
   }
 ]);
