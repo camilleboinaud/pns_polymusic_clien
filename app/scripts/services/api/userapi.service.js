@@ -3,7 +3,6 @@
 angular.module('pnsPolymusicClientApp').factory('User', ['$http', 'SERVER_ADDR', '$sessionStorage',
   function ($http, SERVER_ADDR, $sessionStorage) {
     var User= {};
-    var loggedInUser = null;
 
     User.register = function (user, callback) {
       $http({
@@ -39,7 +38,7 @@ angular.module('pnsPolymusicClientApp').factory('User', ['$http', 'SERVER_ADDR',
           callback(msg.data);
         }
       );
-    }
+    };
 
     User.logout = function(callback){
       $http({
@@ -49,16 +48,17 @@ angular.module('pnsPolymusicClientApp').factory('User', ['$http', 'SERVER_ADDR',
       })
       .then(function success(msg){
             disconnect();
-            callback(msg.data)
+            console.log('prout');
+            callback(msg.data);
           }, function error(msg) {
             callback(msg.data);
           }
         );
-    }
+    };
 
     User.isLoggedIn = function(){
       return ($sessionStorage.UserSession !== undefined);
-    }
+    };
 
     var connect = function(user){
       $sessionStorage.UserSession = {
@@ -69,12 +69,13 @@ angular.module('pnsPolymusicClientApp').factory('User', ['$http', 'SERVER_ADDR',
     };
 
     var disconnect = function() {
+      console.log('here i am');
       delete $sessionStorage.UserSession;
     };
 
-    var getCurrentUser = function(){
+    User.getCurrentUser = function(){
       return ($sessionStorage.UserSession) ? $sessionStorage.UserSession : null;
-    }
+    };
 
     return User;
   }

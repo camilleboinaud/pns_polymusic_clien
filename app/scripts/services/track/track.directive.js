@@ -27,6 +27,7 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
     var freqDrawWidth = canvasWidth / (freqCount * freqShowPercent);
     var timeDrawWidth = canvasWidth / freqCount;
     var trackMuteVolume=0;
+    $scope.trackReady=false;
 
 
     $scope.trackIsMute=false;
@@ -59,6 +60,8 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
       $scope.$watch('trackStereo', function(value) {
         audioTrack.setBalance(value);
       });
+
+      $scope.trackReady=true;
     })();
 
     track.getAudioTrack = function() {
