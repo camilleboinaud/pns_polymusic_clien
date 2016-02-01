@@ -8,7 +8,7 @@
  * Controller of the pnsPolymusicClientApp
  */
 angular.module('pnsPolymusicClientApp')
-  .controller('MainCtrl', ['$scope', 'songFactory', '$document',function ($scope, songFactory, $document) {
+  .controller('MainCtrl', ['$scope', 'songFactory','SongREST', function ($scope, songFactory, SongREST ) {
 
     //here's no way to detect whether a browser can play multiple audio elements at once.
     var isiOS = navigator.userAgent.match(/(iPad|iPhone|iPod)/g) ? true : false;
@@ -108,9 +108,22 @@ angular.module('pnsPolymusicClientApp')
       }
     }
 
-
     function setTrackWidth() {
-      $scope.trackWidth = 400;
+      $scope.trackWidth = 370;
+    }
+
+    /**
+     * Get song list by search_text
+     * @param isSong boolean
+     */
+    $scope.search = function (isASong) {
+      var params = {
+        search_text: $scope.search_song,
+        isSong: isASong
+      };
+      SongREST.searchSong(params, function (data) {
+        $scope.songs = data;
+      });
     }
 
     $scope.solo = function() {
