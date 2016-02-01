@@ -1,5 +1,11 @@
 <div class="row">
   <div class="col-md-offset-3 col-lg-6">
+    <!--notification de success de upload-->
+    <div class="alert alert-dismissible alert-success" id="alert_upload"ng-show="hasNotif">
+      <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+      <strong>Congratulations!</strong> You successfully upload your music <a href="#" class="alert-link">Go to my list of music</a>.
+    </div>
+
     <div class="panel panel-success">
       <div class="panel-heading">
         <h3 class="panel-title">Upload Your File</h3>
