@@ -22,6 +22,7 @@ angular.module('pnsPolymusicClientApp')
     $scope.aCtx;
     $scope.master = {};
     $scope.useAudioTag = true;
+    $scope.masterGain = 100;
 
     (function init() {
       if (!window.AudioContext) {
@@ -70,6 +71,10 @@ angular.module('pnsPolymusicClientApp')
       }
     });
 
+    $scope.$watch('masterGain', function(value) {
+      value = value / 100;
+      $scope.master.gainNode.gain.value = value;
+    });
 
     $scope.trackLoad = function(key, track) {
       if (++thisLoadCount >= $scope.currentSong.tracks.length) {
