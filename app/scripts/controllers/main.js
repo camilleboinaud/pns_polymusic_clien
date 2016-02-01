@@ -126,4 +126,12 @@ angular.module('pnsPolymusicClientApp')
       });
     }
 
+    $scope.solo = function() {
+      var tracks = $scope.currentSong.tracks;
+      angular.forEach(tracks, function(track) {
+        if(track.getTrackIsSolo() === false) {
+          console.log(track.getTrackIsSolo());
+        }
+      });
+    }
   }]);
