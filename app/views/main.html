@@ -15,9 +15,9 @@
             <!--formulaire de recherche-->
             <form class="form-inline" role="search">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
+                <input type="text" class="form-control" placeholder="Search your music">
               </div>
-              <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+              <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> Search</button>
             </form>
             <!--END: formulaire de recherche-->
 
@@ -56,21 +56,24 @@
     <div class="error" ng-show="error" ng-cloak>Sorry, it looks like this won't work in your browser.</div>
 
     <!--Upload the file-->
-    <a class="btn btn-success" href="/#/upload">Upload</a>
+    <a class="btn btn-success" href="/#/upload"><i class="fa fa-upload"></i> Upload your music</a>
 
     <!--Save button Modal-->
-    <a class="btn btn-warning" data-toggle="modal" data-target="#modal_save_mix">Save Mix Song</a>
+    <a class="btn btn-warning" data-toggle="modal" data-target="#modal_save_mix"><i class="fa fa-floppy-o"></i> Save Mix Song</a>
     <div ng-include src="'views/modal_save_mix.html'"></div>
     <br/>
-
-    <!--track list à gauche-->
-    <div class="col-lg-6" style="color:orange">
-      <div class="panel panel-default">
-        <div class="track-container" ng-cloak>
-          <div track="track" track-name="{{track.name}}" ng-repeat="track in currentSong.tracks"></div>
+    
+    <div class="row">
+      <!--track list à gauche-->
+      <div class="col-lg-6" style="color:orange">
+        <div class="panel panel-default">
+          <div class="track-container" ng-cloak>
+            <div track="track" track-name="{{track.name}}" ng-repeat="track in currentSong.tracks"></div>
+          </div>
         </div>
       </div>
     </div>
+
   </div>
 </div>
 <br/>
