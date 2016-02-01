@@ -28,7 +28,9 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
     var timeDrawWidth = canvasWidth / freqCount;
     var trackMuteVolume=0;
 
+
     $scope.trackIsMute=false;
+    var trackIsSolo=false;
 
     var audioTrack;
     var analyser;
@@ -37,7 +39,7 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
     (function init() {
       audioTrack = audioTrackFactory.getNewAudioTrack({
         ctx: $scope.$parent.aCtx,
-        useAudioTag: false,
+        useAudioTag: true,
         url: track.url,
         outNode: $scope.$parent.master.gainNode,
         fftSize: fftSize
@@ -53,9 +55,22 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
           $scope.trackIsMute=false;
         }
       });
+
+      $scope.$watch('trackStereo', function(value) {
+        audioTrack.setBalance(value);
+      });
     })();
 
-    $scope.mute = function() {
+    track.getAudioTrack = function() {
+      return audioTrack;
+    };
+
+    track.getTrackIsSolo = function() {
+      return trackIsSolo;
+    };
+
+    $scope.mute = function mute() {
+      console.log("Je suis dans mute");
       if($scope.trackIsMute === false) {
         var temp = $scope.trackVolume;
         audioTrack.setVolume(0);
@@ -69,6 +84,12 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
         $scope.trackIsMute = false;
       }
     };
+
+    $scope.soloTrack = function() {
+      (trackIsSolo === false) ? trackIsSolo=true : trackIsSolo=false;
+      console.log(trackIsSolo);
+      $scope.$parent.solo();
+    }
 
     function updateStatus(status) {
       if (status === 'ready') {
