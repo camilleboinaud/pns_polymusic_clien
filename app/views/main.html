@@ -1,16 +1,26 @@
 <div class="row">
-  <div class="col-lg-2">
+  <div class="col-lg-3">
     <ul  id="song_mix_tab" class="nav nav-tabs" data-tabs="tabs">
       <li class="active"><a href="#song_tab" data-toggle="tab"> Songs</a></li>
       <li><a href="#mix_tab" data-toggle="tab">Mix Songs</a></li>
     </ul>
+
     <!--List of songs and mix songs-->
     <div id="content_song_mix_tab" class="tab-content">
-
       <!--tab of songs-->
       <div class="tab-pane active" id="song_tab">
         <div class="panel panel-primary">
           <div class="panel-body">
+
+            <!--formulaire de recherche-->
+            <form class="form-inline" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search your music">
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> Search</button>
+            </form>
+            <!--END: formulaire de recherche-->
+
             <!--list of songs-->
             <div class="songs" ng-cloak>
               <span ng-repeat="song in songs">
@@ -39,24 +49,31 @@
     </div>
   </div>
 
+
   <!--tracks-->
-  <div class="col-lg-10">
+  <div class="col-lg-9">
     <!--error-->
     <div class="error" ng-show="error" ng-cloak>Sorry, it looks like this won't work in your browser.</div>
 
-    <!--Modal-->
-    <a class="btn btn-success" data-toggle="modal" data-target="#modal_save_mix">Save Mix Song</a>
+    <!--Upload the file-->
+    <a class="btn btn-success" href="/#/upload"><i class="fa fa-upload"></i> Upload your music</a>
+
+    <!--Save button Modal-->
+    <a class="btn btn-warning" data-toggle="modal" data-target="#modal_save_mix"><i class="fa fa-floppy-o"></i> Save Mix Song</a>
     <div ng-include src="'views/modal_save_mix.html'"></div>
     <br/>
-
-    <!--track list à gauche-->
-    <div class="col-lg-6" style="color:orange">
-      <div class="panel panel-default">
-        <div class="track-container" ng-cloak>
-          <div track="track" track-name="{{track.name}}" ng-repeat="track in currentSong.tracks"></div>
+    
+    <div class="row">
+      <!--track list à gauche-->
+      <div class="col-lg-6" style="color:orange">
+        <div class="panel panel-default">
+          <div class="track-container" ng-cloak>
+            <div track="track" track-name="{{track.name}}" ng-repeat="track in currentSong.tracks"></div>
+          </div>
         </div>
       </div>
     </div>
+
   </div>
 </div>
 <br/>
