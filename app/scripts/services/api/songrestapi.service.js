@@ -106,10 +106,26 @@ angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload',
     };
 
     /**
-     * Get page numbers
+     * Get song list bu search_text
      * @param params
      * @param callback
-       */
+     */
+    SongREST.searchSong = function (params, callback) {
+      $http({
+        method: 'GET',
+        url: serverAddress+'/api/songs/?string='+params.search_text+'&isSong='+params.isSong
+      }).then(function successCallback(response){
+        callback(response.data);
+      }, function errorCallback(error) {
+        console.log(error);
+      });
+    };
+
+    /**
+    * Get page numbers
+    * @param params
+    * @param callback
+    */
     SongREST.getNbCommentPages = function (params, callback) {
       $http({
         method: 'GET',
