@@ -39,13 +39,10 @@ angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', function ($
 
   AudioTrack.prototype.loadAndDecode = function(statusCallback) {
     var self = this;
-    console.log("1");
     if (self.useAudioTag) {
-      console.log("2");
       var audio = new Audio(self.url);
       audio.crossOrigin = 'anonymous';
       audio.addEventListener('canplaythrough', function(e) {
-        console.log("3");
         self.node = self.ctx.createMediaElementSource(audio);
         self.splitNode = self.ctx.createChannelSplitter(2);
         self.mergeNode = self.ctx.createChannelMerger(2);
@@ -57,7 +54,6 @@ angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', function ($
         self.splitNode.connect(self.rightVolumeNode, 1);
         self.leftVolumeNode.connect(self.mergeNode, 0, 0);
         self.rightVolumeNode.connect(self.mergeNode, 0, 1);
-  console.log("balblalal : "+self.leftVolumeNode.gain);
         self.gainNode = self.addGainNode(self.mergeNode);
         self.analyser = self.createAnalyser(self.gainNode);
 
@@ -112,17 +108,18 @@ angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', function ($
   };
 
   AudioTrack.prototype.setBalance = function(value) {
-    console.log("valeur du balance range : " + value);
-      if(value == 0) {
+    if(this.splitNode) {
+      if (value == 0) {
         this.leftVolumeNode.gain.value = 1;
         this.rightVolumeNode.gain.value = 1;
-      } else if( value == 1) {
+      } else if (value == 1) {
         this.leftVolumeNode.gain.value = 0;
         this.rightVolumeNode.gain.value = 1;
       } else {
         this.leftVolumeNode.gain.value = 1;
         this.rightVolumeNode.gain.value = 0;
       }
+    }
   };
 
 
@@ -137,9 +134,7 @@ angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', function ($
     }
 
     this.bsNode.start(0, bufferOffset);
-    console.info(this.gainNode);
-    this.gainNode = this.addGainNode(this.bsNode, this.outNode);
-    console.info(this.gainNode);
+    this.gainNode = this.addGainNode(this.bsNode, this.outNode);;
     this.analyser = this.createAnalyser(this.gainNode, this.fftSize);
   };
 

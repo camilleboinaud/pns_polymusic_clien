@@ -70,7 +70,6 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
     };
 
     $scope.mute = function mute() {
-      console.log("Je suis dans mute");
       if($scope.trackIsMute === false) {
         var temp = $scope.trackVolume;
         audioTrack.setVolume(0);
@@ -87,9 +86,8 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
 
     $scope.soloTrack = function() {
       (trackIsSolo === false) ? trackIsSolo=true : trackIsSolo=false;
-      console.log(trackIsSolo);
       $scope.$parent.solo();
-    }
+    };
 
     function updateStatus(status) {
       if (status === 'ready') {
