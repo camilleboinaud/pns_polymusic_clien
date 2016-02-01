@@ -73,7 +73,7 @@ angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload',
     };
 
     /**
-     * Get all song's comments
+     * Get number of song's comments
      * @param params
      * @param callback
      */
@@ -121,8 +121,11 @@ angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload',
       });
     };
 
-
-
+    /**
+    * Get page numbers
+    * @param params
+    * @param callback
+    */
     SongREST.getNbCommentPages = function (params, callback) {
       $http({
         method: 'GET',
