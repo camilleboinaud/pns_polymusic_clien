@@ -5,19 +5,16 @@
         <div class="row">
           <div class="col-md-2">
             <img  class="img-thumbnail" src="././images/logo.png">
-            <div><i class="fa fa-music"></i> {{song.name}}</div>
-            <div><i class="fa fa-user"></i> {{song.author}}</div>
+            <div><i class="fa fa-user"></i><strong> Author: </strong> {{song.author}}</div>
           </div>
 
           <div class="col-md-10">
+            <h4 class="text-warning"><i class="fa fa-music"></i> {{song.name}}</h4>
             <button class="btn btn-warning"><i class="fa fa-play"></i> Play</button>
             <span class="rating">
-              <span><i class="fa fa-star-o"></i></span>
-              <span><i class="fa fa-star-o"></i></span>
-              <span><i class="fa fa-star-o"></i></span>
-              <span><i class="fa fa-star-o"></i></span>
-              <span><i class="fa fa-star-o"></i></span>
+                <span><i class="fa fa-star-o"></i></span>
             </span>
+            <span>{{song.rating}}</span>
             <br/>
             <br/>
             <br/>
