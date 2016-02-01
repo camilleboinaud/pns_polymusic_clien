@@ -10,6 +10,9 @@
 angular.module('pnsPolymusicClientApp')
   .controller('SongDetailCtrl', function ($scope, $routeParams, SongREST) {
 
+    var limit = 10;
+    $scope.currentPage = 1;
+
     /**
      * INIT: Get song's info by ID
      */
@@ -18,13 +21,18 @@ angular.module('pnsPolymusicClientApp')
     });
 
 
-    var getAllComments = function () {
-      SongREST.getAllCommentsBySongId($routeParams.songId, function (comments) {
+    var getAllComments = function (params) {
+      params.songId = $routeParams.songId;
+      SongREST.getAllCommentsBySongId(params, function (comments) {
         $scope.comments = comments;
-        $scope.nbComment = comments.length;
       });
+
+      SongREST.getNbCommentBySongId(params, function (response) {
+        $scope.nbComment = response.nbComment;
+      });
+
+
     };
-    getAllComments();
 
     $scope.newComment = function () {
       console.log('newComment');
@@ -33,14 +41,27 @@ angular.module('pnsPolymusicClientApp')
         content: $scope.content
       };
       SongREST.writeNewComments(params, function (response) {
-        console.log(response);
-        getAllComments();
+        getAllComments({limit:limit});
         $scope.content = '';
       })
-    }
+    };
 
+    $scope.selectPage = function (number, event) {
+      $scope.currentPage = number;
+      getAllComments({limit:limit, pageIndex:number});
+    };
 
+    var getNbPages = function () {
+      var params = {
+        songId: $routeParams.songId,
+        limit: limit
+      };
+      SongREST.getNbCommentPages(params, function (response) {
+        $scope.nbPage = new Array(response.nbPages);
+      })
+    };
 
-
+    getNbPages();
+    getAllComments({limit:limit});
 
   });

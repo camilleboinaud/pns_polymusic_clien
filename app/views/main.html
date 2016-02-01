@@ -15,9 +15,9 @@
             <!--formulaire de recherche-->
             <form class="form-inline" role="search">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search your music">
+                <input type="text" class="form-control" ng-model="search_song" placeholder="Search your music">
               </div>
-              <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> Search</button>
+              <button type="submit" class="btn btn-primary btn-sm" ng-click="search(true)"><i class="fa fa-search"></i> Search</button>
             </form>
             <!--END: formulaire de recherche-->
 
@@ -62,7 +62,7 @@
     <a class="btn btn-warning" data-toggle="modal" data-target="#modal_save_mix"><i class="fa fa-floppy-o"></i> Save Mix Song</a>
     <div ng-include src="'views/modal_save_mix.html'"></div>
     <br/>
-    
+
     <div class="row">
       <!--track list à gauche-->
       <div class="col-lg-6" style="color:orange">
