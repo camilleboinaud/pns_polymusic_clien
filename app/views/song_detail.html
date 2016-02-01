@@ -34,6 +34,9 @@
             </div>
             <br/>
 
+            <div class="pagination" ng-repeat="page in nbPage track by $index">
+              <li ng-class="{active: $index +1 == currentPage}" ><a href ng-click="selectPage($index+1, $event)">{{$index+1}}</a></li>
+            </div>
 
             <div class="list-comments">
               <ul class="media-list">
@@ -44,7 +47,7 @@
                     </a>
                   </div>
                   <div class="media-body">
-                    <h5 class="media-heading">Name of user <small>09/11/2015</small></h5>
+                    <h5 class="media-heading">Name of user <small>{{comment.timechamps | date:"MM/dd/yyyy 'at' h:mma"}}</small></h5>
                     <p>{{comment.content}}</p>
                   </div>
                 </li>
