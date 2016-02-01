@@ -42,9 +42,9 @@
           <div class="collapse navbar-collapse" id="js-navbar-collapse" ng-controller="NavController">
 
             <ul class="nav navbar-nav navbar-right">
-              <li ng-hide="isLoggedIn"><a class="btn btn-warning btn-xs" href="/#/sign-up">Sign up</a></li>
-              <li ng-hide="isLoggedIn"><a class="btn btn-default btn-xs" href="/#/sign-in">Sign in</a></li>
-              <li ng-show="isLoggedIn"><a class="btn btn-warning btn-xs" href="/#/logout" ng-click="logout">Logout</a></li>
+              <li ng-hide="isLoggedIn()"><a class="btn btn-warning btn-xs" href="/#/sign-up">Sign up</a></li>
+              <li ng-hide="isLoggedIn()"><a class="btn btn-default btn-xs" href="/#/sign-in">Sign in</a></li>
+              <li ng-show="isLoggedIn()"><a class="btn btn-warning btn-xs" href="/#/logout" ng-click="logout()">Logout</a></li>
               <li><a href="/#/about"><i class="fa fa-question-circle"></i></a></li>
             </ul>
           </div>
@@ -53,7 +53,7 @@
     </div>
 
     <!--Views-->
-    <div class="container-fluid">
+    <div class="container-fluid" ng-controller="NavController">
       <div ng-view=""></div>
     </div>
 
