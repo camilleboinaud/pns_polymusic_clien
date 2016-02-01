@@ -58,13 +58,29 @@ angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload',
 
     /**
      * Get all song's comments
-     * @param ID
+     * @param params
      * @param callback
        */
-    SongREST.getAllCommentsBySongId = function (ID, callback) {
+    SongREST.getAllCommentsBySongId = function (params, callback) {
       $http({
         method: 'GET',
-        url: serverAddress+'/api/songs/'+ID+'/comments'
+        url: serverAddress+'/api/songs/'+params.songId+'/comments?limit='+params.limit+'&lastTimeChamps='+params.lastTimeChamps+'&pageIndex='+params.pageIndex
+      }).then(function successCallback(response){
+        callback(response.data);
+      }, function errorCallback(error) {
+        console.log(error);
+      });
+    };
+
+    /**
+     * Get all song's comments
+     * @param params
+     * @param callback
+     */
+    SongREST.getNbCommentBySongId = function (params, callback) {
+      $http({
+        method: 'GET',
+        url: serverAddress+'/api/songs/'+params.songId+'/ngComment'
       }).then(function successCallback(response){
         callback(response.data);
       }, function errorCallback(error) {
@@ -82,6 +98,17 @@ angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload',
         method: 'POST',
         url: serverAddress+'/api/comments',
         data:{songId: params.songId, content:params.content}
+      }).then(function successCallback(response){
+        callback(response.data);
+      }, function errorCallback(error) {
+        console.log(error);
+      });
+    };
+
+    SongREST.getNbCommentPages = function (params, callback) {
+      $http({
+        method: 'GET',
+        url: serverAddress+'/api/comments/pages?songId='+params.songId+'&limit='+params.limit
       }).then(function successCallback(response){
         callback(response.data);
       }, function errorCallback(error) {
