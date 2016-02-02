@@ -86,7 +86,7 @@
     <!--player à gauche-->
     <div class="col col-lg-6 text-warning" >
       <!--<div ng-include src="'views/player.html'"></div>-->
-      <div class="" ng-show="currentSong" ng-cloak>
+      <div class="col col-lg-2" ng-show="currentSong" ng-cloak>
         <button ng-disabled="!ready" ng-show="!playing" ng-click="playTracks()" class="btn-sm btn-warning">
           <i class="fa fa-play"></i>
         </button>
@@ -95,6 +95,11 @@
         </button>
         <span ng-disabled="!ready">{{currentSong.name}}</span>
       </div>
+      <div class="col col-lg-4">
+        <input class="playerSlider" id="playerSlider" data-slider-id='playerSlider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="0.1" data-slider-value="0"/>
+      </div>
+
+
     </div>
   </div>
 </footer>

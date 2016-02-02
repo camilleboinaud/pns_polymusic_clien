@@ -166,3 +166,9 @@ footer {
   color: orange;
   position: absolute;
 }
+
+/* player bar slider */
+
+#playerSlider .slider-selection {
+  background: #5c9dd5;
+}

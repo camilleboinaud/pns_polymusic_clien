@@ -33,6 +33,22 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
     var audioTrack;
     var analyser;
 
+    // convert seconds to human readable duration
+    var secondtoHHMMSS = function (second) {
+      var hours   = Math.floor(second / 3600);
+      var minutes = Math.floor((second - (hours * 3600)) / 60);
+      var seconds = Math.floor(second - (hours * 3600) - (minutes * 60));
+
+      if (hours   < 10) {hours   = '0'+hours;}
+      if (minutes < 10) {minutes = '0'+minutes;}
+      if (seconds < 10) {seconds = '0'+seconds;}
+      if (hours == '00'){
+        return minutes+':'+seconds;
+      } else {
+        return hours+':'+minutes+':'+seconds;
+      }
+    };
+
 
     (function init() {
       audioTrack = audioTrackFactory.getNewAudioTrack({
@@ -75,6 +91,8 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
         $scope.loading = false;
         status = '';
         $scope.$parent.trackLoad($scope.key, track);
+        // set duration
+        $scope.duration = secondtoHHMMSS(audioTrack.duration);
       }
 
       $timeout(function() {
@@ -143,6 +161,17 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
       }
       ctx.stroke();
     };
+
+    // get track duration
+    track.getDuration = function() {
+      return audioTrack.duration
+    };
+
+    // get readable track duration
+    track.getReadableDuration = function() {
+      return secondtoHHMMSS(audioTrack.duration);
+    };
+
   }
 
   //return the template of track

@@ -68,6 +68,7 @@ angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', function ($
           statusCallback('decoding');
           self.ctx.decodeAudioData(response.data, function(buffer) {
             self.buffer = buffer;
+            self.duration = buffer.duration;
             statusCallback('ready');
           });
         });

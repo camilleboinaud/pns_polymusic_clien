@@ -1,7 +1,7 @@
 <div class="track" ng-class="{loading:loading==true}">
   <div class="row">
     <div class="col-sm-10">
-      <h2>{{trackName}}<span ng-show="status"> ({{status}})</span></h2>
+      <h2>{{trackName}}<span ng-show="status"> ({{status}})</span><span> {{duration}}</span></h2>
       <span style="color:grey;"><i class="fa fa-volume-down"></i></span>
       <input type="range" ng-model="trackVolume"/>
       <i class="fa fa-volume-up"></i>

@@ -8,18 +8,18 @@
  * Controller of the pnsPolymusicClientApp
  */
 angular.module('pnsPolymusicClientApp')
-  .controller('MainCtrl', ['$scope', 'songFactory','SongREST', function ($scope, songFactory, SongREST ) {
+  .controller('MainCtrl', ['$scope', 'songFactory','SongREST', '$document', 'DurationService', function ($scope, songFactory, SongREST, $document, DurationService) {
 
     //here's no way to detect whether a browser can play multiple audio elements at once.
     var isiOS = navigator.userAgent.match(/(iPad|iPhone|iPod)/g) ? true : false;
     var thisLoadCount = 0;
 
-    $scope.currentSong;
+    $scope.currentSong = {};
 
     $scope.ready = false;
     $scope.playing = false;
-    $scope.trackWidth;
-    $scope.aCtx;
+    $scope.trackWidth = 0;
+    $scope.aCtx = null;
     $scope.master = {};
     $scope.useAudioTag = true;
 
@@ -35,18 +35,54 @@ angular.module('pnsPolymusicClientApp')
       songFactory.getAllPubSongs(function (songs) {
         $scope.songs = songs;
       });
+
     })();
 
+    //############# player bar control ######################//
 
+    var playerSlider = $document.find("#playerSlider").slider({
+      formatter: function(value) {
+        return 'Current value: ' + value;
+      }
+    });
+
+    var playerSliderMove = function (percent){
+      playerSlider.slider('setValue', percent)
+    };
+
+    var playerChange = function (event) {
+      console.log('dfd');
+      if($scope.currentSong.tracks){
+        if ($scope.playing){
+          $scope.stopTracks();
+        }
+        $scope.currentSong.timer = DurationService.getNewDuration({
+          totalTime:$scope.currentSong.duration,
+          currentPercent: event.value
+        });
+      }
+
+    };
+
+    playerSlider.on('slide', playerChange)
+      .data('slider');
+
+
+
+    //############# End player bar control ######################//
 
     $scope.playTracks = function(tracks) {
       if (!tracks) {
         tracks = $scope.currentSong.tracks;
       }
+      if (!$scope.currentSong.timer) {
+        $scope.currentSong.timer = DurationService.getNewDuration({totalTime:$scope.currentSong.duration});
+      }
       angular.forEach(tracks, function(track, key) {
         track.play();
       });
       $scope.playing = true;
+      $scope.currentSong.timer.startTimer(playerSliderMove);
     };
 
     $scope.stopTracks = function(tracks) {
@@ -57,6 +93,7 @@ angular.module('pnsPolymusicClientApp')
         track.stop();
       });
       $scope.playing = false;
+      $scope.currentSong.timer.pauseTimer();
     };
 
     $scope.$watch('currentSong', function(currentSong, oldSong) {
@@ -67,11 +104,22 @@ angular.module('pnsPolymusicClientApp')
         clearAudios(oldSong.tracks);
         $scope.ready = false;
         thisLoadCount = 0;
+        if($scope.currentSong.timer) {
+          $scope.currentSong.timer.stopTimer();
+        }
       }
     });
 
 
     $scope.trackLoad = function(key, track) {
+      // get longest duration
+      if(!$scope.currentSong.duration || $scope.currentSong.duration < track.getDuration()){
+        $scope.currentSong.duration = track.getDuration();
+        $scope.currentSong.readableDuration = track.getReadableDuration();
+      }
+      console.log($scope.currentSong.readableDuration);
+      console.log($scope.currentSong.duration);
+
       if (++thisLoadCount >= $scope.currentSong.tracks.length) {
         $scope.ready = true;
         $scope.$$phase || $scope.$apply();
@@ -114,7 +162,7 @@ angular.module('pnsPolymusicClientApp')
 
     /**
      * Get song list by search_text
-     * @param isSong boolean
+     * @param isASong boolean
      */
     $scope.search = function (isASong) {
       var params = {
@@ -124,6 +172,7 @@ angular.module('pnsPolymusicClientApp')
       SongREST.searchSong(params, function (data) {
         $scope.songs = data;
       });
-    }
+    };
+
 
   }]);

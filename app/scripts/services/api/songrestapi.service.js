@@ -137,6 +137,26 @@ angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload',
       });
     };
 
+
+    /**
+     * Get Track's duration by url
+     * @param track
+     * @param callback
+     */
+    SongREST.getTrackDuration = function (track, callback){
+      var audioContext = new window.AudioContext();
+      $http
+        .get(track.url,{responseType: 'arraybuffer'})
+        .then(function successCallback(response){
+          audioContext.decodeAudioData(response.data, function(buffer) {
+            track.duration = buffer.duration;
+            callback(track);
+          });
+        }, function errorCallback(error) {
+          console.log(error);
+        });
+    };
+
     return SongREST;
   }
 ]);

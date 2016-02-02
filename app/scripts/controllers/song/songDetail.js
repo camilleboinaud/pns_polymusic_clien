@@ -23,6 +23,7 @@ angular.module('pnsPolymusicClientApp')
 
     var getAllComments = function (params) {
       params.songId = $routeParams.songId;
+      params.limit = limit;
       SongREST.getAllCommentsBySongId(params, function (comments) {
         $scope.comments = comments;
       });
@@ -31,6 +32,9 @@ angular.module('pnsPolymusicClientApp')
         $scope.nbComment = response.nbComment;
       });
 
+      SongREST.getNbCommentPages(params, function (response) {
+        $scope.nbPage = new Array(response.nbPages);
+      });
 
     };
 

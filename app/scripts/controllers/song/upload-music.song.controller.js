@@ -7,23 +7,56 @@
      function ($scope, SongREST, $document) {
 
        $scope.progressPercentage =0;
+       $scope.tracks = [];
+       var inputElement = document.getElementById('uploadSong');
+
+       var secondtoHHMMSS = function (second) {
+         var hours   = Math.floor(second / 3600);
+         var minutes = Math.floor((second - (hours * 3600)) / 60);
+         var seconds = Math.floor(second - (hours * 3600) - (minutes * 60));
+
+         if (hours   < 10) {hours   = '0'+hours;}
+         if (minutes < 10) {minutes = '0'+minutes;}
+         if (seconds < 10) {seconds = '0'+seconds;}
+         if (hours == '00'){
+           return minutes+':'+seconds;
+         } else {
+           return hours+':'+minutes+':'+seconds;
+         }
+       };
 
        $scope.submit = function() {
-         if ($scope.tracks && $scope.songName) {
+         if ($scope.trackFiles && $scope.songName) {
            var song = {
              name:$scope.songName,
              author:$scope.author,
-             tracks: $scope.tracks
+             tracks: $scope.trackFiles
            };
-           console.log(song);
            $scope.upload(song);
          }
        };
 
-       var inputElement = document.getElementById('uploadSong');
+
+       /**
+        * When add files
+        */
        inputElement.onchange = function() {
-         $scope.tracks = inputElement.files;
-         //TODO do something with fileList.
+         var callback = function(track){
+           track.readableDuration = secondtoHHMMSS(track.duration);
+           $scope.tracks[track.index] = track;
+           $scope.$$phase || $scope.$apply(); // update view
+         };
+
+         $scope.trackFiles = inputElement.files;
+         for (var i = 0; i < $scope.trackFiles.length; i++) {
+           var track = {
+             url: URL.createObjectURL($scope.trackFiles.item(i)),
+             index: i,
+             name: $scope.trackFiles.item(i).name
+           };
+           $scope.tracks.push(track);
+           SongREST.getTrackDuration(track, callback);
+         }
        };
 
        // upload on file select or drop
@@ -41,12 +74,15 @@
                  .css("width", $scope.progressPercentage + "%")
                  .attr("aria-valuenow", $scope.progressPercentage)
                  .text($scope.progressPercentage + "%");
-               if ($scope.progressPercentage >= 100)
+               if ($scope.progressPercentage >= 100){
                  clearInterval(interval);
+               }
              }, 0);
            }
          );
-
        };
+
+
+
      }
  ]);
