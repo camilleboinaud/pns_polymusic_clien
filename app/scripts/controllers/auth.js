@@ -16,6 +16,7 @@ angular.module('pnsPolymusicClientApp').controller('AuthentificationCtrl', ['$sc
             user.password = user.password[0];
             User.register(user,
               function (msg) {
+                window.location.href = '/#/';
                 console.info('Success: ', msg);
               }, function (msg) {
                 console.info('Error: ' + msg);
@@ -35,7 +36,9 @@ angular.module('pnsPolymusicClientApp').controller('AuthentificationCtrl', ['$sc
     $scope.login = function(user){
 
       if(user !== null && user.email !== null && user.password !== null){
-        User.login(user, function (msg) {
+        User.login(user, function(msg) {
+            window.location.href = '/#/'
+          }, function (msg) {
             console.error('Error: ' + msg);
           }
         );

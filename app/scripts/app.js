@@ -3,6 +3,12 @@
 
 angular.module('song',[]);
 
+var checkRouting = function ($sessionStorage, $location) {
+  if ($sessionStorage.UserSession === undefined) {
+    $location.path('/sign-in');
+  }
+  return false;
+};
 
 /**
  * @ngdoc overview
@@ -37,16 +43,22 @@ angular
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
-        controllerAs: 'main'
+        controllerAs: 'main',
+        resolve : {
+          factory: checkRouting
+        }
       })
       .when('/songs/:songId',{
         templateUrl: 'views/song_detail.html',
         controller: 'SongDetailCtrl',
-        controllerAs: 'songDetail'
+        controllerAs: 'songDetail',
+        resolve : {
+          factory: checkRouting
+        }
       })
       .when('/sign-in', {
         templateUrl: 'views/sign_in.html',
-        controller: 'AuthentificationCtrl',
+        controller: 'AuthentificationCtrl'
       })
       .when('/sign-up', {
         templateUrl: 'views/sign_up.html',
@@ -55,7 +67,10 @@ angular
       .when('/upload', {
         templateUrl: 'views/upload.html',
         controller: 'MusicUploadController',
-        controllerAs: 'uploaderCtrl'
+        controllerAs: 'uploaderCtrl',
+        resolve : {
+          factory: checkRouting
+        }
       })
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -63,7 +78,7 @@ angular
         controllerAs: 'about'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/sign-in'
       });
   })
 

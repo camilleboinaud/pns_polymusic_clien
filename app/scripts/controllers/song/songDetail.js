@@ -18,6 +18,8 @@ angular.module('pnsPolymusicClientApp')
      */
     SongREST.getSongUrlById($routeParams.songId, function (song) {
       $scope.song = song;
+      $scope.rating = new Array(song.rating);
+      $scope.rating_vide  = new Array(5 - song.rating);
     });
 
 

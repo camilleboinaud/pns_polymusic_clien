@@ -22,6 +22,7 @@ angular.module('pnsPolymusicClientApp')
     $scope.aCtx = null;
     $scope.master = {};
     $scope.useAudioTag = true;
+    $scope.masterGain = 100;
 
     (function init() {
       if (!window.AudioContext) {
@@ -110,6 +111,10 @@ angular.module('pnsPolymusicClientApp')
       }
     });
 
+    $scope.$watch('masterGain', function(value) {
+      value = value / 100;
+      $scope.master.gainNode.gain.value = value;
+    });
 
     $scope.trackLoad = function(key, track) {
       // get longest duration
@@ -157,7 +162,7 @@ angular.module('pnsPolymusicClientApp')
     }
 
     function setTrackWidth() {
-      $scope.trackWidth = 400;
+      $scope.trackWidth = 370;
     }
 
     /**
@@ -175,4 +180,12 @@ angular.module('pnsPolymusicClientApp')
     };
 
 
+    $scope.solo = function() {
+      var tracks = $scope.currentSong.tracks;
+      angular.forEach(tracks, function(track) {
+        if(track.getTrackIsSolo() === false) {
+          console.log(track.getTrackIsSolo());
+        }
+      });
+    }
   }]);
