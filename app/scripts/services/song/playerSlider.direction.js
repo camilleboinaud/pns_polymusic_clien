@@ -7,18 +7,29 @@ angular.module('pnsPolymusicClientApp').directive('playerSlider', function() {
 
     $scope.percent = 0;
     $scope.currentTime = '00:00';
+
+      /**
+       * move slider
+       * @param percent
+       */
     $scope.playerSliderMove = function (percent){
       if(percent) {
         $scope.percent = percent;
       }
     };
 
+    /**
+     * When slider is pressed
+     */
     $scope.playerSliderPressed = function () {
       if($scope.currentSong.timer) {
         $scope.currentSong.timer.stopTimer();
       }
     };
 
+    /**
+     * When slider is clicked
+     */
     $scope.playerSliderClick = function () {
       $scope.percent = parseFloat($scope.percent);
 
@@ -37,13 +48,19 @@ angular.module('pnsPolymusicClientApp').directive('playerSlider', function() {
       if($scope.currentSong.playing) {$scope.currentSong.timer.startTimer($scope.playerSliderMove);}
     };
 
-    // init timer
+    /**
+     * Init timer
+     */
     $scope.currentSong.timer = DurationService.getNewDuration({
       totalTime:$scope.currentSong.duration,
       currentPercent: $scope.percent
     });
 
-    // convert seconds to human readable duration
+    /**
+     * convert seconds to human readable duration
+     * @param second
+     * @returns {string}
+     */
     var secondtoHHMMSS = function (second) {
       var hours   = Math.floor(second / 3600);
       var minutes = Math.floor((second - (hours * 3600)) / 60);
@@ -60,7 +77,7 @@ angular.module('pnsPolymusicClientApp').directive('playerSlider', function() {
     };
 
       /**
-       * set up listener
+       * set up listeners
        */
     // isPlaying changed
     $scope.$watch('currentSong.playing', function (newValue, oldValue) {
@@ -78,10 +95,11 @@ angular.module('pnsPolymusicClientApp').directive('playerSlider', function() {
         oldSong.timer.stopTimer();
       }
       $scope.percent = 0;
+      $scope.currentTime = '00:00';
     });
 
     $scope.$watch('percent', function(percent, oldPercent) {
-      if(oldPercent) { // not first time
+      if(oldPercent && $scope.currentSong.duration) { // not first time
         $scope.currentTime = secondtoHHMMSS($scope.currentSong.duration * percent / 100);
       }
     });
@@ -90,7 +108,7 @@ angular.module('pnsPolymusicClientApp').directive('playerSlider', function() {
   }
 
 
-  //return the template of track
+  //return the template of player-slider
   return {
     restrict: 'EA',
     scope: {
