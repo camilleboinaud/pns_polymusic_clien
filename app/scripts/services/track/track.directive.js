@@ -56,7 +56,7 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
     (function init() {
       audioTrack = audioTrackFactory.getNewAudioTrack({
         ctx: $scope.$parent.aCtx,
-        useAudioTag: true,
+        useAudioTag: false,// true
         url: track.url,
         outNode: $scope.$parent.master.gainNode,
         fftSize: fftSize
@@ -193,6 +193,14 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
     track.getReadableDuration = function() {
       return secondtoHHMMSS(audioTrack.duration);
     };
+
+    track.setPauseTime = function (newPauseTime) {
+      audioTrack.pauseTime = newPauseTime;
+    };
+
+    track.getPauseTime = function () {
+      return audioTrack.pauseTime;
+    }
 
   }
 

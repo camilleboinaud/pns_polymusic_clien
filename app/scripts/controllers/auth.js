@@ -10,7 +10,7 @@
 angular.module('pnsPolymusicClientApp').controller('AuthentificationCtrl', ['$scope', 'User', function ($scope, User) {
 
     $scope.register = function(user){
-        if(user !== null && user.username !== null && user.email !== null && user.password !== null) {
+        if(user && user.username && user.email && user.password) {
 
           if (user.password[0] === user.password[1]) {
             user.password = user.password[0];

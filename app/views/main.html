@@ -87,18 +87,17 @@
     <div class="col col-lg-6 text-warning" >
       <!--<div ng-include src="'views/player.html'"></div>-->
       <div class="col col-lg-2" ng-show="currentSong" ng-cloak>
-        <button ng-disabled="!ready" ng-show="!playing" ng-click="playTracks()" class="btn-sm btn-warning">
+        <button ng-disabled="!currentSong.ready" ng-show="!currentSong.playing" ng-click="playTracks()" class="btn-sm btn-warning">
           <i class="fa fa-play"></i>
         </button>
-        <button ng-disabled="!ready" ng-show="playing" ng-click="stopTracks()" class="btn-sm btn-danger">
+        <button ng-disabled="!currentSong.ready" ng-show="currentSong.playing" ng-click="stopTracks()" class="btn-sm btn-danger">
           <i class="fa fa-pause"></i>
         </button>
         <span ng-disabled="!ready">{{currentSong.name}}</span>
         <input type="range" ng-model="masterGain" />
       </div>
-      <div class="col col-lg-4">
-        <input class="playerSlider" id="playerSlider" data-slider-id='playerSlider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="0.1" data-slider-value="0"/>
-      </div>
+
+      <player-slider song="currentSong" player-slider-id="playerSliderLeft"></player-slider>
 
 
     </div>

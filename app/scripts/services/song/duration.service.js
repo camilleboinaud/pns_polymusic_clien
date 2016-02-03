@@ -23,7 +23,6 @@ angular.module('pnsPolymusicClientApp')
           me.currentPercent = 100;
           me.stopTimer();
         }
-        console.log(me.currentPercent);
         if(processCallback) {processCallback(me.currentPercent)}
       },intervalTime*1000)
     };
