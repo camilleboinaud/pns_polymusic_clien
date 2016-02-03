@@ -8,7 +8,7 @@
  * Controller of the pnsPolymusicClientApp
  */
 angular.module('pnsPolymusicClientApp')
-  .controller('SongDetailCtrl', function ($scope, $routeParams, SongREST, User) {
+  .controller('SongDetailCtrl', function ($scope, $routeParams, SongREST, User, $document) {
 
     var limit = 10;
     $scope.currentPage = 1;
@@ -76,9 +76,22 @@ angular.module('pnsPolymusicClientApp')
     $scope.has_rated = [false, false, false, false, false];
 
     $scope.make_rating = function (nb) {
-      console.info("coucou");
       for(var i =1; i<=nb; i++){
         $scope.has_rated[i-1] = true;
       }
+      for(var i =nb+1; i<=5; i++){
+        $scope.has_rated[i-1] = false;
+      }
+      var params = {
+        songId: $scope.song._id,
+        rating: nb,
+        userId: User.getCurrentUser().id
+      };
+      //send rating to server
+      SongREST.newRating(params, function (response) {
+      });
+
+      console.info("coucou");
+
     }
   });
