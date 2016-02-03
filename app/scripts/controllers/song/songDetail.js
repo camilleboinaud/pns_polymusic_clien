@@ -8,7 +8,7 @@
  * Controller of the pnsPolymusicClientApp
  */
 angular.module('pnsPolymusicClientApp')
-  .controller('SongDetailCtrl', function ($scope, $routeParams, SongREST) {
+  .controller('SongDetailCtrl', function ($scope, $routeParams, SongREST, User) {
 
     var limit = 10;
     $scope.currentPage = 1;
@@ -44,7 +44,9 @@ angular.module('pnsPolymusicClientApp')
       console.log('newComment');
       var params = {
         songId: $routeParams.songId,
-        content: $scope.content
+        content: $scope.content,
+        userId: User.getCurrentUser().id,
+        userName: User.getCurrentUser().username
       };
       SongREST.writeNewComments(params, function (response) {
         getAllComments({limit:limit});

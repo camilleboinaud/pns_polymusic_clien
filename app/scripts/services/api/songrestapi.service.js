@@ -51,7 +51,7 @@ angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload',
     SongREST.uploadSong = function (song, successCallback, errorCallback, progressCallback) {
       Upload.upload({
         url: serverAddress + '/api/songs',
-        data: { songName:song.name, author:song.author, file: song.tracks}
+        data: { songName:song.name, author:song.author, owner:song.owner, file: song.tracks}
       }).then(successCallback, errorCallback, progressCallback);
     };
 
@@ -97,7 +97,7 @@ angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload',
       $http({
         method: 'POST',
         url: serverAddress+'/api/comments',
-        data:{songId: params.songId, content:params.content}
+        data: params
       }).then(function successCallback(response){
         callback(response.data);
       }, function errorCallback(error) {

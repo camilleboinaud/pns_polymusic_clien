@@ -35,7 +35,6 @@ angular.module('pnsPolymusicClientApp')
 
 
     Duration.prototype.stopTimer = function () {
-      console.log('stop');
       var me = this;
       $interval.cancel(me.timer);
       delete me.timer;
