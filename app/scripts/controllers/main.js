@@ -16,7 +16,8 @@ angular.module('pnsPolymusicClientApp')
 
     $scope.currentSong = {
       ready: false,
-      playing: false
+      playing: false,
+      readableDuration: '00:00'
     };
 
     //$scope.ready = false;

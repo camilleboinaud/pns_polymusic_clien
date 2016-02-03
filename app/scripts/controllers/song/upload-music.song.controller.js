@@ -3,8 +3,8 @@
  */
  'use strict';
 
- angular.module('song').controller('MusicUploadController', ['$scope','SongREST','$document','$timeout','$location',
-     function ($scope, SongREST, $document, $timeout, $location) {
+ angular.module('song').controller('MusicUploadController', ['$scope','SongREST','$document','$timeout','$location','User',
+     function ($scope, SongREST, $document, $timeout, $location, User) {
 
        $scope.progressPercentage =0;
        $scope.tracks = [];
@@ -31,6 +31,7 @@
            var song = {
              name:$scope.songName,
              author:$scope.author,
+             owner:User.getCurrentUser().id,
              tracks: $scope.trackFiles
            };
            $scope.upload(song);

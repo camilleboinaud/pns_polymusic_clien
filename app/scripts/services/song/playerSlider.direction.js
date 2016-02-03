@@ -6,6 +6,7 @@ angular.module('pnsPolymusicClientApp').directive('playerSlider', function() {
   function playerSliderController($scope, DurationService){
 
     $scope.percent = 0;
+    $scope.currentTime = '00:00';
     $scope.playerSliderMove = function (percent){
       if(percent) {
         $scope.percent = percent;
@@ -13,14 +14,12 @@ angular.module('pnsPolymusicClientApp').directive('playerSlider', function() {
     };
 
     $scope.playerSliderPressed = function () {
-      console.log('pressed');
       if($scope.currentSong.timer) {
         $scope.currentSong.timer.stopTimer();
       }
     };
 
     $scope.playerSliderClick = function () {
-      console.log($scope.percent);
       $scope.percent = parseFloat($scope.percent);
 
       $scope.currentSong.timer = DurationService.getNewDuration({
@@ -44,26 +43,47 @@ angular.module('pnsPolymusicClientApp').directive('playerSlider', function() {
       currentPercent: $scope.percent
     });
 
+    // convert seconds to human readable duration
+    var secondtoHHMMSS = function (second) {
+      var hours   = Math.floor(second / 3600);
+      var minutes = Math.floor((second - (hours * 3600)) / 60);
+      var seconds = Math.floor(second - (hours * 3600) - (minutes * 60));
+
+      if (hours   < 10) {hours   = '0'+hours;}
+      if (minutes < 10) {minutes = '0'+minutes;}
+      if (seconds < 10) {seconds = '0'+seconds;}
+      if (hours == '00'){
+        return minutes+':'+seconds;
+      } else {
+        return hours+':'+minutes+':'+seconds;
+      }
+    };
+
+      /**
+       * set up listener
+       */
     // isPlaying changed
     $scope.$watch('currentSong.playing', function (newValue, oldValue) {
       if($scope.currentSong.timer) {
         if (newValue) {
-          console.log('start');
           $scope.currentSong.timer.startTimer($scope.playerSliderMove);
         } else {
-          console.log('pause');
           $scope.currentSong.timer.pauseTimer();
         }
       }
-      console.log('isPlaying = ' + newValue);
     });
 
     $scope.$watch('currentSong', function(currentSong, oldSong) {
-      console.info(currentSong);
       if(oldSong.timer) {
         oldSong.timer.stopTimer();
       }
       $scope.percent = 0;
+    });
+
+    $scope.$watch('percent', function(percent, oldPercent) {
+      if(oldPercent) { // not first time
+        $scope.currentTime = secondtoHHMMSS($scope.currentSong.duration * percent / 100);
+      }
     });
 
 
