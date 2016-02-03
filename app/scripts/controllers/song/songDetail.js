@@ -72,4 +72,13 @@ angular.module('pnsPolymusicClientApp')
     getNbPages();
     getAllComments({limit:limit});
 
+    //pour 5 etoils
+    $scope.has_rated = [false, false, false, false, false];
+
+    $scope.make_rating = function (nb) {
+      console.info("coucou");
+      for(var i =1; i<=nb; i++){
+        $scope.has_rated[i-1] = true;
+      }
+    }
   });

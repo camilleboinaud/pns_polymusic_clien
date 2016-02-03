@@ -1,6 +1,4 @@
-<div class="col col-lg-4">
-  <input type="range" id={{id}} max="100" min="0" step="0.1" value="0" ng-model="percent" ng-change="playerSliderMove()" ng-click="playerSliderClick()" ng-mousedown="playerSliderPressed()" ng-disabled="!currentSong.ready"/>
-  <span>{{currentTime}}/{{currentSong.readableDuration}}</span>
-  <!--<rzslider rz-slider-model="slider.value" rz-slider-options="slider.options"></rzslider>-->
-</div>
+<div>Duration:</div>
+<input type="range" id={{id}} style="display: inline-block;width: 75%;" max="100" min="0" step="0.1" value="0" ng-model="percent" ng-change="playerSliderMove()" ng-click="playerSliderClick()" ng-mousedown="playerSliderPressed()" ng-disabled="!currentSong.ready"/>
+<span>{{currentTime}}/{{currentSong.readableDuration}}</span>
 

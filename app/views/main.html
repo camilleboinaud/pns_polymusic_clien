@@ -20,6 +20,7 @@
               <button type="submit" class="btn btn-primary btn-sm" ng-click="search(true)"><i class="fa fa-search"></i> Search</button>
             </form>
             <!--END: formulaire de recherche-->
+            <hr/>
 
             <!--list of songs-->
             <div class="songs" ng-cloak>
@@ -83,24 +84,47 @@
 <!--player of music : footer-->
 <footer class="footer well">
   <div class="row">
-    <!--player à gauche-->
-    <div class="col col-lg-6 text-warning" >
-      <!--<div ng-include src="'views/player.html'"></div>-->
-      <div class="col col-lg-2" ng-show="currentSong" ng-cloak>
-        <button ng-disabled="!currentSong.ready" ng-show="!currentSong.playing" ng-click="playTracks()" class="btn-sm btn-warning">
-          <i class="fa fa-play"></i>
-        </button>
-        <button ng-disabled="!currentSong.ready" ng-show="currentSong.playing" ng-click="stopTracks()" class="btn-sm btn-danger">
-          <i class="fa fa-pause"></i>
-        </button>
-        <span ng-disabled="!ready">{{currentSong.name}}</span>
-        <input type="range" ng-model="masterGain" />
-      </div>
-
-      <player-slider song="currentSong" player-slider-id="playerSliderLeft"></player-slider>
-
-
+    <div class="col-lg-3">
+      <center>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-danger"><i class="fa fa-microphone"></i></button>
+          <button type="button" class="btn btn-success"><i class="fa fa-play"></i></button>
+          <button type="button" class="btn btn-default"><i class="fa fa-stop"></i></button>
+        </div>
+      </center>
     </div>
+
+      <div class="col-lg-9">
+          <!--player à gauche-->
+        <div class="row">
+          <div class="col-lg-6 text-warning" >
+            <div class="row">
+
+              <div class="col-sm-1" ng-show="currentSong" ng-cloak>
+                <!--button play-->
+                <button ng-disabled="!currentSong.ready" ng-show="!currentSong.playing" ng-click="playTracks()" class="btn-sm btn-warning">
+                  <i class="fa fa-play"></i>
+                </button>
+                <!--button pause-->
+                <button ng-disabled="!currentSong.ready" ng-show="currentSong.playing" ng-click="stopTracks()" class="btn-sm btn-danger">
+                  <i class="fa fa-pause"></i>
+                </button>
+              </div>
+              <div class="col-md-3">
+                <!--song name-->
+                <div ng-disabled="!ready">{{currentSong.name}}</div>
+                <p>
+                  <i class="fa fa-volume-up"></i>
+                  <input type="range" style="display: inline-block;width: 80%;" ng-model="masterGain" />
+                </p>
+              </div>
+              <div class="col-md-8 duration">
+                <player-slider song="currentSong" player-slider-id="playerSliderLeft"></player-slider>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
 </footer>
 <!--END player of music : footer-->

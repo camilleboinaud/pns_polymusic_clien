@@ -115,6 +115,7 @@ angular.module('pnsPolymusicClientApp')
     function clearAudios(tracks) {
       angular.forEach(tracks, function(track, key) {
         track.clear();
+        track.stop();
       });
     }
 
