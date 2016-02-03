@@ -44,6 +44,7 @@
             <ul class="nav navbar-nav navbar-right" style="margin-top: 7px">
               <span ng-hide="isLoggedIn()"><a class="btn btn-warning" href="/#/sign-up">Sign up <i class="fa fa-user"></i></a></span>
               <span ng-hide="isLoggedIn()"><a class="btn btn-default" href="/#/sign-in">Sign in <i class="fa fa-lock"></i></a></span>
+              <sapn ng-show="isLoggedIn()" class="text-warning"><a  href="/#/user/{{user.id}}">Hello, {{user.username}}</a></sapn>
               <sapn ng-show="isLoggedIn()"><a class="btn btn-warning" href="/#/logout" ng-click="logout()">Logout <i class="fa fa-share"></i></a></sapn>
               <span><a href="/#/about" class="btn btn-primary"><i class="fa fa-question-circle"></i></a></span>
             </ul>
@@ -94,6 +95,7 @@
     <script src="scripts/controllers/nav.js"></script>
     <script src="scripts/controllers/about.js"></script>
     <script src="scripts/controllers/auth.js"></script>
+    <script src="scripts/controllers/manage.js"></script>
     <script src="scripts/controllers/song/upload-music.song.controller.js"></script>
     <script src="scripts/controllers/song/songDetail.js"></script>
 

@@ -56,6 +56,13 @@ angular
           factory: checkRouting
         }
       })
+      .when('/user/:userId',{
+        templateUrl: 'views/user_manage.html',
+        controller: 'ManageSongCtrl',
+        resolve : {
+          factory: checkRouting
+        }
+      })
       .when('/sign-in', {
         templateUrl: 'views/sign_in.html',
         controller: 'AuthentificationCtrl'

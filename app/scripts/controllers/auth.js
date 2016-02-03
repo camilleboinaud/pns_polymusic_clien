@@ -34,11 +34,10 @@ angular.module('pnsPolymusicClientApp').controller('AuthentificationCtrl', ['$sc
     };
 
     $scope.login = function(user){
-
       if(user !== null && user.email !== null && user.password !== null){
         User.login(user, function(msg) {
-            window.location.href = '/#/'
-          }, function (msg) {
+          window.location.href = '/#/';
+        }, function (msg) {
             console.error('Error: ' + msg);
           }
         );
