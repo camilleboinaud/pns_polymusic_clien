@@ -70,7 +70,7 @@
            //apres 2 seconds close la notification et rediger au page index
            $timeout(function() {
              $scope.hasNotif = false;
-             $location.path('/#/');
+             $location.path('/');
            }, 2000);
 
          }, function (resp) {

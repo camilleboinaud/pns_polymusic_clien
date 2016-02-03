@@ -9,16 +9,46 @@
           </div>
 
           <div class="col-md-10">
-            <h4 class="text-warning"><i class="fa fa-music"></i> {{song.name}}</h4>
-            <button class="btn btn-warning"><i class="fa fa-play"></i> Play</button>
-            <span class="rating">
-                <span><i class="fa fa-star-o"></i></span>
-            </span>
-            <span>{{song.rating}}</span>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <h4 class="text-warning">
+              <i class="fa fa-music"></i> {{song.name}}
+            </h4>
+            <div>
+              <button class="btn btn-warning"><i class="fa fa-play"></i> Play</button>
+              <span class="h4 text-warning">
+                <span ng-repeat="r in rating track by $index">
+                  <span><i class="fa fa-star"></i></span>
+                </span>
+                 <span ng-repeat="r in rating_vide track by $index">
+                   <i class="fa fa-star-o"></i>
+                 </span>
+                <span class="h6" style="color:grey">Rating:  {{song.rating}}</span>
+              </span>
+            </div>
+            <div>
+              <span class="rating">
+                <span ng-click="make_rating(5)">
+                  <i class="fa fa-star-o" ng-show="!has_rated[4]"></i>
+                  <i class="fa fa-star" ng-show="has_rated[4]"></i>
+                </span>
+                <span ng-click="make_rating(4)">
+                  <i class="fa fa-star-o" ng-show="!has_rated[3]"></i>
+                  <i class="fa fa-star" ng-show="has_rated[3]"></i>
+                </span>
+                 <span ng-click="make_rating(3)">
+                  <i class="fa fa-star-o" ng-show="!has_rated[2]"></i>
+                  <i class="fa fa-star" ng-show="has_rated[2]"></i>
+                </span>
+                <span ng-click="make_rating(2)">
+                  <i class="fa fa-star-o" ng-show="!has_rated[1]"></i>
+                  <i class="fa fa-star" ng-show="has_rated[1]"></i>
+                </span>
+                <span ng-click="make_rating(1)">
+                  <i class="fa fa-star-o" ng-show="!has_rated[0]"></i>
+                  <i class="fa fa-star" ng-show="has_rated[0]"></i>
+                </span>
+              </span>
+            </div>
+
             <div style="font-size: 20px"><i class="fa fa-comments"></i> <span class="badge">{{nbComment}}</span></div>
             <hr style="margin-top: 2px"/>
             <div class="form-group">
