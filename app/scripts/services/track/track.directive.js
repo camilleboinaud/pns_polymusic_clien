@@ -56,7 +56,7 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
     (function init() {
       audioTrack = audioTrackFactory.getNewAudioTrack({
         ctx: $scope.$parent.aCtx,
-        useAudioTag: false,// true
+        useAudioTag: false,
         url: track.url,
         outNode: $scope.$parent.master.gainNode,
         fftSize: fftSize
