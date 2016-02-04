@@ -190,6 +190,23 @@ angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload',
       });
     };
 
+    /**
+     * Get user's songs
+     * @param params: userId, songId
+     * @param callback
+     */
+    SongREST.deleteSongById = function (params, callback){
+      $http({
+        method: 'DELETE',
+        url: serverAddress+'/api/songs/'+params.songId,
+        data: {userId: params.userId}
+      }).then(function successCallback(response){
+        callback(response.data);
+      }, function errorCallback(error) {
+        console.log(error);
+      });
+    };
+
     return SongREST;
   }
 ]);

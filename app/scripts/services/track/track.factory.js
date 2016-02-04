@@ -61,6 +61,7 @@ angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', function ($
       });
 
       self.audio = audio;
+      self.duration = audio.duration;
     } else {
       if (self.buffer) { // already loaded
         self. pauseTime = null;
@@ -82,6 +83,14 @@ angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', function ($
           });
         });
 
+      self.splitNode = self.ctx.createChannelSplitter(2);
+      self.mergeNode = self.ctx.createChannelMerger(2);
+      self.rightVolumeNode = self.ctx.createGain();
+      self.leftVolumeNode = self.ctx.createGain();
+      self.gainNode = self.ctx.createGain();
+      self.analyser = self.ctx.createAnalyser();
+      self.analyser.smoothingTimeConstant = 0.6;
+      self.analyser.fftSize = this.fftSize;
     }
   };
 
@@ -135,8 +144,14 @@ angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', function ($
     }
 
     this.bsNode.start(0, bufferOffset);
-    this.gainNode = this.addGainNode(this.bsNode, this.outNode);
-    this.analyser = this.createAnalyser(this.gainNode, this.fftSize);
+    this.bsNode.connect(this.splitNode);
+    this.splitNode.connect(this.leftVolumeNode, 0);
+    this.splitNode.connect(this.rightVolumeNode, 1);
+    this.leftVolumeNode.connect(this.mergeNode, 0, 0);
+    this.rightVolumeNode.connect(this.mergeNode, 0, 1);
+    this.mergeNode.connect(this.gainNode);
+    this.gainNode.connect(this.outNode);
+    this.gainNode.connect(this.analyser);
   };
 
   AudioTrack.prototype.clear = function() {
