@@ -1,1 +1,60 @@
-coucou user manager
+<div class="row">
+  <div class="col-md-offset-1 col-lg-10">
+    <ul  id="manane_song_mix_tab" class="nav nav-tabs" data-tabs="tabs">
+      <li class="active"><a href="#manage_song_tab" data-toggle="tab"> Songs</a></li>
+      <li><a href="#manage_mix_tab" data-toggle="tab">Mix Songs</a></li>
+    </ul>
+
+    <div id="content_song_mix_tab" class="tab-content">
+      <div class="tab-pane fade active in" id="manage_song_tab">
+        <div class="h4"> Manager your music </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <i class="fa fa-table"></i> Song List
+          </div>
+          <div class="panel-body">
+            <table class="table table-hover">
+              <tr class="text-primary">
+                <th>Songs</th>
+                <th>Author</th>
+                <th>Rating</th>
+                <th>N° Rating</th>
+                <th>N° Comments</th>
+                <th>Visibility</th>
+                <th>Delete</th>
+              </tr>
+              <tr ng-repeat="song in my_songs">
+                <td>{{song.name}}</td>
+                <td>{{song.author}}</td>
+                <td>{{song.rating}}</td>
+                <td>{{song.nbRating}}</td>
+                <td>{{song.nbComment}}</td>
+                <td>
+                  <form>
+                    <switch id="enabled" name="enabled" ng-model="song.is_pub" on="On" off="Off" class="blue" ng-change="change_visibility()"></switch>
+                    <span ng-show="!song.is_pub">private</span>
+                    <span class="text-success" ng-show="song.is_pub">public</span>
+                  </form>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="manage_mix_tab">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  $('a[data-toggle="tab"]').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+  })
+</script>

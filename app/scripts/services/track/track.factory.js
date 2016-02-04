@@ -151,7 +151,7 @@ angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', function ($
     this.rightVolumeNode.connect(this.mergeNode, 0, 1);
     this.mergeNode.connect(this.gainNode);
     this.gainNode.connect(this.outNode);
-    this.analyser.connect(this.gainNode);
+    this.gainNode.connect(this.analyser);
   };
 
   AudioTrack.prototype.clear = function() {
@@ -159,18 +159,6 @@ angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', function ($
       this.audio.src = '';
     }
   };
-
-
-  AudioTrack.prototype.createScriptProcessor = function(bufferSize, nbInputChanels, nbOutputChanels){
-    var scriptProcessor = this.ctx.createScriptProcessor(bufferSize, nbInputChanels, nbOutputChanels);
-
-    scriptProcessor.onaudioprocess = function(event){
-      var input = event.inputBuffer.getChannelData(0);
-      console.info(input);
-    }
-
-
-  }
 
 
   return {
