@@ -7,6 +7,11 @@
 
     <div id="content_song_mix_tab" class="tab-content">
       <div class="tab-pane fade active in" id="manage_song_tab">
+        <br/>
+        <div class="alert alert-dismissible alert-success" ng-show="delete_info">
+          <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+          You successfully delete the song.
+        </div>
         <div class="h4"><center>Manage your music </center> </div>
         <div class="panel panel-primary">
           <div class="panel-heading">
@@ -40,7 +45,24 @@
                   </form>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-danger btn-sm" ng-click="delete(song._id)"><i class="fa fa-trash"></i></button>
+                  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target ="#delete_confirmation_modal"><i class="fa fa-trash"></i></button>
+                  <div class="modal"  id ="delete_confirmation_modal" tabindex="-1" role="dialog" aria-labelledby="confimationOfDeleting">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Confirmation of deleting</h4>
+                        </div>
+                        <div class="modal-body">
+                          <p>Are your sure?</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-danger"ng-click="delete(song._id)" ><i class="fa fa-trash"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </td>
               </tr>
             </table>
