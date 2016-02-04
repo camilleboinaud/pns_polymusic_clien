@@ -9,42 +9,53 @@
  */
 angular.module('pnsPolymusicClientApp').controller('AuthentificationCtrl', ['$scope', 'User', function ($scope, User) {
 
-    $scope.register = function(user){
-        if(user && user.username && user.email && user.password) {
+  $scope.info = null;
 
-          if (user.password[0] === user.password[1]) {
-            user.password = user.password[0];
-            User.register(user,
-              function (msg) {
-                window.location.href = '/#/';
-                console.info('Success: ', msg);
-              }, function (msg) {
-                console.info('Error: ' + msg);
-              }
-            );
+  $scope.register = function(user){
+    if(user && user.username && user.email && user.password) {
 
-          } else {
-            console.info("Oops.. passwords do not match")
-          }
-
-        } else {
-          console.log("Oops.. all fields needs to be filled")
-        }
-
-    };
-
-    $scope.login = function(user){
-      if(user !== null && user.email !== null && user.password !== null){
-        User.login(user, function(msg) {
-          window.location.href = '/#/';
-        }, function (msg) {
-            console.error('Error: ' + msg);
+      if (user.password[0] === user.password[1]) {
+        user.password = user.password[0];
+        User.register(user,
+          function (msg) {
+            if(msg.success === false){
+              $scope.info = msg.message;
+            } else {
+              window.location.href = '/';
+            }
+          }, function (msg) {
+            $scope.info = 'Error: ' + msg;
           }
         );
+
       } else {
-        console.log("Oops.. all fields needs to be filled");
+        $scope.info = "Oops.. passwords do not match";
       }
 
-    };
+    } else {
+      $scope.info = "Oops.. all fields needs to be filled";
+    }
+
+  };
+
+  $scope.login = function(user){
+    if(user !== null && user.email !== null && user.password !== null){
+      User.login(user,
+        function(msg) {
+          console.info(msg);
+          if(msg.success === false){
+            $scope.info = msg.message;
+          } else {
+            window.location.href = '/';
+          }
+        }, function (msg) {
+          $scope.info = 'Error: ' + msg;
+        }
+      );
+    } else {
+      $scope.info = "Oops.. all fields needs to be filled";
+    }
+
+  };
 
 }]);

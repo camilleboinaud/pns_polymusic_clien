@@ -130,6 +130,12 @@ angular.module('pnsPolymusicClientApp')
       }
     }
 
+    function onAudioProcess(event){
+        var input = event.inputBuffer;
+
+        console.info(input);
+    }
+
     function setTrackWidth() {
       $scope.trackWidth = 370;
     }
