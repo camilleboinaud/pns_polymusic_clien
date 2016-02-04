@@ -107,7 +107,6 @@ angular.module('pnsPolymusicClientApp').directive('playerSlider', function() {
 
   }
 
-
   //return the template of player-slider
   return {
     restrict: 'EA',

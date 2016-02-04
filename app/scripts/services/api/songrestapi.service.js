@@ -174,6 +174,22 @@ angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload',
       });
     };
 
+    /**
+     * Get user's songs
+     * @param params: userId
+     * @param callback
+     */
+    SongREST.getSongsByUser = function (params, callback){
+      $http({
+        method: 'GET',
+        url: serverAddress+'/api/songs?userId='+params.userId
+      }).then(function successCallback(response){
+        callback(response.data);
+      }, function errorCallback(error) {
+        console.log(error);
+      });
+    };
+
     return SongREST;
   }
 ]);
