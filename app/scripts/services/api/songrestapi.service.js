@@ -199,8 +199,7 @@ angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload',
     SongREST.deleteSongById = function (params, callback){
       $http({
         method: 'DELETE',
-        url: serverAddress+'/api/songs/'+params.songId,
-        data: {userId: params.userId}
+        url: serverAddress+'/api/songs/'+params.songId+'?userId='+params.userId
       }).then(function successCallback(response){
         callback(response.data);
       }, function errorCallback(error) {
