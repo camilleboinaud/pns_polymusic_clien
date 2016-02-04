@@ -32,7 +32,19 @@ angular.module('pnsPolymusicClientApp').controller('ManageSongCtrl', ['$scope', 
     SongREST.updateSongById(params, function (message) {
       console.info(message);
       if(message.message == "song update success"){
+
       }
+    })
+  };
+
+  $scope.delete = function (songID) {
+    var params = {
+      userId: User.getCurrentUser().id,
+      songId: songID
+    };
+    console.info(params);
+    SongREST.deleteSongById(params, function (response) {
+      console.info(response);
     })
   }
 

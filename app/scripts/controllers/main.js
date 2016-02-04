@@ -8,7 +8,7 @@
  * Controller of the pnsPolymusicClientApp
  */
 angular.module('pnsPolymusicClientApp')
-  .controller('MainCtrl', ['$scope', 'songFactory','SongREST', '$document', 'DurationService', function ($scope, songFactory, SongREST, $document, DurationService) {
+  .controller('MainCtrl', ['$scope','SongREST', '$document', 'DurationService', 'User', function ($scope, SongREST, $document, DurationService ,User) {
 
     //here's no way to detect whether a browser can play multiple audio elements at once.
     var isiOS = navigator.userAgent.match(/(iPad|iPhone|iPod)/g) ? true : false;
@@ -37,11 +37,16 @@ angular.module('pnsPolymusicClientApp')
 
       setTrackWidth();
       initAudio();
-      songFactory.getAllPubSongs(function (songs) {
-        $scope.songs = songs;
-      });
-
     })();
+
+    var userId="";
+    if (User.getCurrentUser()) {
+      userId = User.getCurrentUser().id
+    }
+    SongREST.getAllPubSongs({userId:userId}, function(songs){
+      $scope.songs = songs;
+    });
+
 
 
     $scope.playTracks = function(tracks) {
@@ -147,7 +152,8 @@ angular.module('pnsPolymusicClientApp')
     $scope.search = function (isASong) {
       var params = {
         search_text: $scope.search_song,
-        isSong: isASong
+        isSong: isASong,
+        userId: User.getCurrentUser().id
       };
       SongREST.searchSong(params, function (data) {
         $scope.songs = data;

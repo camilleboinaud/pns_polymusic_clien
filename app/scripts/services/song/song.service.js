@@ -13,8 +13,8 @@ angular.module('pnsPolymusicClientApp').factory('songFactory', function (SongRES
 
   var songFactory = {};
 
-  songFactory.getAllPubSongs = function getAllPubSongs(callback){
-    SongREST.getAllPubSongs(function(songs){
+  songFactory.getAllPubSongs = function getAllPubSongs(params, callback){
+    SongREST.getAllPubSongs(params, function(songs){
       callback(songs);
     });
   };

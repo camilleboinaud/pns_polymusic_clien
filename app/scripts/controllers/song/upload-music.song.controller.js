@@ -46,23 +46,25 @@
        inputElement.onchange = function() {
          var callback = function(track){
            $scope.$apply(function() {
-             $scope.tracks[track.index -1].readableDuration = secondtoHHMMSS(track.duration);
+             $scope.tracks[track.index].readableDuration = secondtoHHMMSS(track.duration);
            });
          };
          // clean trackFiles
          $scope.trackFiles = [];
          $scope.tracks = [];
+         var index = 0;
          for (var i = 0; i < inputElement.files.length; i++) {
            var trackFile = inputElement.files.item(i);
            if (trackFile.type.indexOf('audio') != -1){
              var track = {
                url: URL.createObjectURL(trackFile),
-               index: i,
-               name: trackFile.name
+               name: trackFile.name,
+               index: index
              };
              $scope.tracks.push(track);
              $scope.trackFiles.push(trackFile);
              SongREST.getTrackDuration(track, callback);
+             index++;
            }
          }
        };

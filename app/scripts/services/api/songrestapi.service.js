@@ -3,21 +3,23 @@
  */
 'use strict';
 
-angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload', 'User',
-  function ($http, Upload, User) {
+angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload',
+  function ($http, Upload) {
     var SongREST= {},
-      serverAddress = 'http://localhost:3000';
+      serverAddress = 'http://localhost:3000',
+      audioContext = new window.AudioContext();
 
     SongREST.serverAddress = serverAddress;
 
       /**
        * Get list of pub songs
+       * @param params
        * @param callback
        */
-    SongREST.getAllPubSongs = function (callback) {
+    SongREST.getAllPubSongs = function (params, callback) {
       $http({
         method: 'GET',
-        url: serverAddress + '/api/songs?userId=' + User.getCurrentUser().id
+        url: serverAddress + '/api/songs?userId=' + params.userId
       }).then(function successCallback(response){
         callback(response.data);
       }, function errorCallback(error) {
@@ -113,7 +115,7 @@ angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload', 
     SongREST.searchSong = function (params, callback) {
       $http({
         method: 'GET',
-        url: serverAddress+'/api/songs/?string='+params.search_text+'&isSong='+params.isSong+'&userId='+ User.getCurrentUser().id
+        url: serverAddress+'/api/songs/?string='+params.search_text+'&isSong='+params.isSong+'&userId='+ params.userId
       }).then(function successCallback(response){
         callback(response.data);
       }, function errorCallback(error) {
@@ -144,7 +146,6 @@ angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload', 
      * @param callback
      */
     SongREST.getTrackDuration = function (track, callback){
-      var audioContext = new window.AudioContext();
       $http
         .get(track.url,{responseType: 'arraybuffer'})
         .then(function successCallback(response){
