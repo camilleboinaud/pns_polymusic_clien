@@ -8,6 +8,7 @@
 
        $scope.progressPercentage =0;
        $scope.tracks = [];
+       $scope.trackFiles = [];
        var inputElement = document.getElementById('uploadSong');
        $scope.hasNotif = false;
 
@@ -44,20 +45,25 @@
         */
        inputElement.onchange = function() {
          var callback = function(track){
-           track.readableDuration = secondtoHHMMSS(track.duration);
-           $scope.tracks[track.index] = track;
-           $scope.$$phase || $scope.$apply(); // update view
+           $scope.$apply(function() {
+             $scope.tracks[track.index -1].readableDuration = secondtoHHMMSS(track.duration);
+           });
          };
-
-         $scope.trackFiles = inputElement.files;
-         for (var i = 0; i < $scope.trackFiles.length; i++) {
-           var track = {
-             url: URL.createObjectURL($scope.trackFiles.item(i)),
-             index: i,
-             name: $scope.trackFiles.item(i).name
-           };
-           $scope.tracks.push(track);
-           SongREST.getTrackDuration(track, callback);
+         // clean trackFiles
+         $scope.trackFiles = [];
+         $scope.tracks = [];
+         for (var i = 0; i < inputElement.files.length; i++) {
+           var trackFile = inputElement.files.item(i);
+           if (trackFile.type.indexOf('audio') != -1){
+             var track = {
+               url: URL.createObjectURL(trackFile),
+               index: i,
+               name: trackFile.name
+             };
+             $scope.tracks.push(track);
+             $scope.trackFiles.push(trackFile);
+             SongREST.getTrackDuration(track, callback);
+           }
          }
        };
 
@@ -90,7 +96,6 @@
            }, 0);
          });
        };
-
 
 
      }
