@@ -152,7 +152,6 @@ footer {
 /*stars css*/
 .rating {
   unicode-bidi: bidi-override;
-  direction: rtl;
   font-size: 30px;
 }
 .rating > span {

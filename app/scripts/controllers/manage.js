@@ -7,6 +7,13 @@
  * # ManageSongCtrl
  * Controller of the pnsPolymusicClientApp
  */
-angular.module('pnsPolymusicClientApp').controller('ManageSongCtrl', ['$scope', 'User', function ($scope, User) {
+angular.module('pnsPolymusicClientApp').controller('ManageSongCtrl', ['$scope', 'User','SongREST', function ($scope, User, SongREST) {
+
+  //get all songs
+  SongREST.getAllPubSongs(
+    function (songs) {
+      $scope.songs = songs;
+    });
+
 
 }]);
