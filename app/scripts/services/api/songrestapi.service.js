@@ -207,6 +207,23 @@ angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload',
       });
     };
 
+    /**
+     * Get user's songs
+     * @param params: userId, songId, isPub
+     * @param callback
+     */
+    SongREST.changeIsPubById = function (params, callback){
+      $http({
+        method: 'UPDATE',
+        url: serverAddress+'/api/songs/'+params.songId,
+        data: {userId: params.userId, isPub: params.isPub}
+      }).then(function successCallback(response){
+        callback(response.data);
+      }, function errorCallback(error) {
+        console.log(error);
+      });
+    };
+
     return SongREST;
   }
 ]);
