@@ -151,7 +151,7 @@ angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', function ($
     this.rightVolumeNode.connect(this.mergeNode, 0, 1);
     this.mergeNode.connect(this.gainNode);
     this.gainNode.connect(this.outNode);
-    this.analyser.connect(this.gainNode);
+    this.gainNode.connect(this.analyser);
   };
 
   AudioTrack.prototype.clear = function() {
