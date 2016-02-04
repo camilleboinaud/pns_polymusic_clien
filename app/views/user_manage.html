@@ -7,7 +7,7 @@
 
     <div id="content_song_mix_tab" class="tab-content">
       <div class="tab-pane fade active in" id="manage_song_tab">
-        <div class="h4"> Manager your music </div>
+        <div class="h4"><center>Manage your music </center> </div>
         <div class="panel panel-primary">
           <div class="panel-heading">
             <i class="fa fa-table"></i> Song List
@@ -20,7 +20,7 @@
                 <th>Rating</th>
                 <th>N° Rating</th>
                 <th>N° Comments</th>
-                <th>Visibility</th>
+                <th style="width:20%">Visibility</th>
                 <th>Delete</th>
               </tr>
               <tr ng-repeat="song in my_songs">
@@ -31,9 +31,12 @@
                 <td>{{song.nbComment}}</td>
                 <td>
                   <form>
-                    <switch id="enabled" name="enabled" ng-model="song.is_pub" on="On" off="Off" class="blue" ng-change="change_visibility()"></switch>
-                    <span ng-show="!song.is_pub">private</span>
-                    <span class="text-success" ng-show="song.is_pub">public</span>
+                    <switch id="enabled" name="enabled" ng-model="song.is_pub" class="blue" ng-change="change_visibility()"></switch>
+                    <span class="h6">
+                      <i class="fa fa-spinner fa-pulse"></i>
+                      <span ng-show="!song.is_pub">Private</span>
+                      <span class="text-success" ng-show="song.is_pub">Public</span>
+                    </span>
                   </form>
                 </td>
                 <td>
