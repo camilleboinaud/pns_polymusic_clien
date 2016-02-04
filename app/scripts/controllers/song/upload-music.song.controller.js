@@ -52,17 +52,19 @@
          // clean trackFiles
          $scope.trackFiles = [];
          $scope.tracks = [];
+         var index = 0;
          for (var i = 0; i < inputElement.files.length; i++) {
            var trackFile = inputElement.files.item(i);
            if (trackFile.type.indexOf('audio') != -1){
              var track = {
                url: URL.createObjectURL(trackFile),
-               index: i,
-               name: trackFile.name
+               name: trackFile.name,
+               index: index
              };
              $scope.tracks.push(track);
              $scope.trackFiles.push(trackFile);
              SongREST.getTrackDuration(track, callback);
+             index++;
            }
          }
        };
