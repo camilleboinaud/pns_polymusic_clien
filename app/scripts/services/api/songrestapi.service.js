@@ -212,9 +212,9 @@ angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload',
      * @param params: userId, songId, isPub
      * @param callback
      */
-    SongREST.changeIsPubById = function (params, callback){
+    SongREST.updateSongById = function (params, callback){
       $http({
-        method: 'UPDATE',
+        method: 'PUT',
         url: serverAddress+'/api/songs/'+params.songId,
         data: {userId: params.userId, isPub: params.isPub}
       }).then(function successCallback(response){
