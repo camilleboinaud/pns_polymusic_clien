@@ -7,7 +7,7 @@ angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload', 
   function ($http, Upload, AudioContextService) {
     var SongREST= {},
       serverAddress = 'http://localhost:3000',
-      audioContext = AudioContextService.getContext;
+      audioContext = AudioContextService.getContext();
 
     SongREST.serverAddress = serverAddress;
 
