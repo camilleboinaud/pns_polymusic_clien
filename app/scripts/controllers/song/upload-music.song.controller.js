@@ -46,7 +46,7 @@
        inputElement.onchange = function() {
          var callback = function(track){
            $scope.$apply(function() {
-             $scope.tracks[track.index -1].readableDuration = secondtoHHMMSS(track.duration);
+             $scope.tracks[track.index].readableDuration = secondtoHHMMSS(track.duration);
            });
          };
          // clean trackFiles
