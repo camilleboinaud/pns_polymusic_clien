@@ -9,6 +9,7 @@
  */
 angular.module('pnsPolymusicClientApp').controller('ManageSongCtrl', ['$scope', 'User','SongREST', function ($scope, User, SongREST) {
 
+
   //get all songs of user
   var params = {
     userId: User.getCurrentUser().id
@@ -22,8 +23,17 @@ angular.module('pnsPolymusicClientApp').controller('ManageSongCtrl', ['$scope', 
   );
 
   //change the visibility of song
-  $scope.change_visibility = function () {
-
+  $scope.update_song = function (songID, isPublic) {
+    var params = {
+      userId: User.getCurrentUser().id,
+      songId: songID,
+      isPub: isPublic
+    };
+    SongREST.updateSongById(params, function (message) {
+      console.info(message);
+      if(message.message == "song update success"){
+      }
+    })
   }
 
 }]);
