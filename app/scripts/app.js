@@ -30,6 +30,7 @@ angular
     'ngTouch',
     'ngFileUpload',
     'ngStorage',
+    'uiSwitch',
     'song'
   ])
 

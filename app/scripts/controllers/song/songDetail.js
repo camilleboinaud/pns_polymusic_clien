@@ -90,9 +90,8 @@ angular.module('pnsPolymusicClientApp')
       //send rating to server
       SongREST.newRating(params, function (response) {
         console.info(response);
+        $scope.rating = new Array(response.rating);
+        $scope.rating_vide  = new Array(5 - response.rating);
       });
-
-      console.info("coucou");
-
     }
   });

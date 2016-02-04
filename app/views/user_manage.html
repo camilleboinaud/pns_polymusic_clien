@@ -18,13 +18,27 @@
                 <th>Songs</th>
                 <th>Author</th>
                 <th>Rating</th>
+                <th>N° Rating</th>
                 <th>N° Comments</th>
+                <th>Visibility</th>
+                <th>Delete</th>
               </tr>
-              <tr>
-                <td>song name</td>
-                <td>song name</td>
-                <td>song name</td>
-                <td>song name</td>
+              <tr ng-repeat="song in my_songs">
+                <td>{{song.name}}</td>
+                <td>{{song.author}}</td>
+                <td>{{song.rating}}</td>
+                <td>{{song.nbRating}}</td>
+                <td>{{song.nbComment}}</td>
+                <td>
+                  <form>
+                    <switch id="enabled" name="enabled" ng-model="song.is_pub" on="On" off="Off" class="blue" ng-change="change_visibility()"></switch>
+                    <span ng-show="!song.is_pub">private</span>
+                    <span class="text-success" ng-show="song.is_pub">public</span>
+                  </form>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                </td>
               </tr>
             </table>
           </div>
