@@ -146,6 +146,18 @@ angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', function ($
   };
 
 
+  AudioTrack.prototype.createScriptProcessor = function(bufferSize, nbInputChanels, nbOutputChanels){
+    var scriptProcessor = this.ctx.createScriptProcessor(bufferSize, nbInputChanels, nbOutputChanels);
+
+    scriptProcessor.onaudioprocess = function(event){
+      var input = event.inputBuffer.getChannelData(0);
+      console.info(input);
+    }
+
+
+  }
+
+
   return {
     getNewAudioTrack: function() {
       var instance = Object.create(AudioTrack.prototype);
