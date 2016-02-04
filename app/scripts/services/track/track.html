@@ -14,9 +14,9 @@
       <div class="spinner" ng-show="loading"></div>
     </div>
     <div class="col-sm-2">
-      <p><button class="btn btn-default btn-sm" ng-disabled="!trackReady" ng-show="trackIsMute" ng-click="mute()">DM</button></p>
-      <p><button class="btn btn-warning btn-sm" ng-disabled="!trackReady" ng-show="!trackIsMute" ng-click="mute()">M</button></p>
-      <p><button class="btn btn-warning btn-sm" ng-disabled="!trackReady" ng-click="soloTrack()">S</button></p>
+      <button class="btn btn-default btn-sm" ng-disabled="!trackReady" ng-show="trackIsMute" ng-click="mute()">DM</button>
+      <button class="btn btn-warning btn-sm" ng-disabled="!trackReady" ng-show="!trackIsMute" ng-click="mute()">M</button>
+      <button style="margin-top: 3px;" class="btn btn-warning btn-sm" ng-disabled="!trackReady" ng-click="soloTrack()">S</button>
     </div>
   </div>
 
