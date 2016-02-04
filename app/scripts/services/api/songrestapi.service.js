@@ -3,11 +3,11 @@
  */
 'use strict';
 
-angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload',
-  function ($http, Upload) {
+angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload', 'AudioContextService',
+  function ($http, Upload, AudioContextService) {
     var SongREST= {},
       serverAddress = 'http://localhost:3000',
-      audioContext = new window.AudioContext();
+      audioContext = AudioContextService.getContext;
 
     SongREST.serverAddress = serverAddress;
 

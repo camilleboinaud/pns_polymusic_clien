@@ -8,7 +8,7 @@
  * Controller of the pnsPolymusicClientApp
  */
 angular.module('pnsPolymusicClientApp')
-  .controller('MainCtrl', ['$scope','SongREST', '$document', 'DurationService', 'User', function ($scope, SongREST, $document, DurationService ,User) {
+  .controller('MainCtrl', ['$scope','SongREST', '$document', 'DurationService', 'User', 'AudioContextService', function ($scope, SongREST, $document, DurationService ,User, AudioContextService) {
 
     //here's no way to detect whether a browser can play multiple audio elements at once.
     var isiOS = navigator.userAgent.match(/(iPad|iPhone|iPod)/g) ? true : false;
@@ -34,11 +34,10 @@ angular.module('pnsPolymusicClientApp')
         $scope.error = true;
         return;
       }
-
       setTrackWidth();
-      initAudio();
     })();
 
+    initAudio();
     var userId="";
     if (User.getCurrentUser()) {
       userId = User.getCurrentUser().id
@@ -125,7 +124,7 @@ angular.module('pnsPolymusicClientApp')
     }
 
     function initAudio() {
-      $scope.aCtx = new window.AudioContext();
+      $scope.aCtx = AudioContextService.getContext();
       $scope.aCtx.createGain = $scope.aCtx.createGain || $scope.aCtx.createGainNode;
       $scope.master.gainNode = $scope.aCtx.createGain();
       $scope.master.gainNode.connect($scope.aCtx.destination);
