@@ -25,11 +25,12 @@
             <!--list of songs-->
             <div class="songs" ng-cloak>
               <span ng-repeat="song in songs">
-                <input id="{{'radio-'+song.name}}" type="radio" ng-model="$parent.currentSong" ng-value="song" hidden/>
+                <input id="{{'A-radio-'+song.name}}" type="radio" ng-model="$parent.currentSongs[0]" ng-value="song" hidden/>
+                <input id="{{'B-radio-'+song.name}}" type="radio" ng-model="$parent.currentSongs[1]" ng-value="song" hidden/>
                 <a href="/#/songs/{{song._id}}" class="text-capitalize">{{song.name}}</a>
                 <div class="btn-group-sm pull-right">
-                  <label class="btn-warning btn-sm" for="{{'radio-'+song.name}}">A</label>
-                  <label class="btn-info btn-sm">B</label>
+                  <label class="btn-warning btn-sm" for="{{'A-radio-'+song.name}}">A</label>
+                  <label class="btn-info btn-sm"  for="{{'B-radio-'+song.name}}">B</label>
                 </div>
                 <hr/>
               </span>
@@ -66,13 +67,18 @@
 
     <div class="row">
       <!--track list à gauche-->
-      <div class="col-lg-6 track-container" style="color:orange" >
+      <div class="col-lg-6 track-container" style="color:orange">
         <div class="panel panel-default">
-          <div class="" ng-cloak>
-            <div track="track" track-name="{{track.name}}" ng-repeat="track in currentSong.tracks"></div>
-          </div>
+          <div class="" ng-cloak track-container song="currentSongs[0]" master="masters[0]"></div>
         </div>
       </div>
+      <!--track list à droit-->
+      <div class="col-lg-6 track-container" style="color:orange">
+        <div class="panel panel-default">
+          <div class="" ng-cloak track-container song="currentSongs[1]" master="masters[1]"></div>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -99,30 +105,41 @@
         <div class="row">
           <div class="col-lg-6 text-warning" >
             <div class="row">
+              <play-btn song="currentSongs[0]"></play-btn>
 
-              <div class="col-sm-1" ng-show="currentSong" ng-cloak>
-                <!--button play-->
-                <button ng-disabled="!currentSong.ready" ng-show="!currentSong.playing" ng-click="playTracks()" class="btn-sm btn-warning">
-                  <i class="fa fa-play"></i>
-                </button>
-                <!--button pause-->
-                <button ng-disabled="!currentSong.ready" ng-show="currentSong.playing" ng-click="stopTracks()" class="btn-sm btn-danger">
-                  <i class="fa fa-pause"></i>
-                </button>
-              </div>
               <div class="col-md-3">
                 <!--song name-->
-                <div ng-disabled="!ready">{{currentSong.name}}</div>
+                <div ng-disabled="!currentSongs[0].ready">{{currentSongs[0].name}}</div>
                 <p>
                   <i class="fa fa-volume-up"></i>
-                  <input type="range" style="display: inline-block;width: 80%;" ng-model="masterGain" />
+                  <master-gain master="masters[0]"></master-gain>
                 </p>
               </div>
               <div class="col-md-8 duration">
-                <player-slider song="currentSong" player-slider-id="playerSliderLeft"></player-slider>
+                <player-slider song="currentSongs[0]" player-slider-id="playerSliderLeft"></player-slider>
               </div>
             </div>
           </div>
+
+          <div class="col-lg-6 text-warning" >
+            <div class="row">
+              <play-btn song="currentSongs[1]"></play-btn>
+
+              <div class="col-md-3">
+                <!--song name-->
+                <div ng-disabled="!currentSongs[1].ready">{{currentSongs[1].name}}</div>
+                <p>
+                  <i class="fa fa-volume-up"></i>
+                  <master-gain master="masters[1]"></master-gain>
+                </p>
+              </div>
+              <div class="col-md-8 duration">
+                <player-slider song="currentSongs[1]" player-slider-id="playerSliderRight"></player-slider>
+              </div>
+            </div>
+          </div>
+
+
         </div>
       </div>
   </div>
