@@ -14,17 +14,29 @@
       <div class="spinner" ng-show="loading"></div>
     </div>
     <div class="col-sm-2">
-      <button class="btn btn-default btn-sm" ng-disabled="!trackReady" ng-show="trackIsMute" ng-click="mute()">DM</button>
-      <button class="btn btn-warning btn-sm" ng-disabled="!trackReady" ng-show="!trackIsMute" ng-click="mute()">M</button>
-      <button style="margin-top: 3px;" class="btn btn-warning btn-sm" ng-disabled="!trackReady" ng-click="soloTrack()">S</button>
+      <button class="btn btn-default btn-sm" ng-show="trackIsMute" ng-click="mute()">DM</button>
+      <button class="btn btn-warning btn-sm" ng-show="!trackIsMute" ng-click="mute()">M</button>
+      <button style="margin-top: 3px;" class="btn btn-warning btn-sm" ng-click="soloTrack()">S</button>
     </div>
   </div>
 
   <div class="row">
     <div class="col-sm-10">
       <span>L</span>
-      <input type="range" ng-disabled="!trackReady" ng-model="trackStereo" min='-1' max='1'/>
+      <input type="range" ng-model="trackStereo" min='-1' max='1'/>
       <span>R</span>
+    </div>
+    <div>
+      <input type="range" ng-model="filterFrequency" min='0' max='20000' step="10"/>
+      <span>{{filterFrequency}}</span>
+    </div>
+    <div>
+      <input type="range" ng-model="filterGain" min='0' max='100'/>
+      <span>{{filterGain/100}}</span>
+    </div>
+    <div>
+      <input type="range" ng-model="filterQ" min='1' max='10000'/>
+      <span>{{filterQ/100}}</span>
     </div>
   </div>
 </div>

@@ -16,6 +16,9 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
     $scope.trackVolume = 100;
     $scope.loading = true;
     $scope.trackStereo = 0;
+    $scope.filterFrequency = 20000;
+    $scope.filterGain = 100;
+    $scope.filterQ = 10000;
 
     var track = $scope.track;
     var canvas = $element[0].querySelector('canvas');
@@ -75,6 +78,18 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
 
       $scope.$watch('trackStereo', function(value) {
         audioTrack.setBalance(value);
+      });
+
+      $scope.$watch('filterFrequency', function(value) {
+        audioTrack.setFilterFrequency(value);
+      });
+
+      $scope.$watch('filterQ', function(value) {
+        audioTrack.setFilterQ(value/100);
+      });
+
+      $scope.$watch('filterGain', function(value) {
+        audioTrack.setFilterGain(value/100);
       });
 
       $scope.trackReady=true;
