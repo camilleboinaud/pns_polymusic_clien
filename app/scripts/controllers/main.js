@@ -40,8 +40,6 @@ angular.module('pnsPolymusicClientApp')
       });
 
     }
-
-    //initAudio();
     var userId="";
     if (User.getCurrentUser()) {
       userId = User.getCurrentUser().id
@@ -49,10 +47,6 @@ angular.module('pnsPolymusicClientApp')
     SongREST.getAllPubSongs({userId:userId}, function(songs){
       $scope.songs = songs;
     });
-    //
-    //$scope.$watch('currentSongs', function(currentSong, oldSong) {
-    //  console.log('main currentSongs[0] changed');
-    //});
 
     /**
      * Get song list by search_text
@@ -67,6 +61,26 @@ angular.module('pnsPolymusicClientApp')
       SongREST.searchSong(params, function (data) {
         $scope.songs = data;
       });
+    };
+
+    var playingSongAIndex,
+      playingSongBIndex;
+
+    $scope.playSongOnA = function (index) {
+      if(playingSongAIndex !== undefined){
+        $scope.songs[playingSongAIndex].selected = false;
+      }
+      playingSongAIndex = index;
+      $scope.songs[index].selected = true;
+      console.log($scope.songs);
+    };
+
+    $scope.playSongOnB = function (index) {
+      if (playingSongBIndex !== undefined) {
+        $scope.songs[playingSongBIndex].selected = false;
+      }
+      playingSongBIndex = index;
+      $scope.songs[index].selected = true;
     };
 
   }]);
