@@ -27,6 +27,11 @@
       <span>R</span>
     </div>
     <div>
+      <select ng-options="option.name for option in typeFilter track by option.id" ng-model="typeFilterSelected" >
+        <option ng-repeat="option in typeFilter" value="{{option.id}}">{{option.name}}</option>
+      </select>
+    </div>
+    <div>
       <input type="range" ng-model="filterFrequency" min='0' max='20000' step="10"/>
       <span>{{filterFrequency}}</span>
     </div>
