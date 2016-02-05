@@ -114,7 +114,7 @@ angular.module('pnsPolymusicClientApp').directive('playerSlider', function() {
       currentSong: '=song',
       id:'@playerSliderId'
     },
-    templateUrl: 'scripts/services/song/playerSlider.html',
+    templateUrl: 'scripts/directives/playerSlider/playerSlider.html',
     controller: playerSliderController
   };
 
