@@ -16,6 +16,20 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
     $scope.trackVolume = 100;
     $scope.loading = true;
     $scope.trackStereo = 0;
+    $scope.filterFrequency = 20000;
+    $scope.filterGain = 100;
+    $scope.filterQ = 100;
+    $scope.typeFilter = [
+      {id : 0, name : "none"},
+      {id : 1, name : "lowpass"},
+      {id : 2, name : "highpass"},
+      {id : 3, name : "bandpass"},
+      {id : 4, name : "lowshelf"},
+      {id : 5, name : "highshelf"},
+      {id : 6, name : "peaking"},
+      {id : 7, name : "notch"}
+    ];
+    $scope.typeFilterSelected = $scope.typeFilter[0];
 
     var track = $scope.track;
     var canvas = $element[0].querySelector('canvas');
@@ -75,6 +89,27 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
 
       $scope.$watch('trackStereo', function(value) {
         audioTrack.setBalance(value);
+      });
+
+      $scope.$watch('filterFrequency', function(value) {
+        audioTrack.setFilterFrequency(value);
+      });
+
+      $scope.$watch('filterQ', function(value) {
+        audioTrack.setFilterQ(value/100);
+      });
+
+      $scope.$watch('filterGain', function(value) {
+        audioTrack.setFilterGain(value/100);
+      });
+
+      $scope.$watch('typeFilterSelected', function(value) {
+        $scope.typeFilterSelected = value;
+        if(value.name == "none") {
+          audioTrack.setFilterType("lowpass");
+        } else {
+          audioTrack.setFilterType(value.name);
+        }
       });
 
       $scope.trackReady=true;
