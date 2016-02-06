@@ -7,9 +7,10 @@
  * # ManageSongCtrl
  * Controller of the pnsPolymusicClientApp
  */
-angular.module('pnsPolymusicClientApp').controller('ManageSongCtrl', ['$scope', 'User','SongREST','$timeout', function ($scope, User, SongREST, $timeout) {
+angular.module('pnsPolymusicClientApp').controller('ManageSongCtrl', ['$scope', 'User','SongREST','$timeout','$document', function ($scope, User, SongREST, $timeout, $document) {
 
   $scope.delete_info = false;
+  $scope.is_loading = false;
 
   //get all songs of user
   var params = {
@@ -25,6 +26,7 @@ angular.module('pnsPolymusicClientApp').controller('ManageSongCtrl', ['$scope', 
 
   //change the visibility of song
   $scope.update_song = function (songID, isPublic) {
+    $scope.is_loading = true;
     var params = {
       userId: User.getCurrentUser().id,
       songId: songID,
@@ -33,7 +35,9 @@ angular.module('pnsPolymusicClientApp').controller('ManageSongCtrl', ['$scope', 
     SongREST.updateSongById(params, function (message) {
       console.info(message);
       if(message.message == "song update success"){
-
+        $timeout(function () {
+          $scope.is_loading = false;
+        }, 200);
       }
     })
   };

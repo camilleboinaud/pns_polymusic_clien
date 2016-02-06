@@ -44,12 +44,11 @@
           <div class="form-group">
             <ul class="list-group" ng-repeat="track in tracks">
               <li class="list-group-item" >
-                <div class="col-lg-10">{{track.name}} {{track.readableDuration}}</div>
-                <button type="button" class="col-lg-2 btn btn-danger btn-sm" ng-click="deleteUploadFile($index)">
+                <div class="col-lg-11">{{track.name}} {{track.readableDuration}}</div>
+                <button type="button" class="col-lg-1 btn btn-danger btn-sm" ng-click="deleteUploadFile($index)">
                   <i class="fa fa-trash"></i>
                 </button>
               </li>
-
             </ul>
           </div>
 

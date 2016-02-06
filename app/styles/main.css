@@ -6,6 +6,9 @@ body {
   min-height:600px;
 }
 
+.solo {
+  background-color: #3c3c3c !important;
+}
 
 .footer {
   position: fixed;
@@ -110,9 +113,17 @@ footer {
   background: #666;
   height: 7px;
 }
-.track input[type='range']::-webkit-slider-thumb {
+.gauche .track input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none !important;
   background: orange;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+}
+
+.droit .track input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  background: dodgerblue;
   height: 15px;
   width: 15px;
   border-radius: 50%;
@@ -131,6 +142,7 @@ footer {
   left: 10%;
   top: 10%;
   display : none;
+  font-size : 12px;
 }
 
 .col-sm-10:hover > .filter {

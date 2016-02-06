@@ -69,13 +69,13 @@
       <!--track list à gauche-->
       <div class="col-lg-6 track-container" style="color:orange">
         <div class="panel panel-default">
-          <div class="" ng-cloak track-container song="currentSongs[0]" master="masters[0]"></div>
+          <div class="gauche" ng-cloak track-container song="currentSongs[0]" master="masters[0]"></div>
         </div>
       </div>
       <!--track list à droit-->
-      <div class="col-lg-6 track-container" style="color:orange">
+      <div class="col-lg-6 track-container text-primary">
         <div class="panel panel-default">
-          <div class="" ng-cloak track-container song="currentSongs[1]" master="masters[1]"></div>
+          <div class="droit" ng-cloak track-container song="currentSongs[1]" master="masters[1]"></div>
         </div>
       </div>
 
@@ -122,10 +122,10 @@
             </div>
           </div>
 
-          <div class="col-lg-6 text-warning" >
+          <div class="col-lg-6 text-primary" >
             <div class="row">
               <div class="col-sm-1" ng-cloak>
-                <play-btn song="currentSongs[1]" play-btn-class="btn-sm btn-warning" pause-btn-class="btn-sm btn-danger"></play-btn>
+                <play-btn song="currentSongs[1]" play-btn-class="btn-sm btn-info" pause-btn-class="btn-sm btn-danger"></play-btn>
               </div>
               <div class="col-md-3">
                 <!--song name-->

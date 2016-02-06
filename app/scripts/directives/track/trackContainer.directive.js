@@ -50,11 +50,25 @@ angular.module('pnsPolymusicClientApp').directive('trackContainer', function() {
 
     $scope.solo = function() {
       var tracks = $scope.currentSong.tracks;
+      var trackIsSolo = false;
       angular.forEach(tracks, function(track) {
-        if(track.getTrackIsSolo() === false) {
-          console.log(track.getTrackIsSolo());
+        if(track.getTrackIsSolo() === true) {
+          trackIsSolo = true;
         }
       });
+      if(trackIsSolo == true) {
+        angular.forEach(tracks, function(track) {
+          if(track.getTrackIsSolo() === false) {
+            track.setSoloOn();
+          } else {
+            track.setSoloOff();
+          }
+        });
+      } else {
+        angular.forEach(tracks, function(track) {
+          track.setSoloOff();
+        });
+      }
     };
 
     var secondtoHHMMSS = function (second) {
