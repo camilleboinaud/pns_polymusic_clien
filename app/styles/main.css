@@ -131,6 +131,7 @@ footer {
   left: 10%;
   top: 10%;
   display : none;
+  font-size : 12px;
 }
 
 .col-sm-10:hover > .filter {
