@@ -6,6 +6,9 @@ body {
   min-height:600px;
 }
 
+.solo {
+  background-color: #3c3c3c !important;
+}
 
 .footer {
   position: fixed;

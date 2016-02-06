@@ -37,9 +37,10 @@
       </div>
     </div>
     <div class="col-sm-2">
-      <button class="btn btn-default btn-sm" ng-show="trackIsMute" ng-click="mute()">DM</button>
-      <button class="btn btn-warning btn-sm" ng-show="!trackIsMute" ng-click="mute()">M</button>
-      <button style="margin-top: 3px;" class="btn btn-warning btn-sm" ng-click="soloTrack()">S</button>
+      <button class="btn btn-warning btn-sm" ng-show="trackIsMute" ng-click="mute()">M</button>
+      <button class="solo btn btn-warning btn-sm" ng-show="!trackIsMute" ng-click="mute()">M</button>
+      <button style="margin-top: 3px;" ng-show="!trackIsSolo" class="solo btn btn-warning btn-sm" ng-click="soloTrack()">S</button>
+      <button style="margin-top: 3px;" ng-show="trackIsSolo" class="btn btn-warning btn-sm" ng-click="soloTrack()">S</button>
     </div>
   </div>
 

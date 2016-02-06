@@ -45,7 +45,7 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
 
 
     $scope.trackIsMute=false;
-    var trackIsSolo=false;
+    $scope.trackIsSolo=false;
 
     var audioTrack;
     var analyser;
@@ -120,7 +120,15 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
     };
 
     track.getTrackIsSolo = function() {
-      return trackIsSolo;
+      return $scope.trackIsSolo;
+    };
+
+    track.setSoloOn = function() {
+      audioTrack.setSoloOn();
+    };
+
+    track.setSoloOff = function() {
+      audioTrack.setSoloOff();
     };
 
     $scope.mute = function mute() {
@@ -139,7 +147,7 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
     };
 
     $scope.soloTrack = function() {
-      (trackIsSolo === false) ? trackIsSolo=true : trackIsSolo=false;
+      ($scope.trackIsSolo === false) ? $scope.trackIsSolo=true : $scope.trackIsSolo=false;
       $scope.$parent.solo();
     };
 
