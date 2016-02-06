@@ -12,6 +12,28 @@
     <div class="col-sm-10">
       <canvas></canvas>
       <div class="spinner" ng-show="loading"></div>
+      <div class="filter">
+        <div>
+          <select ng-options="option.name for option in typeFilter track by option.id" ng-model="typeFilterSelected" >
+            <option ng-repeat="option in typeFilter" value="{{option.id}}">{{option.name}}</option>
+          </select>
+        </div>
+        <div ng-hide="typeFilterSelected.type == 0">
+          <span>F </span>
+          <input type="range" ng-model="filterFrequency" min='0' max='20000' step="10" style="display : inline-block; width : 70%"/>
+          <span>{{filterFrequency}} Hz</span>
+        </div>
+        <div ng-hide="typeFilterSelected.type == 0 || typeFilterSelected.type == 2">
+          <span>Q </span>
+          <input type="range" ng-model="filterQ" min='1' max='10000' style="display : inline-block; width : 70%"/>
+          <span>{{filterQ/100}}</span>
+        </div>
+        <div ng-hide="typeFilterSelected.type == 0 || typeFilterSelected.type == 1">
+          <span>G </span>
+          <input type="range" ng-model="filterGain" min='0' max='100' style="display : inline-block; width : 70%"/>
+          <span>{{filterGain/100}}</span>
+        </div>
+      </div>
     </div>
     <div class="col-sm-2">
       <button class="btn btn-default btn-sm" ng-show="trackIsMute" ng-click="mute()">DM</button>
@@ -25,23 +47,6 @@
       <span>L</span>
       <input type="range" ng-model="trackStereo" min='-1' max='1'/>
       <span>R</span>
-    </div>
-    <div>
-      <select ng-options="option.name for option in typeFilter track by option.id" ng-model="typeFilterSelected" >
-        <option ng-repeat="option in typeFilter" value="{{option.id}}">{{option.name}}</option>
-      </select>
-    </div>
-    <div>
-      <input type="range" ng-model="filterFrequency" min='0' max='20000' step="10"/>
-      <span>{{filterFrequency}}</span>
-    </div>
-    <div>
-      <input type="range" ng-model="filterGain" min='0' max='100'/>
-      <span>{{filterGain/100}}</span>
-    </div>
-    <div>
-      <input type="range" ng-model="filterQ" min='1' max='10000'/>
-      <span>{{filterQ/100}}</span>
     </div>
   </div>
 </div>

@@ -124,6 +124,19 @@ footer {
   vertical-align: middle;
 }
 
+.filter {
+  height: inherit;
+  width: inherit;
+  position: absolute;
+  left: 10%;
+  top: 10%;
+  display : none;
+}
+
+.col-sm-10:hover > .filter {
+  display : block;
+}
+
 .track .spinner {
   height: 40px;
   width: 40px;

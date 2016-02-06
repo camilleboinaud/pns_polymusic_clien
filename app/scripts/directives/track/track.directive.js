@@ -20,14 +20,14 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
     $scope.filterGain = 100;
     $scope.filterQ = 100;
     $scope.typeFilter = [
-      {id : 0, name : "none"},
-      {id : 1, name : "lowpass"},
-      {id : 2, name : "highpass"},
-      {id : 3, name : "bandpass"},
-      {id : 4, name : "lowshelf"},
-      {id : 5, name : "highshelf"},
-      {id : 6, name : "peaking"},
-      {id : 7, name : "notch"}
+      {id : 0, name : "none", type : 0},
+      {id : 1, name : "lowpass", type : 1},
+      {id : 2, name : "highpass", type : 1},
+      {id : 3, name : "bandpass", type : 1},
+      {id : 4, name : "lowshelf", type : 2},
+      {id : 5, name : "highshelf", type : 2},
+      {id : 6, name : "peaking", type : 3},
+      {id : 7, name : "notch", type : 1}
     ];
     $scope.typeFilterSelected = $scope.typeFilter[0];
 
