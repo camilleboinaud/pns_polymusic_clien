@@ -18,7 +18,10 @@
             <i class="fa fa-table"></i> Song List
           </div>
           <div class="panel-body">
-            <table class="table table-hover">
+            <center ng-if="my_songs.length ==0">
+              You don't have any songs available now, go to <a class="btn btn-success" href="/#/upload"><i class="fa fa-upload"></i> Upload your music</a>
+            </center>
+            <table class="table table-hover" ng-if="my_songs.length >0">
               <tr class="text-primary">
                 <th>Songs</th>
                 <th>Author</th>
@@ -38,7 +41,7 @@
                   <form>
                     <switch id="enabled" name="enabled" ng-model="song.is_pub" class="blue" ng-change="update_song(song._id,song.is_pub)"></switch>
                     <span class="h6">
-                      <i class="fa fa-spinner fa-pulse"></i>
+                      <i class="fa fa-spinner fa-pulse" ng-show="is_loading"></i>
                       <span ng-show="!song.is_pub">Private</span>
                       <span class="text-success" ng-show="song.is_pub">Public</span>
                     </span>
@@ -46,7 +49,7 @@
                 </td>
                 <td>
                   <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target ="#delete_confirmation_modal"><i class="fa fa-trash"></i></button>
-                  <div class="modal"  id ="delete_confirmation_modal" tabindex="-1" role="dialog" aria-labelledby="confimationOfDeleting">
+                  <div class="modal"  id ="delete_confirmation_modal" >
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -58,7 +61,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-danger"ng-click="delete(song._id)" ><i class="fa fa-trash"></i></button>
+                          <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="delete(song._id)" >Delete <i class="fa fa-trash"></i></button>
                         </div>
                       </div>
                     </div>
@@ -69,6 +72,7 @@
           </div>
         </div>
       </div>
+
       <div class="tab-pane fade" id="manage_mix_tab">
 
       </div>
