@@ -8,20 +8,52 @@
  * Controller of the pnsPolymusicClientApp
  */
 angular.module('pnsPolymusicClientApp')
-  .controller('SongDetailCtrl', function ($scope, $routeParams, SongREST, User, $document) {
+  .controller('SongDetailCtrl', function ($scope, $routeParams, SongREST, User, AudioContextService, audioTrackFactory) {
 
-    var limit = 10;
+    var limit = 10,
+      thisLoadCount = 0,
+      audioTracks = [],
+      master = {},
+      aCtx = null;
+
     $scope.currentPage = 1;
 
-    /**
-     * INIT: Get song's info by ID
-     */
-    SongREST.getSongUrlById($routeParams.songId, function (song) {
-      $scope.song = song;
-      $scope.rating = new Array( Math.ceil(song.rating));
-      $scope.rating_vide  = new Array(5 - Math.ceil(song.rating));
-    });
+    function initAudio() {
+      aCtx = AudioContextService.getContext();
+      aCtx.createGain = aCtx.createGain || aCtx.createGainNode;
 
+      master.gainNode = aCtx.createGain();
+      master.gainNode.connect(aCtx.destination);
+
+    }
+
+    function loadTracks () {
+      $scope.song.tracks.forEach(function (track) {
+        var audioTrack = audioTrackFactory.getNewAudioTrack({
+          ctx: aCtx,
+          useAudioTag: false,
+          url: track.url,
+          outNode: master.gainNode,
+          fftSize: 256
+        });
+        audioTracks.push(audioTrack);
+        audioTrack.loadAndDecode(updateStatus);
+      });
+    }
+
+    function updateStatus(status) {
+      console.log(status);
+      if (status === 'ready') {
+        if (++thisLoadCount >= $scope.song.tracks.length) {
+          $scope.$apply(function () {
+            $scope.song.ready = true;
+            $scope.song.tracks = audioTracks;
+            console.log($scope.song);
+
+          });
+        }
+      }
+    }
 
     var getAllComments = function (params) {
       params.songId = $routeParams.songId;
@@ -69,9 +101,6 @@ angular.module('pnsPolymusicClientApp')
       })
     };
 
-    getNbPages();
-    getAllComments({limit:limit});
-
     //pour 5 etoils
     $scope.has_rated = [false, false, false, false, false];
 
@@ -93,5 +122,18 @@ angular.module('pnsPolymusicClientApp')
         $scope.rating = new Array(response.rating);
         $scope.rating_vide  = new Array(5 - response.rating);
       });
-    }
+    };
+
+    /**
+     * INIT: Get song's info by ID
+     */
+    initAudio();
+    SongREST.getSongUrlById($routeParams.songId, function (song) {
+      $scope.song = song;
+      $scope.rating = new Array( Math.ceil(song.rating));
+      $scope.rating_vide  = new Array(5 - Math.ceil(song.rating));
+      loadTracks();
+    });
+    getNbPages();
+    getAllComments({limit:limit});
   });

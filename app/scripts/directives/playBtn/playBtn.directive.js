@@ -4,7 +4,6 @@
 'use strict';
 angular.module('pnsPolymusicClientApp').directive('playBtn', function() {
   function playBtnController($scope, DurationService){
-
     $scope.playTracks = function(tracks) {
       if (!tracks) {
         tracks = $scope.currentSong.tracks;
@@ -36,7 +35,9 @@ angular.module('pnsPolymusicClientApp').directive('playBtn', function() {
   return {
     restrict: 'EA',
     scope: {
-      currentSong: '=song'
+      currentSong: '=song',
+      playBtnClass: '@',
+      pauseBtnClass: '@'
     },
     templateUrl: 'scripts/directives/playBtn/playBtn.html',
     controller: playBtnController

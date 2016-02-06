@@ -22,10 +22,6 @@ angular.module('pnsPolymusicClientApp')
     }];
 
     $scope.masters = [{},{}];
-
-    //$scope.ready = false;
-    //$scope.playing = false;
-    //$scope.trackWidth = 0;
     $scope.aCtx = null;
 
     initAudio();
@@ -72,7 +68,6 @@ angular.module('pnsPolymusicClientApp')
       }
       playingSongAIndex = index;
       $scope.songs[index].selected = true;
-      console.log($scope.songs);
     };
 
     $scope.playSongOnB = function (index) {

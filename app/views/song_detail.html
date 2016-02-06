@@ -13,7 +13,8 @@
               <i class="fa fa-music"></i> {{song.name}}
             </h4>
             <div>
-              <button class="btn btn-warning"><i class="fa fa-play"></i> Play</button>
+              <play-btn song="song" play-btn-class="btn btn-warning" pause-btn-class="btn btn-danger"></play-btn>
+              <!--<button class="btn btn-warning"><i class="fa fa-play"></i> Play</button>-->
               <span class="h4 text-warning">
                 <span ng-repeat="r in rating track by $index">
                   <span><i class="fa fa-star text-warning"></i></span>

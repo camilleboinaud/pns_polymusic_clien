@@ -1,10 +1,9 @@
-<div class="col-sm-1" ng-cloak>
-  <!--button play-->
-  <button ng-disabled="!currentSong.ready" ng-show="!currentSong.playing" ng-click="playTracks()" class="btn-sm btn-warning">
-    <i class="fa fa-play"></i>
-  </button>
-  <!--button pause-->
-  <button ng-disabled="!currentSong.ready" ng-show="currentSong.playing" ng-click="stopTracks()" class="btn-sm btn-danger">
-    <i class="fa fa-pause"></i>
-  </button>
-</div>
+<!--button play-->
+<button ng-disabled="!currentSong.ready" ng-show="!currentSong.playing" ng-click="playTracks()" ng-class="playBtnClass">
+  <i class="fa fa-play"></i>
+</button>
+<!--button pause-->
+<button ng-disabled="!currentSong.ready" ng-show="currentSong.playing" ng-click="stopTracks()" ng-class="pauseBtnClass">
+  <i class="fa fa-pause"></i>
+</button>
+

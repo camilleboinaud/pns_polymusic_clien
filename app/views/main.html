@@ -105,8 +105,9 @@
         <div class="row">
           <div class="col-lg-6 text-warning" >
             <div class="row">
-              <play-btn song="currentSongs[0]"></play-btn>
-
+              <div class="col-sm-1" ng-cloak>
+                <play-btn song="currentSongs[0]" play-btn-class="btn-sm btn-warning" pause-btn-class="btn-sm btn-danger"></play-btn>
+              </div>
               <div class="col-md-3">
                 <!--song name-->
                 <div ng-disabled="!currentSongs[0].ready">{{currentSongs[0].name}}</div>
@@ -123,8 +124,9 @@
 
           <div class="col-lg-6 text-warning" >
             <div class="row">
-              <play-btn song="currentSongs[1]"></play-btn>
-
+              <div class="col-sm-1" ng-cloak>
+                <play-btn song="currentSongs[1]" play-btn-class="btn-sm btn-warning" pause-btn-class="btn-sm btn-danger"></play-btn>
+              </div>
               <div class="col-md-3">
                 <!--song name-->
                 <div ng-disabled="!currentSongs[1].ready">{{currentSongs[1].name}}</div>
