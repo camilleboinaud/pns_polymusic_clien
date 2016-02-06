@@ -39,11 +39,17 @@
          }
        };
 
+       $scope.cancel = function () {
+         $scope.trackFiles = [];
+         $scope.tracks = [];
+         $scope.uploadFiles = [];
+       };
+
 
        /**
         * When add files
         */
-       inputElement.onchange = function() {
+       $scope.$watch('uploadFiles', function (files) {
          var callback = function(track){
            $scope.$apply(function() {
              $scope.tracks[track.index].readableDuration = secondtoHHMMSS(track.duration);
@@ -53,21 +59,23 @@
          $scope.trackFiles = [];
          $scope.tracks = [];
          var index = 0;
-         for (var i = 0; i < inputElement.files.length; i++) {
-           var trackFile = inputElement.files.item(i);
-           if (trackFile.type.indexOf('audio') != -1){
-             var track = {
-               url: URL.createObjectURL(trackFile),
-               name: trackFile.name,
-               index: index
-             };
-             $scope.tracks.push(track);
-             $scope.trackFiles.push(trackFile);
-             SongREST.getTrackDuration(track, callback);
-             index++;
+         if (files) {
+           for (var i = 0; i < files.length; i++) {
+             var trackFile = files.item(i);
+             if (trackFile.type.indexOf('audio') != -1){
+               var track = {
+                 url: URL.createObjectURL(trackFile),
+                 name: trackFile.name,
+                 index: index
+               };
+               $scope.tracks.push(track);
+               $scope.trackFiles.push(trackFile);
+               SongREST.getTrackDuration(track, callback);
+               index++;
+             }
            }
          }
-       };
+       });
 
        // upload on file select or drop
        $scope.upload = function (song) {
@@ -99,6 +107,27 @@
          });
        };
 
+       $scope.deleteUploadFile = function (index) {
+         $scope.tracks.splice(index,1);
+         $scope.trackFiles.splice(index,1);
+       };
+
 
      }
- ]);
+ ])
+   .directive("fileread", [function () {
+     return {
+       scope: {
+         fileread: "="
+       },
+       link: function (scope, element, attributes) {
+         element.bind("change", function (changeEvent) {
+           scope.$apply(function () {
+             //scope.fileread = changeEvent.target.files[0];
+             // or all selected files:
+              scope.fileread = changeEvent.target.files;
+           });
+         });
+       }
+     }
+   }]);
