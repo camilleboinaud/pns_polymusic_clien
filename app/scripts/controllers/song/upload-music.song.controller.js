@@ -9,7 +9,6 @@
        $scope.progressPercentage =0;
        $scope.tracks = [];
        $scope.trackFiles = [];
-       var inputElement = document.getElementById('uploadSong');
        $scope.hasNotif = false;
 
        var secondtoHHMMSS = function (second) {
