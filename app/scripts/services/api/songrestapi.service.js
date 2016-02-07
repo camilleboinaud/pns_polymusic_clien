@@ -224,6 +224,24 @@ angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload', 
       });
     };
 
+    /**
+     * Get my rating info
+     * @param params: userId, songId
+     * @param callback
+       */
+    SongREST.getMyRating = function (params, callback){
+      $http({
+        method: 'GET',
+        url: serverAddress+'/api/ratings?userId='+params.userId+'&songId='+params.songId
+      }).then(function successCallback(response){
+        callback(response.data);
+      }, function errorCallback(error) {
+        console.log(error);
+      });
+    };
+
+
+
     return SongREST;
   }
 ]);
