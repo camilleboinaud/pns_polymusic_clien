@@ -39,9 +39,9 @@
                 <td>{{song.nbComment}}</td>
                 <td>
                   <form>
-                    <switch id="enabled" name="enabled" ng-model="song.is_pub" class="blue" ng-change="update_song(song._id,song.is_pub)"></switch>
+                    <switch id="enabled" name="enabled" ng-model="song.is_pub" class="blue" ng-change="update_song(song._id,song.is_pub, song)"></switch>
                     <span class="h6">
-                      <i class="fa fa-spinner fa-pulse" ng-show="is_loading"></i>
+                      <i class="fa fa-spinner fa-pulse" ng-show="song.is_loading"></i>
                       <span ng-show="!song.is_pub">Private</span>
                       <span class="text-success" ng-show="song.is_pub">Public</span>
                     </span>

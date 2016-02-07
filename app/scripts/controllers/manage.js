@@ -25,8 +25,8 @@ angular.module('pnsPolymusicClientApp').controller('ManageSongCtrl', ['$scope', 
   );
 
   //change the visibility of song
-  $scope.update_song = function (songID, isPublic) {
-    $scope.is_loading = true;
+  $scope.update_song = function (songID, isPublic, song) {
+    song.is_loading = true;
     var params = {
       userId: User.getCurrentUser().id,
       songId: songID,
@@ -36,7 +36,7 @@ angular.module('pnsPolymusicClientApp').controller('ManageSongCtrl', ['$scope', 
       console.info(message);
       if(message.message == "song update success"){
         $timeout(function () {
-          $scope.is_loading = false;
+          song.is_loading = false;
         }, 200);
       }
     })
