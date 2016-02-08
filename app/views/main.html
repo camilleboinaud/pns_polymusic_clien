@@ -17,7 +17,7 @@
               <div class="form-group">
                 <input type="text" class="form-control" ng-model="search_song" placeholder="Search your music">
               </div>
-              <button type="submit" class="btn-info btn-sm" ng-click="search(true)"><i class="fa fa-search"></i> Search</button>
+              <button type="submit" class="btn-info btn-sm btn" ng-click="search(true)"><i class="fa fa-search"></i> Search</button>
             </form>
             <!--END: formulaire de recherche-->
             <hr/>
@@ -34,7 +34,7 @@
                   <div class="col-sm-4" ng-show="!song.selected">
                     <div class="btn-group-sm">
                       <label  ng-click="playSongOnA($index)" class="btn-warning btn-sm" for="{{'A-radio-'+song.name}}">A</label>
-                      <label  ng-click="playSongOnB($index)" class="btn-info btn-sm"  for="{{'B-radio-'+song.name}}">B</label>
+                      <label  ng-click="playSongOnB($index)" class="btn-info btn-sm btn"  for="{{'B-radio-'+song.name}}">B</label>
                     </div>
                   </div>
                 </div>
@@ -137,7 +137,7 @@
             </div>
             <div class="row" ng-show="currentSongs[1].selected">
               <div class="col-sm-1" ng-cloak>
-                <play-btn song="currentSongs[1]" play-btn-class="btn-sm btn-info" pause-btn-class="btn-sm btn-danger"></play-btn>
+                <play-btn song="currentSongs[1]" play-btn-class="btn-sm btn-info btn" pause-btn-class="btn-sm btn-danger"></play-btn>
               </div>
               <div class="col-md-3">
                 <!--song name-->
