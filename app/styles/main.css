@@ -219,3 +219,9 @@ footer {
   text-overflow: ellipsis;
   max-width:100%;
 }
+
+.btn-droit{
+  color: #ffffff;
+  background-color: #2a9fd6;
+  border-color: #2a9fd6;
+}
