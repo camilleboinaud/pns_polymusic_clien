@@ -6,8 +6,23 @@ body {
   min-height:600px;
 }
 
-.solo {
+.gauche .solo {
   background-color: #3c3c3c !important;
+}
+
+.droit .solo {
+  background-color: #3c3c3c !important;
+}
+.gauche .btn-mute{
+  color: #ffffff;
+  background-color: #ff8800;
+  border-color: #ff8800;
+}
+
+.droit .btn-mute{
+  color: #ffffff;
+  background-color: #2a9fd6;
+  border-color: #2a9fd6;
 }
 
 .footer {
