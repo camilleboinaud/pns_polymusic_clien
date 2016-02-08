@@ -17,23 +17,29 @@
               <div class="form-group">
                 <input type="text" class="form-control" ng-model="search_song" placeholder="Search your music">
               </div>
-              <button type="submit" class="btn btn-primary btn-sm" ng-click="search(true)"><i class="fa fa-search"></i> Search</button>
+              <button type="submit" class="btn-info btn-sm" ng-click="search(true)"><i class="fa fa-search"></i> Search</button>
             </form>
             <!--END: formulaire de recherche-->
             <hr/>
 
             <!--list of songs-->
             <div class="songs" ng-cloak>
-              <span ng-repeat="song in songs">
-                <input id="{{'A-radio-'+song.name}}" type="radio" ng-model="$parent.currentSongs[0]" ng-value="song" hidden/>
-                <input id="{{'B-radio-'+song.name}}" type="radio" ng-model="$parent.currentSongs[1]" ng-value="song" hidden/>
-                <a href="/#/songs/{{song._id}}" class="text-capitalize">{{song.name}}</a>
-                <div class="btn-group-sm pull-right">
-                  <label ng-show="!song.selected" ng-click="playSongOnA($index)" class="btn-warning btn-sm" for="{{'A-radio-'+song.name}}">A</label>
-                  <label ng-show="!song.selected" ng-click="playSongOnB($index)" class="btn-info btn-sm"  for="{{'B-radio-'+song.name}}">B</label>
+              <div ng-repeat="song in songs">
+                <div class="row">
+                  <div class="col-sm-8 over-flow">
+                    <input id="{{'A-radio-'+song.name}}" type="radio" ng-model="$parent.currentSongs[0]" ng-value="song" hidden/>
+                    <input id="{{'B-radio-'+song.name}}" type="radio" ng-model="$parent.currentSongs[1]" ng-value="song" hidden/>
+                    <a href="/#/songs/{{song._id}}" class="text-capitalize">{{song.name}}</a>
+                  </div>
+                  <div class="col-sm-4" ng-show="!song.selected">
+                    <div class="btn-group-sm">
+                      <label  ng-click="playSongOnA($index)" class="btn-warning btn-sm" for="{{'A-radio-'+song.name}}">A</label>
+                      <label  ng-click="playSongOnB($index)" class="btn-info btn-sm"  for="{{'B-radio-'+song.name}}">B</label>
+                    </div>
+                  </div>
                 </div>
                 <hr/>
-              </span>
+              </div>
             </div>
           </div>
         </div>
@@ -113,7 +119,7 @@
               </div>
               <div class="col-md-3">
                 <!--song name-->
-                <div ng-disabled="!currentSongs[0].ready">{{currentSongs[0].name}}</div>
+                <div class="over-flow" ng-disabled="!currentSongs[0].ready">{{currentSongs[0].name}}</div>
                 <p>
                   <i class="fa fa-volume-up"></i>
                   <master-gain master="masters[0]"></master-gain>
@@ -135,7 +141,7 @@
               </div>
               <div class="col-md-3">
                 <!--song name-->
-                <div ng-disabled="!currentSongs[1].ready">{{currentSongs[1].name}}</div>
+                <div class="over-flow" ng-disabled="!currentSongs[1].ready">{{currentSongs[1].name}}</div>
                 <p>
                   <i class="fa fa-volume-up"></i>
                   <master-gain master="masters[1]"></master-gain>
@@ -146,8 +152,6 @@
               </div>
             </div>
           </div>
-
-
         </div>
       </div>
   </div>

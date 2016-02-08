@@ -212,3 +212,10 @@ footer {
 #playerSlider .slider-selection {
   background: #5c9dd5;
 }
+
+
+.over-flow{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width:100%;
+}
