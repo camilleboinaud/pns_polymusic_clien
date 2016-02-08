@@ -4,6 +4,7 @@
 'use strict';
 angular.module('pnsPolymusicClientApp')
   .factory('DurationService', ['$interval',
+
   function ($interval) {
 
     var DurationService = {},
@@ -42,6 +43,7 @@ angular.module('pnsPolymusicClientApp')
     };
 
     DurationService.getNewDuration = function (init) {
+      console.info(init)
       return new Duration(init)
     };
 

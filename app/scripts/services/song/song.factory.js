@@ -29,8 +29,8 @@ angular.module('pnsPolymusicClientApp').factory('AudioSongFactory', function (Du
     if (!tracks) {
       tracks = this.tracks;
     }
-    if (!this.timer) {
-      this.timer = DurationService.getNewDuration({totalTime:this.duration});
+    if (!$scope.timer) {
+      $scope.timer = DurationService.getNewDuration({totalTime:this.duration});
     }
     angular.forEach(tracks, function(track, key) {
       track.play();
@@ -48,6 +48,16 @@ angular.module('pnsPolymusicClientApp').factory('AudioSongFactory', function (Du
     });
     this.playing = false;
   };
+
+  AudioSong.prototype.startRecordingTracks = function(tracks){
+    if (!tracks) {
+      tracks = this.tracks;
+    }
+    angular.forEach(tracks, function(track, key) {
+      track.startRecording();
+    });
+    this.recording = true;
+  }
 
 
   AudioSong.prototype.clearAudios = function () {

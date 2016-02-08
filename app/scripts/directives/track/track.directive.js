@@ -9,11 +9,23 @@
  */
 
 
-angular.module('pnsPolymusicClientApp').directive('track', function() {
+angular.module('pnsPolymusicClientApp').directive('track', [ 'DurationService', 'MixRecorder', '$interval',
+  function(DurationService, MixRecorder, $interval) {
 
   function trackController($scope, $element, $timeout, audioTrackFactory) {
 
-    $scope.trackVolume = 100;
+    var lastTrackVolume = 100;
+    $scope.getTrackVolume = function(){
+        $interval(function(){
+            var res = ($scope.recorder) ? $scope.recorder.getNodeValue('trackVolume', lastTrackVolume) : 100;
+            lastTrackVolume = res;
+            $scope.trackVolume = res;
+            console.log("getTrackVolume: " + res);
+        }, 2000);
+    };
+
+    $scope.getTrackVolume();
+
     $scope.loading = true;
     $scope.trackStereo = 0;
     $scope.filterFrequency = 20000;
@@ -77,9 +89,13 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
       });
 
       audioTrack.loadAndDecode(updateStatus);
+
       initCanvas(canvas);
 
       $scope.$watch('trackVolume', function(value) {
+
+        if($scope.recorder) $scope.recorder.saveNodeValue('trackVolume', value);
+
         value = value / 100;
         audioTrack.setVolume(value);
         if(value !== 0) {
@@ -88,22 +104,42 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
       });
 
       $scope.$watch('trackStereo', function(value) {
+
+        if($scope.recorder)
+            $scope.recorder.saveNodeValue('trackStereo', value);
+
         audioTrack.setBalance(value);
       });
 
       $scope.$watch('filterFrequency', function(value) {
+
+        if($scope.recorder)
+            $scope.recorder.saveNodeValue('filterFrequency', value);
+
         audioTrack.setFilterFrequency(value);
       });
 
       $scope.$watch('filterQ', function(value) {
+
+        if($scope.recorder)
+          $scope.recorder.saveNodeValue('filterQ', value);
+
         audioTrack.setFilterQ(value/100);
       });
 
       $scope.$watch('filterGain', function(value) {
+
+        if($scope.recorder)
+          $scope.recorder.saveNodeValue('filterGain', value);
+
         audioTrack.setFilterGain(value/100);
       });
 
       $scope.$watch('typeFilterSelected', function(value) {
+
+        if($scope.recorder)
+          $scope.recorder.saveNodeValue('typeFilterSelected', value);
+
         $scope.typeFilterSelected = value;
         if(value.name == "none") {
           audioTrack.setFilterType("lowpass");
@@ -145,6 +181,19 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
 
     function updateStatus(status) {
       if (status === 'ready') {
+
+        $scope.liveDuration = DurationService.getNewDuration({totalTime: audioTrack.duration});
+
+        //init recorder
+        $scope.recorder = new MixRecorder({
+          'trackVolume': new Array(),
+          'trackStereo': new Array(),
+          'filterFrequency': new Array(),
+          'filterQ': new Array(),
+          'filterGain': new Array(),
+          'typeFilterSelected': new Array()
+        }, $scope.liveDuration);
+
         $scope.loading = false;
         status = '';
         $scope.$parent.trackLoad($scope.key, track);
@@ -179,6 +228,7 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
     // augment track object
     track.play = function() {
       audioTrack.play();
+      $scope.liveDuration.startTimer();
       analyser = audioTrack.analyser;
     };
 
@@ -189,6 +239,7 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
 
     track.clear = function() {
       audioTrack.clear();
+      $scope.liveDuration.stopTimer();
     };
 
 
@@ -250,4 +301,4 @@ angular.module('pnsPolymusicClientApp').directive('track', function() {
     templateUrl: 'scripts/directives/track/track.html',
     controller: trackController
   };
-});
+}]);

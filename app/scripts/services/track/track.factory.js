@@ -9,7 +9,7 @@
  */
 
 
-angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', function ($http) {
+angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', ['$http', function ($http) {
 
   function AudioTrack(cfg) {
     this.ctx = cfg.ctx;
@@ -70,18 +70,16 @@ angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', function ($
       }
       statusCallback('loading');
 
-      $http
-        .get(this.url, {
+      $http.get(this.url, {
           responseType: 'arraybuffer'
-        })
-        .then(function(response) {
+      }).then(function(response) {
           statusCallback('decoding');
           self.ctx.decodeAudioData(response.data, function(buffer) {
-            self.buffer = buffer;
-            self.duration = buffer.duration;
-            statusCallback('ready');
+              self.buffer = buffer;
+              self.duration = buffer.duration;
+              statusCallback('ready');
           });
-        });
+      });
 
       self.splitNode = self.ctx.createChannelSplitter(2);
       self.mergeNode = self.ctx.createChannelMerger(2);
@@ -93,6 +91,7 @@ angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', function ($
       self.analyser.smoothingTimeConstant = 0.6;
       self.analyser.fftSize = this.fftSize;
     }
+
   };
 
   AudioTrack.prototype.play = function() {
@@ -186,4 +185,4 @@ angular.module('pnsPolymusicClientApp').factory('audioTrackFactory', function ($
       return instance;
     }
   };
-});
+}]);
