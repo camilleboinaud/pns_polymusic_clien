@@ -78,4 +78,5 @@ angular.module('pnsPolymusicClientApp')
       $scope.songs[index].selected = true;
     };
 
+
   }]);

@@ -35,6 +35,12 @@ angular.module('pnsPolymusicClientApp').directive('playBtn', function() {
       $scope.currentSong.playing = false;
     };
 
+    $scope.$on('$routeChangeStart', function(next, current) {
+      if($scope.currentSong.playing){
+        $scope.stopTracks($scope.currentSong.tracks);
+      }
+    });
+
   }
 
   //return the template of player-slider
