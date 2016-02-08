@@ -1,7 +1,13 @@
-/**
- * Created by sth on 2/5/16.
- */
 'use strict';
+
+/**
+ * @ngdoc function
+ * @name pnsPolymusicClientApp.services: playBtn
+ * @description
+ * # playBtn
+ */
+
+
 angular.module('pnsPolymusicClientApp').directive('playBtn', function() {
   function playBtnController($scope, DurationService){
     $scope.playTracks = function(tracks) {

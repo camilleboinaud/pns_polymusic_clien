@@ -1,6 +1,10 @@
 /**
- * Created by sth on 1/17/16.
+ * @ngdoc function
+ * @name pnsPolymusicClientApp.services: SongREST
+ * @description
+ * # SongREST: interfaces of server
  */
+
 'use strict';
 
 angular.module('pnsPolymusicClientApp').factory('SongREST', ['$http', 'Upload', 'AudioContextService',

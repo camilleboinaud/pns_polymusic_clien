@@ -1,6 +1,10 @@
 /**
- * Created by sth on 2/1/16.
+ * @ngdoc function
+ * @name pnsPolymusicClientApp.services: DurationService
+ * @description
+ * # DurationService: footer od duration
  */
+
 'use strict';
 angular.module('pnsPolymusicClientApp')
   .factory('DurationService', ['$interval',

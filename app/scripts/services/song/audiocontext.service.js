@@ -1,6 +1,10 @@
 /**
- * Created by sth on 2/4/16.
+ * @ngdoc function
+ * @name pnsPolymusicClientApp.services: AudioContextService
+ * @description
+ * # AudioContextService: audio context
  */
+
 'use strict';
 angular.module('pnsPolymusicClientApp').factory('AudioContextService', function() {
   var AudioContextService = {},

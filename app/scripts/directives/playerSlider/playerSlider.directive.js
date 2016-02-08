@@ -1,6 +1,11 @@
+
 /**
- * Created by sth on 2/2/16.
+ * @ngdoc function
+ * @name pnsPolymusicClientApp.services: playerSlider
+ * @description
+ * # playerSlider: footer player slider directive
  */
+
 'use strict';
 angular.module('pnsPolymusicClientApp').directive('playerSlider', function() {
   function playerSliderController($scope, DurationService){
