@@ -1,6 +1,3 @@
- /**
- * Created by sth on 1/6/16.
- */
  'use strict';
 
  angular.module('song').controller('MusicUploadController', ['$scope','SongREST','$document','$timeout','$location','User',
